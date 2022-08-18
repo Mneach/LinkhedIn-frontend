@@ -1,0 +1,8 @@
+@mixin button-submit($paddingTopBottom , $paddingLeftRight , $buttonColor , $color , $borderRadius) {
+    background-color: $buttonColor;
+    color: $color;
+    padding: $paddingTopBottom $paddingLeftRight;
+    border-radius: $borderRadius;
+    font-size: 16px;
+    cursor: pointer;
+}

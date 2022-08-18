@@ -1,0 +1,8 @@
+@mixin FullScreenContainer {
+    height: 100vh;
+}
+
+@mixin Container-1($width,$height) {
+    width: $width;
+    height: $height;
+}

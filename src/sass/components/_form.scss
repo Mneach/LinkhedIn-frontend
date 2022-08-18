@@ -1,0 +1,11 @@
+@mixin input-text($width ,$paddingTop , $paddingBottom , $paddingLeft , $paddingRight , $borderFocusColor) {
+    padding-top: $paddingTop;
+    padding-bottom: $paddingBottom;
+    padding-left: $paddingLeft;
+    padding-right: $paddingRight;
+    width: $width;
+    transition-duration: 0.1s;
+    &:focus{
+        outline: $borderFocusColor solid 2px ;
+    }
+}

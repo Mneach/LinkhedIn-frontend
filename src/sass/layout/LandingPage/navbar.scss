@@ -1,0 +1,13 @@
+@use '../../abstracts' as abs;
+@use '../index' as layout;
+
+.nav{
+    @include layout.Container-1(auto, 70px);
+    @include abs.display-flex(flex-start , center , row);
+    padding-left: 50px;
+    padding-top: 20px;
+
+    img{
+        width: 10%;
+    }
+}

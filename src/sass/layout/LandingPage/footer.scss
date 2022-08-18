@@ -1,0 +1,28 @@
+@use '../../abstracts' as abs;
+@use '../../components' as component;
+@use '../index' as layout;
+
+.footer{
+    @include layout.Container-1(100% , 80px);
+    @include abs.display-flex(center , center , row);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: abs.$white;
+    text-align: center;
+    gap: 20px;
+
+    a{
+        font-size: 13px;
+        color: abs.$gray-600;
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    img{
+        width: 5%;
+    }
+}

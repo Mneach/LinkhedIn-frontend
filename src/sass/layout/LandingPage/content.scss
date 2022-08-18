@@ -1,0 +1,155 @@
+@use '../../abstracts' as abs;
+@use '../../components' as component;
+@use '../index' as layout;
+
+.contentpage{
+    @include layout.Container-1(100% , auto);
+    @include abs.display-flex(center , center , column);
+    margin-top: 0px;
+    gap: 30px;
+
+    &__mid{
+        @include layout.Container-1(20% , auto);
+        @include abs.display-flex(center , center , column);
+        border-radius: 10px;
+        padding: 20px 20px;
+        gap: 20px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    }
+
+    &__mid2{
+        @include layout.Container-1(40% , auto);
+        @include abs.display-flex(center , center , column);
+        border-radius: 10px;
+        padding: 20px 20px;
+        gap: 20px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    }
+
+    &__mid3{
+        margin-top: 80px;
+        @include layout.Container-1(20% , auto);
+        @include abs.display-flex(center , center , column);
+        border-radius: 10px;
+        padding: 20px 20px;
+        gap: 20px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    }
+
+    &__top{
+        @include layout.Container-1(40% , auto);
+        @include abs.display-flex(center , center , row);
+        font-size: 14px;    
+    }
+
+    &__bottom{
+        @include layout.Container-1(100% , auto);
+        @include abs.display-flex(center , center , row);
+        font-size: 14px;  
+    }
+
+    &__midRegister{
+        @include layout.Container-1(30% , auto);
+        @include abs.display-flex(center , center , column);
+        border-radius: 10px;
+        padding: 20px 20px;
+        gap: 20px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    }
+
+    &__headertext{
+        @include layout.Container-1(100% , auto);
+        @include abs.display-flex(flex-start , center , row);
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    &__text1{
+        @include layout.Container-1(100% , auto);
+        @include abs.display-flex(flex-start , center , row);
+        font-size: 16px;       
+    }
+
+    &__text2{
+        @include layout.Container-1(100% , auto);
+        font-size: 10px;    
+        text-align: center;
+        color: abs.$gray-600;   
+    }
+
+    &__input__container{
+        @include layout.Container-1(100% , auto);
+        @include abs.display-flex(flex-start , none , column);
+        gap: 10px;
+        
+        input{
+            @include component.input-text( 90% ,10px , 10px , 5% , 5% , abs.$blue-700);
+        }
+    }
+
+    &__button__signin{
+        @include component.button-submit(10px , 10px ,  abs.$blue-700 , white , 30px);
+        border: none;
+        width: 100%;
+        transition-duration: 0.2s;
+        &:hover{
+            background-color: abs.$blue-900;
+        }
+    }
+
+    &__button__google{
+        @include component.button-submit(10px , 10px ,  white , abs.$dark-500 , 30px);
+        @include abs.display-flex(center , center , row);
+        border: 1px solid gray;
+        width: 100%;
+        transition-duration: 0.2s;
+        gap: 5px;
+        &:hover{
+            background-color: abs.$gray-300;
+        }
+
+        img{
+            width: 20px;
+        }
+    }
+
+    &__or-text{
+        font-size: 16px;
+        margin: 0 10px;
+        @include abs.display-flex(center , center , row);
+    }
+
+    &__or__separator{
+        @include abs.display-flex(center , center , row);
+        color: abs.$gray-600;
+        width: 100%;
+        &::after{
+            content: "";
+            width: 50%;
+            height: 1px;
+            background-color: abs.$gray-400;
+        }
+
+        &::before{
+            content: "";
+            width: 50%;
+            height: 1px;
+            background-color: abs.$gray-400;
+        }
+    }
+
+    a{
+        font-weight: 500;
+        text-decoration: none;
+        color: abs.$blue-700;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    label{
+        font-size: 14px;
+        color: abs.$dark-600;
+    }
+}
