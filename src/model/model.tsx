@@ -1,0 +1,17 @@
+export type User = {
+	id : string,
+    email : string,
+    password : string,
+    isActive : boolean,
+    firstname : string,
+    lastname : string,
+    additionalName : string,
+    profileImageUrl : string,
+    backgroundImageUrl : string,
+    prononus : string,
+    headline : string,
+    about : string,
+    country : string,
+    city : string,
+    profileLink : string,
+}

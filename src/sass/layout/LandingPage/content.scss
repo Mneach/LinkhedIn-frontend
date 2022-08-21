@@ -36,6 +36,21 @@
         box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
     }
 
+    &__mid4{
+        @include layout.Container-1(30% , 100%);
+        @include abs.display-flex(center , center , column);
+        text-align: center;
+        gap: 20px;
+        position: absolute;
+        top: 40%;
+        transform: translate(0, -50%);
+
+        p{
+            font-size: 20px;
+            color: abs.$gray-700;
+        }
+    }
+
     &__top{
         @include layout.Container-1(40% , auto);
         @include abs.display-flex(center , center , row);
@@ -113,6 +128,17 @@
         }
     }
 
+    &__button__loginPage{
+        @include component.button-submit(8px , 8px ,  abs.$blue-700 , white , 30px);
+        border: none;
+        width: 50%;
+        transition-duration: 0.2s;
+        font-size: 18px;
+        &:hover{
+            background-color: abs.$blue-900;
+        }        
+    }
+
     &__or-text{
         font-size: 16px;
         margin: 0 10px;
@@ -151,5 +177,18 @@
     label{
         font-size: 14px;
         color: abs.$dark-600;
+    }
+
+    &__error{
+        @include layout.Container-1(100% , 40px);
+        @include abs.display-flex(center , center , row);
+        color: abs.$red-800;
+        background: abs.$red-100;
+        border: 1px solid #a33a3a;
+        text-align: center;
+        font-size: 14px;
+        p{
+            color: white;
+        }
     }
 }

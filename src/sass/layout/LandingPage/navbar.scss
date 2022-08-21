@@ -1,5 +1,6 @@
 @use '../../abstracts' as abs;
 @use '../index' as layout;
+@use '../../components' as component;
 
 .nav{
     @include layout.Container-1(auto, 70px);
@@ -9,5 +10,53 @@
 
     img{
         width: 10%;
+        cursor: pointer;
+    }
+}
+
+.nav2{
+    @include layout.Container-1(auto, 70px);
+    @include abs.display-flex(space-between , center , row);
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-right: 100px;
+
+    &__leftContent{
+        width: 50%;
+        img{
+            width: 21.5%;
+            cursor: pointer;
+        }
+    }
+
+    &__rightContent{
+        @include abs.display-flex(flex-end , center , row);
+        width: 50%;
+        gap: 10px;
+    }
+
+    &__button__joinNow{
+        @include component.button-submit(5px , 5px ,  white , white , 30px);
+        border: none;
+        width: 15%;
+        color: abs.$blue-700;
+        border: 1px solid abs.$blue-700;
+        transition-duration: 0.2s;
+        &:hover{
+            color: white;
+            background-color: abs.$blue-900;
+        }
+    }
+
+    &__button__signIn{
+        @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
+        @include abs.display-flex(center , center , row);
+        border: none;
+        width: 15%;
+        transition-duration: 0.2s;
+        gap: 5px;
+        &:hover{
+            background-color: abs.$gray-300;
+        }
     }
 }
