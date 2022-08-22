@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
+import { StorageKey } from '../../lib/keys/key'
 
 import '../../sass/layout/LandingPage/content.scss'
 
 const Activation = () => {
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
+            navigate("/mainPage")
+        }
+    }, [])
 
     const movePageHandler = () => {
         navigate('/')

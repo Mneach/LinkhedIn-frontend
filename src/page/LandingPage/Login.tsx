@@ -1,8 +1,9 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
+import { useUserContext } from '../../hooks/UserContext'
 import { queryLogin } from '../../lib/graphql/query'
 import { StorageKey } from '../../lib/keys/key'
 
@@ -18,6 +19,13 @@ const Login = () => {
         password: "",
     })
     
+    useEffect(() => {
+        if(localStorage.getItem(StorageKey.JwtTokenKey) !== null){
+            navigate("/mainPage")
+        }
+    } , [])
+
+
     if(loading) return <p>Loading...</p>
 
     const resetForm = () => {
@@ -33,17 +41,17 @@ const Login = () => {
             setLoginError("Email With Ends With .com")
         } else {
             login({ variables: { "input": { email: loginData.email, password: loginData.password } } })
-            setLoginError("")
         }
         resetForm()
     }
-    if(data) console.log(" TOKEN FROM DB = " + data.Login.token)
-    console.log("CURRENT TOKEN = " + localStorage.getItem(StorageKey.JwtTokenKey))
-    console.log(loginData)
 
+    
     if(called && !loading && data && error == undefined){
         localStorage.setItem(StorageKey.JwtTokenKey , data.Login.token)
-        navigate("/home")
+        if(localStorage.getItem(StorageKey.JwtTokenKey) != null){
+            console.log("CURRENT TOKEN = " + localStorage.getItem(StorageKey.JwtTokenKey))
+            navigate("/mainPage")
+        }
     }
 
     return (

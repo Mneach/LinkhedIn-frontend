@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { __Directive } from 'graphql'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useUserContext } from '../../hooks/UserContext'
 import { queryUser } from '../../lib/graphql/query'
 import { StorageKey } from '../../lib/keys/key'
 import { ParseJwt } from '../../lib/token/token'
@@ -9,22 +10,11 @@ import { ParseJwt } from '../../lib/token/token'
 const Home = () => {
 
     const navigate = useNavigate()
-    const SessionData = localStorage.getItem(StorageKey.JwtTokenKey)
-    const userId = ParseJwt(SessionData as string).userId
-    console.log(userId)
-
-    const {loading , error , data} = useQuery(queryUser , {
-        variables : { userId }
-    })
-
-    if(loading) return <p>Loading...</p>
-    if(error) return <p>Error...</p>
-
-    console.log(error)
-    console.log(data)
+    const userContext = useUserContext()
 
     const logoutHandler = () => {
         localStorage.removeItem(StorageKey.JwtTokenKey)
+        
         navigate('/')
     }
 
@@ -32,8 +22,8 @@ const Home = () => {
     <div>
         {
             <>
-            <p>{data.User.email}</p>
-            <p>{data.User.password}</p>
+            <p>{userContext.User.email}</p>
+            <p>{userContext.User.password}</p>
             </>
         }
 

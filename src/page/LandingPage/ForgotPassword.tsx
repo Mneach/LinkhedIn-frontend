@@ -1,9 +1,10 @@
 import { useMutation } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
 import { mutationResetPassword } from '../../lib/graphql/query'
+import { StorageKey } from '../../lib/keys/key'
 
 const ForgotPassword = () => {
 
@@ -11,7 +12,13 @@ const ForgotPassword = () => {
 
   const [email, setEmail] = useState("")
   const [formError, setFormError] = useState("")
-  const [forgotPasswordMutation, { loading, error, data , called }] = useMutation(mutationResetPassword, { errorPolicy: "all" })
+  const [forgotPasswordMutation, { loading, error, data, called }] = useMutation(mutationResetPassword, { errorPolicy: "all" })
+
+  useEffect(() => {
+    if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
+      navigate("/mainPage")
+    }
+  }, [])
 
   if (loading) return <p>loading...</p>
 
@@ -27,7 +34,7 @@ const ForgotPassword = () => {
       setFormError("")
     }
   }
-  
+
   if (called && !loading && data && error == undefined) {
     navigate('/activation')
   }

@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
 import { queryUserByActivationId } from '../../lib/graphql/query'
+import { StorageKey } from '../../lib/keys/key'
 import { User } from '../../model/model'
 import '../../sass/layout/LandingPage/content.scss'
 
@@ -16,6 +17,12 @@ const ActivationAccount = () => {
         variables: { activationId },
     })
 
+    useEffect(() => {
+        if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
+            navigate("/mainPage")
+        }
+    }, [])
+
     let ActivationDataUser = data as User
     if (data !== undefined) ActivationDataUser = data.UserByActivationId
 
@@ -25,9 +32,6 @@ const ActivationAccount = () => {
         navigate('/')
     }
 
-    const activeAccountHanlder = () => {
-
-    }
 
     if (loading) return <p>Loading...</p>
     return (
@@ -46,7 +50,7 @@ const ActivationAccount = () => {
                                         ))
                                     }
                                 </p>
-                                <button className='contentpage__button__loginPage'  onClick={movePageLogin}>Go To Login</button>
+                                <button className='contentpage__button__loginPage' onClick={movePageLogin}>Go To Login</button>
                             </div>
                         )
                         :
@@ -55,15 +59,12 @@ const ActivationAccount = () => {
                                 (
                                     <div className='contentpage__mid4'>
                                         <p>Your Account With Email <b>{ActivationDataUser.email}</b> Is Active</p>
-                                        <button className='contentpage__button__loginPage'  onClick={movePageLogin}>Go To Login</button>
+                                        <button className='contentpage__button__loginPage' onClick={movePageLogin}>Go To Login</button>
                                     </div>
                                 )
                                 :
                                 (
-                                    <div className='contentpage__mid4'>
-                                        <p>Activate your account by clicking the button bellow</p>
-                                        <button className='contentpage__button__loginPage'  onClick={activeAccountHanlder}>Activate Account</button>
-                                    </div>
+                                    null
                                 )
                         )
                 }

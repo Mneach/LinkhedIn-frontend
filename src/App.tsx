@@ -10,9 +10,9 @@ import Activation from './page/LandingPage/Activation'
 import Home from './page/MainPage/Home'
 import Reset from './page/LandingPage/Reset'
 import ResetPassword from './page/LandingPage/ResetPassword'
+import MainPage from './lib/route/MainPageRoute'
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -24,6 +24,7 @@ function App() {
         <Route path='/reset' element={<Reset />}></Route>
         <Route path='/resetPassword/:resetPasswordId' element={<ResetPassword />}></Route>
         <Route path='/home' element={<Home />}></Route>
+        <Route path='/mainPage/*' element={<MainPage />}></Route>
       </Routes>
     </BrowserRouter>
   ) 

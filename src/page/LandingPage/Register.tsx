@@ -1,9 +1,10 @@
 import { useMutation } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
 import { mutationRegisterUser } from '../../lib/graphql/query'
+import { StorageKey } from '../../lib/keys/key'
 
 const Register = () => {
 
@@ -15,9 +16,11 @@ const Register = () => {
     password: "",
   })
 
-  console.log(data);
-  console.log(error);
-  console.log(registerError)
+  useEffect(() => {
+    if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
+      navigate("/mainPage")
+    }
+  }, [])
 
   const resetForm = () => {
     setRegisterData({ email: "", password: "" })

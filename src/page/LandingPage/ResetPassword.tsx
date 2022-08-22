@@ -1,14 +1,15 @@
 import { useMutation, useQuery } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
 import { mutationUpdatePassword, queryUserByResetPasswordId } from '../../lib/graphql/query'
+import { StorageKey } from '../../lib/keys/key'
 import { User } from '../../model/model'
 
 const ResetPassword = () => {
 
-    let id : string = ""
+    let id: string = ""
     const navigate = useNavigate()
     const { resetPasswordId } = useParams()
     const [password, setPassword] = useState("")
@@ -21,6 +22,12 @@ const ResetPassword = () => {
     })
 
     const [updatePasswordUser, { loading: loadingUpdatePassword, error: errorUpdatePassword, data: dataUpdatePassword, called: updateCalled }] = useMutation(mutationUpdatePassword, {})
+
+    useEffect(() => {
+        if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
+            navigate("/mainPage")
+        }
+    }, [])
 
     if (loading) return <p>loading...</p>
     if (loadingUpdatePassword) return <p>loading...</p>
@@ -42,9 +49,9 @@ const ResetPassword = () => {
     if (updateCalled && !loadingUpdatePassword && dataUpdatePassword && errorUpdatePassword === undefined) {
         movePageLogin()
     }
-    
+
     if (data) id = (data.UserByResetPasswordId.id)
-    
+
     return (
         <div>
             <Navbar navbarModel='model2' />
