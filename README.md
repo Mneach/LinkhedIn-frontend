@@ -18,8 +18,8 @@ Update V1.4 (24 July 2022)
 - Add Personal Information form on register
 - Fix Register User , Eduation , Experience Mutation
 
-update V1.5 (24 July 2022)
-- Add Fitur SignIn with google
-- Add Fitur SignUp with google
-- Add query and mutation data
+Update V1.5 (24 July 2022)
+- Add Fitur Sign In with google
+- Add Fitur Sign Up with google
+- Add some query and mutation
 - Fix User Context 
