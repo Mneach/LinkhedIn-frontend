@@ -5,7 +5,7 @@ import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
 import { mutationUpdatePassword, queryUserByResetPasswordId } from '../../lib/graphql/query'
 import { StorageKey } from '../../lib/keys/key'
-import { User } from '../../model/model'
+import { UserType } from '../../model/model'
 
 const ResetPassword = () => {
 

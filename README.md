@@ -14,6 +14,12 @@ Update V1.3 (22 July 2022)
 
 Update V1.4 (24 July 2022)
 - Redesign Register
-- Design Sign in with google 
+- Design Sign in with google
 - Add Personal Information form on register
 - Fix Register User , Eduation , Experience Mutation
+
+update V1.5 (24 July 2022)
+- Add Fitur SignIn with google
+- Add Fitur SignUp with google
+- Add query and mutation data
+- Fix User Context 

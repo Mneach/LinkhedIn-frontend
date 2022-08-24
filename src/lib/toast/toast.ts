@@ -21,6 +21,7 @@ export const toastError = (message: string, toastPosition: ToastPosition, themeT
         pauseOnHover: false,
         closeOnClick: true,
         draggable: true,
+        pauseOnFocusLoss : false,
         theme: themeToast
     })
 }

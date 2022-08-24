@@ -1,4 +1,4 @@
-export type User = {
+export type UserType = {
 	id : string,
     email : string,
     password : string,
@@ -14,4 +14,36 @@ export type User = {
     country : string,
     city : string,
     profileLink : string,
+    Educations : Array<EducationType>,
+    Experiences : Array<ExperienceType>,
+}
+
+export type EducationType = {
+    id: string,
+    userId: string,
+    school: string,
+    degree: string,
+    fieldStudy: string,
+    grade: string,
+    activities: string,
+    description: string,
+    monthStartDate: string,
+	monthEndDate: string,
+	yearStartDate: string,
+	yearEndDate: string,
+}
+
+export type ExperienceType = {
+    id: string,
+    userId: string,    
+    employmentType: string,
+    companyName: string,
+    country: string,
+    city: string,
+    isActive: boolean,
+    industry: string,
+    monthStartDate: string,
+	monthEndDate: string,
+	yearStartDate: string,
+	yearEndDate: string,    
 }

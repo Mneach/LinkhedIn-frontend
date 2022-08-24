@@ -18,6 +18,8 @@ const Home = () => {
         navigate('/')
     }
 
+    console.log(userContext)
+
     return (
     <div>
         {

@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { queryUser } from "../lib/graphql/query"
 import { StorageKey } from "../lib/keys/key"
 import { ParseJwt } from "../lib/token/token"
-import { User } from "../model/model"
+import { UserType } from "../model/model"
 
 type props = {
     children: React.ReactNode | React.ReactNode[]
@@ -12,12 +12,12 @@ type props = {
 }
 
 type UserContextType = {
-    User: User,
+    User: UserType,
     JwtToken: String,
 }
 
 let UserContext = createContext<UserContextType>({
-    User: '' as unknown as User,
+    User: '' as unknown as UserType,
     JwtToken: ''
 })
 
@@ -36,12 +36,12 @@ export const UserProvider : React.FC<props> = ({ children }) => {
     if (loading) return <p>Loading...</p>
     if (error) console.log(error)
 
-    let dataUser : User = '' as unknown as User
+    let dataUser : UserType = '' as unknown as UserType
 
     if(data === undefined || getToken === null){
         navigate("../" , {replace : true})
     }else{
-        dataUser = data.User as unknown as User
+        dataUser = data.User as unknown as UserType
     }
 
 

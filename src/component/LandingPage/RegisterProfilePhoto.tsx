@@ -107,12 +107,15 @@ export const RegisterProfilePhoto = ({ registerData, educationData, workerData, 
       console.log(imageUrl)
       mutationUser(imageUrl)
       // mutationExperience()
+    }else{
+      mutationUser(registerData.profileImageUrl)
     }
 
   }
 
   const skipButton = () => {
-    mutationUser("")
+    mutationUser(registerData.profileImageUrl)
+    console.log("skpi button clicked")
   }
 
   const backButton = () => {

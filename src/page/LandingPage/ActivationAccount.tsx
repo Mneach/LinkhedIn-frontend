@@ -5,7 +5,7 @@ import Footer from '../../component/LandingPage/Footer'
 import Navbar from '../../component/LandingPage/Navbar'
 import { queryUserByActivationId } from '../../lib/graphql/query'
 import { StorageKey } from '../../lib/keys/key'
-import { User } from '../../model/model'
+import { UserType } from '../../model/model'
 import '../../sass/layout/LandingPage/content.scss'
 
 const ActivationAccount = () => {
@@ -23,7 +23,7 @@ const ActivationAccount = () => {
         }
     }, [])
 
-    let ActivationDataUser = data as User
+    let ActivationDataUser = data as UserType
     if (data !== undefined) ActivationDataUser = data.UserByActivationId
 
     console.log(ActivationDataUser)

@@ -16,7 +16,12 @@ import { StorageKey } from '../../lib/keys/key'
 import '../../sass/layout/LandingPage/content.scss'
 
 const RegisterAccount = () => {
-
+  useEffect(() => {
+    if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
+      navigate("/mainPage")
+    }
+  }, [])
+  
   const navigate = useNavigate();
   // const [regsiterUser, { data, loading, error }] = useMutation(mutationRegisterUser, { errorPolicy: "all" })
   const registerStateData = ["register", "username", "residence", "worker", "student", "time", "profilePhoto", "googleSignIn" , "insertDataWithProfile"]
@@ -59,12 +64,6 @@ const RegisterAccount = () => {
     yearStartDate: "",
     yearEndDate: "",
   })
-
-  useEffect(() => {
-    if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
-      navigate("/mainPage")
-    }
-  }, [])
 
   let userChoose: string = "worker"
 

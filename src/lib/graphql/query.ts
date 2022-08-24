@@ -34,6 +34,17 @@ export const queryUserByEmail = gql`
         UserByEmail(email:$email) {
         id
         email
+        password
+        isActive
+    }
+}
+`
+
+export const queryCheckEmailUser = gql`
+    query checkEmailUser($email:String!){
+    CheckEmailUser(email:$email){
+        id
+        email
     }
 }
 `
@@ -147,10 +158,41 @@ export const mutationAddExperience = gql`
 export const queryUser = gql`
     query User($userId:ID!) {
         User(id:$userId){
-        id
-        email
-        password
-        isActive
+            id
+            email
+            password
+            firstName
+            lastName
+            city
+            country
+            Educations{
+                id
+                userId
+                school
+                degree
+                fieldStudy
+                grade
+                activities
+                description
+                monthStartDate
+                yearStartDate
+                monthEndDate
+                yearEndDate
+            }
+            Experiences{
+                id
+                userId
+                employmentType
+                companyName
+                country
+                city
+                isActive
+                industry
+                monthStartDate
+                yearStartDate
+                monthEndDate
+                yearEndDate
+            }
     }
 }
 `

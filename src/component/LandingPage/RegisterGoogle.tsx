@@ -10,33 +10,32 @@ const RegisterGoogle = (
         :
         { registerData: registerInputType, setRegisterData: setRegisterInputType, registerStateData: string[], setRegisterState: setRegisterStateType }) => {
 
-    const [getUserByEmail] = useLazyQuery(queryUserByEmail, { errorPolicy: "all" })
-    const [registerError, setRegisterError] = useState("");
-
     const resetForm = () => {
-        setRegisterData((prev) => ({ ...prev, email: "", password: "" }))
+        setRegisterData((prev) => ({ ...prev, password: "" }))
     }
 
     const registerHandler = () => {
         if (registerData.password.length <= 6) {
+            resetForm()
             toastError("Password Must Be More Than 6 Characters", "top-right", "colored")
         } else {
-            setRegisterError("")
             setRegisterState(registerStateData.at(2))
         }
     }
+
+    console.log(registerData)
 
     return (
         <>
             <div className='contentpage__mid'>
                 <div className='contentpage__headertext'>Join LinkhedIn</div>
                 <div className='contentpage__googleData'>
-                    <div>
-                        <img src="" alt="" />
+                    <div className='contentpage__googleData__profilePhoto'>
+                        <img src={registerData.profileImageUrl} referrerPolicy="no-referrer" alt="" />
                     </div>
-                    <div>
-                        <p>Firstname</p>
-                        <p>Email</p>
+                    <div className='contentpage__googleData__userInformation'>
+                        <p className='contentpage__googleData__userInformation__name'>{registerData.firstName} {registerData.lastName}</p>
+                        <p className='contentpage__googleData__userInformation__email'>{registerData.email}</p>
                     </div>
                 </div>
                 <div className='contentpage__input__container'>
