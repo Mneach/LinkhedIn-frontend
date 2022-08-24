@@ -11,3 +11,9 @@ Update V1.2 (21 July 2022)
 
 Update V1.3 (22 July 2022)
 - Add authentication for all routes
+
+Update V1.4 (24 July 2022)
+- Redesign Register
+- Design Sign in with google 
+- Add Personal Information form on register
+- Fix Register User , Eduation , Experience Mutation

@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './page/LandingPage/Login'
-import Register from './page/LandingPage/Register'
+import RegisterAccount from './page/LandingPage/RegisterAccount'
 import ForgotPassword from './page/LandingPage/ForgotPassword'
 import ActivationAccount from './page/LandingPage/ActivationAccount'
 import Activation from './page/LandingPage/Activation'
@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />}></Route>
-        <Route path='/register' element={<Register />}></Route>
+        <Route path='/register' element={<RegisterAccount />}></Route>
         <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
         <Route path='/activation' element={<Activation />}></Route>
         <Route path='/activationAccount/:activationId' element={<ActivationAccount />}></Route>

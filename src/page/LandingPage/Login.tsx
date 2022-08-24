@@ -6,6 +6,7 @@ import Navbar from '../../component/LandingPage/Navbar'
 import { useUserContext } from '../../hooks/UserContext'
 import { queryLogin } from '../../lib/graphql/query'
 import { StorageKey } from '../../lib/keys/key'
+import { toastError } from '../../lib/toast/toast'
 
 import '../../sass/layout/LandingPage/content.scss'
 
@@ -33,12 +34,14 @@ const Login = () => {
     }
 
     const loginHandler = () => {
-        if (loginData.email === "" || loginData.password === "") {
-            setLoginError("Input Cannot Be Null")
+        if (loginData.email === ""){
+            toastError("Please Input Your Email", "top-right", "colored")
+        } else if(loginData.password === ""){
+            toastError("Please Input Your Password", "top-right", "colored")
         } else if (loginData.email.includes("@") == false) {
-            setLoginError("Email Must Include @ Symbol ")
+            toastError("Email Must Include @ Symbol", "top-right", "colored")
         } else if (loginData.email.endsWith(".com") == false) {
-            setLoginError("Email With Ends With .com")
+            toastError("Email With Ends With .com", "top-right", "colored")
         } else {
             login({ variables: { "input": { email: loginData.email, password: loginData.password } } })
         }
@@ -65,28 +68,6 @@ const Login = () => {
                         <input type="text" placeholder='Email' value={loginData.email} onChange={(e) => setLoginData((prev) => ({ ...prev, email: e.target.value }))} />
                         <input type="password" placeholder='Password' value={loginData.password} onChange={(e) => setLoginData((prev) => ({ ...prev, password: e.target.value }))} />
                     </div>
-                    {
-                        error !== undefined ?
-                            (
-                                <div className='contentpage__error'>
-                                    {
-                                        error?.graphQLErrors.map(({ message }, i) => (
-                                            <span key={i}>{message}</span>
-                                        ))
-                                    }
-
-                                </div>
-                            )
-                            :
-                            (
-                                registerError !== "" ?
-                                    (
-                                        <div className='contentpage__error'>{registerError}</div>
-                                    )
-                                    :
-                                    (null)
-                            )
-                    }
                     <div className='contentpage__text1'>
                         <Link to={'/forgotPassword'}>Forgot Password?</Link>
                     </div>
