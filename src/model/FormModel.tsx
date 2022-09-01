@@ -1,4 +1,6 @@
+import { ApolloQueryResult } from "@apollo/client";
 import React from "react";
+import { UserType } from "./model";
 
 export type registerInputType = {
     email: string,
@@ -35,8 +37,16 @@ export type signInType = {
 export type setSignInType = React.Dispatch<React.SetStateAction<string>>
 
 
+export type setString = React.Dispatch<React.SetStateAction<string>>
+export type setBoolean = React.Dispatch<React.SetStateAction<boolean>>
+export type setNumber = React.Dispatch<React.SetStateAction<number>>
+export type setUserType = React.Dispatch<React.SetStateAction<UserType>>
+export type refectUserType = (variables?: Partial<{userId: string;}> | undefined) => Promise<ApolloQueryResult<any>>
+export type refectPostType = (variables?: Partial<{Limit: number , Offset: number;}> | undefined) => Promise<ApolloQueryResult<any>>
+
 export type workerInputType = {
     userId: string,
+    title: string,
     employmentType: string,
     companyName: string,
     country: string,
@@ -47,6 +57,7 @@ export type workerInputType = {
 
 export type setWorkerInputType = React.Dispatch<React.SetStateAction<{
     userId: string,
+    title: string,
     employmentType: string,
     companyName: string,
     country: string,
@@ -147,3 +158,4 @@ export enum enumMonthType {
     November = "November",
     December = "December",
 }
+

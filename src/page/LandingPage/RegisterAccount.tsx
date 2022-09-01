@@ -40,6 +40,7 @@ const RegisterAccount = () => {
 
   const [workerInput, setWorkerInput] = useState({
     userId: "",
+    title : "",
     employmentType: "",
     companyName: "",
     country: "",

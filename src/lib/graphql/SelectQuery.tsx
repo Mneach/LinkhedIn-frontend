@@ -1,0 +1,102 @@
+import { gql } from "@apollo/client";
+
+export const querySearch = gql `
+    query Search($Keyword:String! , $Limit:Int!, $Offset:Int!){
+    Search(Keyword:$Keyword , Limit:$Limit , Offset:$Offset){
+        Users{
+            id
+            email
+            password
+            isActive
+            firstName
+            lastName
+            profileImageUrl
+            backgroundImageUrl
+            pronouns
+            headline
+            about
+            city
+            country
+            profileLink
+            Educations{
+                id
+                userId
+                school
+                degree
+                fieldStudy
+                grade
+                activities
+                description
+                monthStartDate
+                yearStartDate
+                monthEndDate
+                yearEndDate
+            }
+            Experiences{
+                id
+                userId
+                title
+                employmentType
+                companyName
+                country
+                city
+                isActive
+                industry
+                monthStartDate
+                yearStartDate
+                monthEndDate
+                yearEndDate
+            }
+            Visits{
+                userId
+                visitId
+            }
+            Follows{
+                userId
+                followId
+            }
+        }    
+        Posts{
+            id
+            text
+            photoUrl
+            videoUrl
+            Sender{
+                id
+                firstName
+                lastName
+                profileImageUrl
+                Follows{
+                    userId
+                    followId
+                }
+            }
+        } 
+    }
+}
+`
+
+export const queryPosts = gql`
+    query Posts($Limit:Int! , $Offset:Int!) {
+    Posts(Limit:$Limit , Offset:$Offset){
+        id
+        text
+        videoUrl
+        photoUrl
+        Sender{
+            id
+            firstName
+            lastName
+            profileImageUrl
+            Follows{
+                userId
+                followId
+            }
+        }
+        Likes{
+            userId
+            postId
+        }
+    }
+    }
+`

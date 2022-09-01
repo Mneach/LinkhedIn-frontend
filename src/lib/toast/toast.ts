@@ -32,7 +32,10 @@ export const toastPromise = (promiseFunction : () => Promise<void> , pending : s
         {
             pending: pending,
             success: success,
-            error: error
+            error: error,
+        },
+        {
+            theme : "colored"
         }
     )
 }

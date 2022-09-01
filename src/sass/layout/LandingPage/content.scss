@@ -7,6 +7,8 @@
     @include abs.display-flex(center , center , column);
     margin-top: 0px;
     gap: 30px;
+    position: relative;
+    top: -60px;
 
     &__mid{
         @include layout.Container-1(20% , auto);
@@ -42,7 +44,7 @@
         text-align: center;
         gap: 20px;
         position: absolute;
-        top: 40%;
+        top: 200px;
         transform: translate(0, -50%);
 
         p{
@@ -280,7 +282,7 @@
             @include layout.Container-1(100% , auto);
             @include abs.display-flex(flex-start , flex-start , column);     
             gap: 5px;
-            font-size: 14px;
+            font-size: 16px;
 
             &__name{
                 font-weight: 500

@@ -1,0 +1,124 @@
+@use '../abstracts' as abs;
+@use '../components' as component;
+@use '../layout/' as layout;
+
+.network-content-container{
+    @include layout.Container-1(auto, auto);
+    @include abs.display-flex(space-between , center  , row);
+    padding: 30px 200px;
+    gap: 30px;
+    .network-left-container{
+        @include layout.Container-1(20%, auto);
+        @include abs.display-flex(center , center , column);
+        gap: 30px;
+        .menu-container{
+           .title{
+
+           }
+           
+           .menu{
+                .left-menu-content{
+
+                }
+
+                .right-menu-content{
+
+                }
+           }
+
+        }
+    }
+
+    .network-right-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(center , flex-start , column);
+        gap: 30px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: white;
+        .network-conenction-card-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , flex-start , column);
+            gap: 15px;
+            margin-bottom: 20px;
+            .title{
+                @include layout.Container-1(100%, auto);
+                border-bottom: 1px solid gray;
+                font-size: 18px;
+                font-weight: 500;
+                
+                p{
+                    padding: 10px;
+                }
+            }
+
+            .content{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(space-between , center , row);
+                gap: 30px;
+                .left-content{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , center , row);
+                    gap: 10px;
+                    margin-left: 20px;
+                    .user-photo{
+                        img{
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .user-information{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(center , flex-start , column);
+                        .name{
+                            font-size: 16px;
+                        }
+                        .headline{
+                            font-size: 14px;
+                            color: abs.$gray-700
+                        }
+                    }
+                }
+
+                .right-content{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-end, center , row);
+                    padding-right: 30px;
+                    gap: 30px;
+                    .button1{
+                        @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
+                        @include abs.display-flex(center , center , row);
+                        border: 1px solid gray;
+                        width: 25%;
+                        transition-duration: 0.2s;
+                        gap: 5px;
+                        font-size: 14px;
+    
+                        &:hover{
+                            background-color: abs.$gray-300;
+                        }
+                
+                        img{
+                            width: 20px;
+                        }
+                    }
+
+                    .button2{
+                        @include component.button-submit(5px ,5px ,  white , abs.$blue-700 , 20px);
+                        border: none;
+                        width: 25%;
+                        transition-duration: 0.2s;
+                        font-size: 14px;
+                        border: 1px solid abs.$blue-700;
+                        // margin-left: 30px;
+                        &:hover{
+                            background-color: abs.$blue-900;
+                            color: white;
+                        }      
+                    }
+                }
+            }
+        }
+    }
+}

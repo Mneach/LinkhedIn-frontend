@@ -76,6 +76,7 @@ export const RegisterProfilePhoto = ({ registerData, educationData, workerData, 
     addExperience({
       variables: {
         userId: userId,
+        title: workerData.title,
         employmentType: workerData.employmentType,
         companyName: workerData.companyName,
         country: workerData.country,
@@ -126,6 +127,7 @@ export const RegisterProfilePhoto = ({ registerData, educationData, workerData, 
     const urlFile = URL.createObjectURL(e.target.files[0])
     setImageFile((e.target.files as FileList)[0] as File)
     setLocalUrl(urlFile)
+    console.log(urlFile)
   }
 
   return (

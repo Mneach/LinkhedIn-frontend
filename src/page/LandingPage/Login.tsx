@@ -8,7 +8,7 @@ import { queryCheckEmailUser, queryLogin, queryUserByEmail } from '../../lib/gra
 import { StorageKey } from '../../lib/keys/key'
 import { toastError } from '../../lib/toast/toast'
 import { ParseJwt } from '../../lib/token/token'
-import { CredentialModel, CredentialResponse, GsiButtonConfiguration, PromptMomentNotification } from '../../model/GoogleModel'
+import { CredentialResponse, GoogleCredentialModel, GsiButtonConfiguration, PromptMomentNotification } from '../../model/GoogleModel'
 import { UserType } from '../../model/model'
 
 import '../../sass/layout/LandingPage/content.scss'
@@ -35,7 +35,7 @@ const Login = () => {
 
     const handleCallBack = (response: CredentialResponse) => {
         console.log(ParseJwt(response.credential as string))
-        const credentialData = ParseJwt(response.credential as string) as CredentialModel
+        const credentialData = ParseJwt(response.credential as string) as GoogleCredentialModel
 
         getUserByEmail({ variables: { email: credentialData.email } }).then((e) => {
             if (e.data !== null) {
@@ -81,7 +81,7 @@ const Login = () => {
                         size: "large",
                         text: "signup_with",
                         shape: "pill",
-                        width: "350px",
+                        width: "300px",
                     } as GsiButtonConfiguration,
     
                 )
@@ -91,9 +91,6 @@ const Login = () => {
             })
         }
     }, [])
-
-
-    if (loading) return <p>Loading...</p>
 
     const resetForm = () => {
         setLoginData({ email: "", password: "" })

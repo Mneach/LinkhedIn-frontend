@@ -36,7 +36,7 @@ const ForgotPassword = () => {
   }
 
   if (called && !loading && data && error == undefined) {
-    navigate('/activation')
+    navigate('/reset')
   }
 
   return (

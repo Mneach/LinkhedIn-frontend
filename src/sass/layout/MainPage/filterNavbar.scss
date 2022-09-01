@@ -1,0 +1,50 @@
+@use '../../abstracts' as abs;
+@use '../../components' as component;
+@use '../index' as layout;
+
+.navbar-filter-container{
+    @include layout.Container-1(100%, 40px);
+    @include abs.display-flex(center , center , row);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 9;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    position: fixed;
+    top: 60px;
+    
+    .button-container{
+        @include layout.Container-1(75%, 40px);
+        @include abs.display-flex(flex-start , center , row);
+        padding-left: 20px;
+        gap: 20px;
+
+        .button1{
+            @include component.button-submit(5px ,5px ,  white , abs.$gray-700 , 20px);
+            border: none;
+            width: 10%;
+            transition-duration: 0.2s;
+            font-size: 14px;
+            border: 1px solid abs.$gray-700;
+            // margin-left: 30px;
+            &:hover{
+                background-color: abs.$gray-600;
+                color: white;
+            }   
+        }
+
+        .button-active{
+            @include component.button-submit(5px ,5px ,  abs.$gray-700 , white , 20px);
+            border: none;
+            width: 10%;
+            transition-duration: 0.2s;
+            font-size: 14px;
+            border: 1px solid abs.$gray-700;
+            // margin-left: 30px;
+            &:hover{
+                background-color: abs.$gray-600;
+                color: white;
+            }   
+        }
+    }
+}

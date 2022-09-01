@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client"
+import { ApolloQueryResult, useQuery } from "@apollo/client"
 import { createContext, useContext } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { queryUser } from "../lib/graphql/query"
@@ -14,11 +14,13 @@ type props = {
 type UserContextType = {
     User: UserType,
     JwtToken: String,
+    userRefetch : (variables?: Partial<{userId: string;}> | undefined) => Promise<ApolloQueryResult<any>>
 }
 
 let UserContext = createContext<UserContextType>({
     User: '' as unknown as UserType,
-    JwtToken: ''
+    JwtToken: '',
+    userRefetch : '' as unknown as (variables?: Partial<{userId: string;}> | undefined) => Promise<ApolloQueryResult<any>>,
 })
 
 export const useUserContext = () => useContext(UserContext)
@@ -28,8 +30,7 @@ export const UserProvider : React.FC<props> = ({ children }) => {
 
     const getToken = localStorage.getItem(StorageKey.JwtTokenKey) as string;
     const userId = getToken ? ParseJwt(getToken as string).userId : ''
-
-    const { loading, error, data } = useQuery(queryUser, {
+    const { loading, error, data , refetch : refechUserData } = useQuery(queryUser, {
         variables: { userId }
     })
 
@@ -43,11 +44,9 @@ export const UserProvider : React.FC<props> = ({ children }) => {
     }else{
         dataUser = data.User as unknown as UserType
     }
-
-
-
+    
     return (
-        <UserContext.Provider value={{User : dataUser , JwtToken : getToken}} >
+        <UserContext.Provider value={{User : dataUser , JwtToken : getToken , userRefetch : refechUserData}} >
             {children}
         </UserContext.Provider>
     )

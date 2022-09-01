@@ -6,6 +6,7 @@ import { StorageKey } from './lib/keys/key';
 import { UserProvider } from './hooks/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { offsetLimitPagination } from '@apollo/client/utilities';
 
 const backendUrl = 'http://localhost:8080/query'
 const apolloLink = new ApolloLink((operation, forward) => {
@@ -22,7 +23,15 @@ const apolloLink = new ApolloLink((operation, forward) => {
 const httpLink = createHttpLink({ uri: backendUrl })
 const client = new ApolloClient({
   link: apolloLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    // typePolicies:{
+    //   Query: {
+    //     fields: {
+    //       Posts: offsetLimitPagination()  
+    //     },
+    //   },
+    // },
+  })
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

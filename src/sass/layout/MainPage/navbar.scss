@@ -1,0 +1,262 @@
+@use '../../abstracts' as abs;
+@use '../../components' as component;
+@use '../index' as layout;
+
+.navMainPage {
+    @include layout.Container-1(100%, 40px);
+    @include abs.display-flex(space-between , center , row);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 10;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    position: fixed;
+    top: 0;
+    
+    &__leftContent{
+        @include layout.Container-1(30%, 40px); 
+        @include abs.display-flex(flex-start , center , row);
+        // border: 1px solid red;
+        margin-left: 13%;
+        gap: 10px;
+        
+        img{
+            width: 40px;
+            height: 40px;
+        }
+
+        &__form-search{
+            @include layout.Container-1(auto, auto);
+            @include abs.display-flex(center , center , row);
+            // border: 1px solid black;
+
+            .input__serch{
+                background-color: abs.$gray-200;
+                color: black;
+                font-size: 15px;
+                width: 250px;
+                height: 40px;
+                border-radius: 2px;
+                padding-left:10px;
+                border: none;
+
+            }
+
+            button{
+                background-color: abs.$gray-200;
+                width: 40px;
+                height: 40px;
+                border: none;
+                transition-duration: 0.2s;
+
+                img{
+                    width: 20px;
+                    height: 20px;
+                }
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: abs.$gray-400;
+                }
+            }
+        }
+    }
+
+    &__rightContent{
+        @include layout.Container-1(auto, auto);
+        @include abs.display-flex(flex-start , center , row);
+        // border: 1px solid black;
+        position: relative;
+        font-size: 14px;
+        color: abs.$dark-200;
+        gap: 30px;
+        margin-right: 12%;
+
+        a{
+            text-decoration: none;
+            color: abs.$dark-200;
+        }
+
+        &__menu{
+            @include layout.Container-1(auto, auto);
+            @include abs.display-flex(center , center , column);        
+            gap: 3px;
+            padding: 0px 10px;
+            img{
+                width: 20px;
+                opacity: 0.5;
+            }   
+
+            &:hover{
+                
+                img {
+                    opacity: 1;
+                }
+                color: abs.$dark-900;
+                cursor: pointer;
+            }
+        }
+
+        &__menu__active{
+            @include layout.Container-1(auto, auto);
+            @include abs.display-flex(center , center , column);        
+            padding: 8px 10px;
+            border-bottom: 2px solid abs.$dark-900;
+            gap:3px;
+            img{
+                width: 20px;
+                opacity: 1;
+            }   
+
+            p{
+                color: abs.$dark-900;
+            }
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        &__menu__user{
+            @include layout.Container-1(auto, auto);
+            @include abs.display-flex(center , center , column);      
+            position: relative;  
+            padding: 0px 10px;
+            img{
+                width: 25px;
+                height: 25px;
+                opacity: 1;
+                border-radius: 50%;
+            }   
+
+            &:hover{
+                color: abs.$dark-900;
+                cursor: pointer;
+            }                  
+
+            &__text-container{
+                @include abs.display-flex(center , center , row);   
+                gap: 5px; 
+                img{
+                    width: 14px;
+                    height: 14px;
+                    opacity: 0.5;
+                }   
+                
+                &:hover{
+                    img{
+                        opacity: 1;
+                    }
+                    color: abs.$dark-900;
+                }  
+            }
+        }
+
+        &__button-profile{
+            border: none;
+            background-color: white;
+            color: abs.$dark-200;
+        }
+
+        &__modal-user{
+            @include layout.Container-1(250px, auto);
+            @include abs.display-flex(center , center , column);    
+            position: absolute;
+            gap: 10px;
+            // border: 1px solid grey;
+            border-radius: 10px;
+            top: 75px;
+            right: 10px;
+            z-index: 100;
+            font-size: 14px;
+            padding: 10px 20px;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            &__profile{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , center , row);  
+                gap: 10px;
+                img{
+                    width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                }
+
+                &__text{
+                    @include abs.display-flex(center , flex-start , column);  
+                }
+
+                .title {
+                    font-weight: 500;
+                    color: abs.$dark-900;
+                }
+            }
+
+            &__button-container {
+                @include layout.Container-1(100%, auto);
+
+                .__button__signin{
+                    @include component.button-submit(5px , 5px , white  , abs.$blue-700 , 30px);
+                    border: 1px solid abs.$blue-700;
+                    width: 100%;
+                    transition-duration: 0.2s;
+                    &:hover{
+                        background-color: abs.$blue-900;
+                        color: white;
+                    }
+                }
+            }
+
+            &__manage-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , flex-start , column);  
+                // margin-top: 15px;
+                gap: 10px;
+                .title {
+                    font-weight: 500;
+                    color: abs.$dark-900;
+                }
+                
+                .content{
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &__signout-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , flex-start , column);  
+                // margin-top: 15px;
+                
+                button{
+                    font-size: 14px;
+                    background-color: white;
+                    border: none;
+                    color: abs.$dark-200;
+                    cursor: pointer;
+
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+            
+            .line{
+                width: 290px;
+                border-bottom: 1px solid abs.$gray-500;
+            }
+        }
+
+    }
+
+    .show{
+        @include abs.display-flex(center , center , column);      
+    }
+
+    .hide{
+        display: none;
+    }
+
+}

@@ -6,7 +6,7 @@ import { StorageKey } from '../../lib/keys/key';
 import { toastError } from '../../lib/toast/toast';
 import { ParseJwt } from '../../lib/token/token';
 import { registerInputType, registerStateType, setRegisterInputType, setRegisterStateType, setSignInType, signInType } from '../../model/FormModel';
-import { CredentialModel, CredentialResponse, GsiButtonConfiguration, PromptMomentNotification } from '../../model/GoogleModel';
+import { GoogleCredentialModel, CredentialResponse, GsiButtonConfiguration, PromptMomentNotification } from '../../model/GoogleModel';
 import { UserType } from '../../model/model';
 
 const Register = (
@@ -49,7 +49,7 @@ const Register = (
 
     const handleCallBack = (response: CredentialResponse) => {
         console.log(ParseJwt(response.credential as string))
-        const credentialData = ParseJwt(response.credential as string) as CredentialModel
+        const credentialData = ParseJwt(response.credential as string) as GoogleCredentialModel
 
         getUserByEmail({ variables: { email: credentialData.email } }).then((e) => {
             if (e.data !== null) {
@@ -104,7 +104,7 @@ const Register = (
                         size: "large",
                         text: "signup_with",
                         shape: "pill",
-                        width: "350px",
+                        width: "300px",
                     } as GsiButtonConfiguration,
     
                 )

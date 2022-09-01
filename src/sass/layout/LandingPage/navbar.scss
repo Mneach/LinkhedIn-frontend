@@ -7,6 +7,8 @@
     @include abs.display-flex(flex-start , center , row);
     padding-left: 50px;
     padding-top: 20px;
+    position: relative;
+    top: -60px;
 
     img{
         width: 10%;
@@ -20,6 +22,8 @@
     padding-left: 50px;
     padding-top: 20px;
     padding-right: 100px;
+    position: relative;
+    top: -60px;
 
     &__leftContent{
         width: 50%;

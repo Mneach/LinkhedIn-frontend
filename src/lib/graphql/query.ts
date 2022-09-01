@@ -124,9 +124,10 @@ export const mutationAddEducation = gql`
 `
 
 export const mutationAddExperience = gql`
-    mutation addExperience($userId:ID! ,$employmentType: String!,$companyName: String!,$country: String!,$city: String!,$isActive: Boolean!,$industry: String!,$monthStartDate: String!,$monthEndDate: String!,$yearStartDate: String!,$yearEndDate: String!   ){
+    mutation addExperience($userId:ID! ,$title: String!,$employmentType: String!,$companyName: String!,$country: String!,$city: String!,$isActive: Boolean!,$industry: String!,$monthStartDate: String!,$monthEndDate: String!,$yearStartDate: String!,$yearEndDate: String!   ){
     addExperience(input:{
         userId:$userId,
+        title:$title,
         employmentType:$employmentType,
         companyName:$companyName,
         country:$country,
@@ -140,6 +141,7 @@ export const mutationAddExperience = gql`
     }){
         id
         userId
+        title
         employmentType
         companyName
         country
@@ -161,10 +163,17 @@ export const queryUser = gql`
             id
             email
             password
+            isActive
             firstName
             lastName
+            profileImageUrl
+            backgroundImageUrl
+            pronouns
+            headline
+            about
             city
             country
+            profileLink
             Educations{
                 id
                 userId
@@ -182,6 +191,7 @@ export const queryUser = gql`
             Experiences{
                 id
                 userId
+                title
                 employmentType
                 companyName
                 country
@@ -193,6 +203,70 @@ export const queryUser = gql`
                 monthEndDate
                 yearEndDate
             }
+            Visits{
+                userId
+                visitId
+            }
+            Follows{
+                userId
+                followId
+            }
     }
 }
+`
+
+export const mutationUpdateUser = gql`
+    mutation updateUser($id:ID!,$firstName:String!,$lastName:String!,$email:String!,$password:String!,$isActive:Boolean!,$pronouns:String!,$headline:String!,$profileImageUrl:String!,$backgroundImageUrl:String!,$about:String!,$country:String!,$city:String!,$profileLink:String!){
+    updateUser(id:$id , input:{
+        firstName:$firstName,
+        lastName:$lastName,
+        email:$email,
+        password:$password,
+        isActive:$isActive,
+        pronouns:$pronouns,
+        headline:$headline,
+        about:$about,
+        profileImageUrl:$profileImageUrl,
+        backgroundImageUrl:$backgroundImageUrl,
+        profileLink:$profileLink,
+        country:$country,
+        city:$city
+    }){
+        id
+        email
+        password
+        firstName
+        lastName
+        city
+        country
+        Educations{
+        id
+        userId
+        school
+        degree
+        fieldStudy
+        grade
+        activities
+        description
+        monthStartDate
+        yearStartDate
+        monthEndDate
+        yearEndDate
+        }
+        Experiences{
+        id
+        userId
+        employmentType
+        companyName
+        country
+        city
+        isActive
+        industry
+        monthStartDate
+        yearStartDate
+        monthEndDate
+        yearEndDate
+        }
+    }
+    }
 `

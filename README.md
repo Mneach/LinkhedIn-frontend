@@ -23,3 +23,5 @@ Update V1.5 (24 July 2022)
 - Add Fitur Sign Up with google
 - Add some query and mutation
 - Fix User Context 
+
+Update V1.6 (1 September 2022)

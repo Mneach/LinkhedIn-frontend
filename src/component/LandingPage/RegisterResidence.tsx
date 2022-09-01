@@ -54,7 +54,7 @@ const RegisterResidence = ({ registerData, setRegisterData, registerStateData, s
           <label htmlFor="lastName">City</label>
           <select value={registerData.city} onChange={(e) => setRegisterData((prev) => ({ ...prev, city: e.target.value }))}>
             <option value="" disabled>Select Your City</option>
-            <option value="Jakarta Raya">Jakarta</option>
+            <option value="Jakarta">Jakarta</option>
             <option value="West Java">West Java</option>
             <option value="East Java">East Java</option>
             <option value="Central Java">Central Java</option>
