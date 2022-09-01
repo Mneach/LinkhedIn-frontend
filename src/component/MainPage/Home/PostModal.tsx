@@ -138,8 +138,8 @@ const PostModal = ({ setPostModal, refechPost }: { setPostModal: setBoolean, ref
                 <div className='modal-content-post__content-container'>
                     <div className="top-content-container">
                         {
-                            UserContext.User.backgroundImageUrl ?
-                                (<img src={UserContext.User.backgroundImageUrl} alt="" />)
+                            UserContext.User.profileImageUrl ?
+                                (<img src={UserContext.User.profileImageUrl} alt="" />)
                                 :
                                 (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
                         }

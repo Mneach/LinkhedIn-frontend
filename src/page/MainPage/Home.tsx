@@ -25,9 +25,9 @@ const Home = () => {
         }
     })
 
-    // useEffect(() => {
-    //     refetch()
-    // }, [])
+    useEffect(() => {
+        refetch()
+    }, [])
 
 
     if (loading) return
@@ -79,8 +79,8 @@ const Home = () => {
                         <div className='top-content-container'>
                             <div className='top-user-profile'>
                                 {
-                                    UserContext.User.backgroundImageUrl ?
-                                        (<img src={UserContext.User.backgroundImageUrl} alt="" />)
+                                    UserContext.User.profileImageUrl ?
+                                        (<img src={UserContext.User.profileImageUrl} alt="" />)
                                         :
                                         (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
                                 }

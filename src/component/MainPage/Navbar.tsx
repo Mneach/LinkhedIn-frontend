@@ -11,7 +11,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const UserContext = useUserContext()
     const [modalUser, setModalUser] = useState("hide")
-    const [keyword , setKeywoard] = useState("")
+    const [keyword, setKeywoard] = useState("")
 
     const handleActiveMenu = (state: any) => {
         if (state.isActive) {
@@ -73,7 +73,12 @@ const Navbar = () => {
                 </NavLink>
                 <button onClick={showModalUser} className={"navMainPage__rightContent__button-profile"}>
                     <div className='navMainPage__rightContent__menu__user'>
-                        <img src={UserContext.User.profileImageUrl} alt="" />
+                        {
+                            UserContext.User.profileImageUrl ?
+                                (<img src={UserContext.User.profileImageUrl} alt="" />)
+                                :
+                                (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
+                        }
                         <div className='navMainPage__rightContent__menu__user__text-container'>
                             <p>Me</p>
                             <img src="/src/assets/arrow_down.png" alt="" />
@@ -82,7 +87,12 @@ const Navbar = () => {
                     <div className={`navMainPage__rightContent__modal-user ${modalUser}`}>
                         <div className='navMainPage__rightContent__modal-user__profile'>
                             <div>
-                                <img src={UserContext.User.profileImageUrl} alt="" />
+                                {
+                                    UserContext.User.profileImageUrl ?
+                                        (<img src={UserContext.User.profileImageUrl} alt="" />)
+                                        :
+                                        (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
+                                }
                             </div>
                             <div className='navMainPage__rightContent__modal-user__profile__text'>
                                 <p className='title'>{UserContext.User.firstName} {UserContext.User.lastName}</p>
