@@ -1,0 +1,16 @@
+@use '../../abstracts' as abs;
+@use '../../components' as component;
+@use '../index' as layout;
+
+.richText-a{
+    text-decoration: none;
+    color: #0084ff;
+
+    &:hover{
+        font-weight: 500;
+    }
+
+    &:visited{
+        color: #0084ff;
+    }
+}

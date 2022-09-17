@@ -9,13 +9,23 @@ import { mutationUpdateUser } from '../../../lib/graphql/query';
 import { useMutation } from '@apollo/client';
 import { toastError, toastPromise, toastSuccess } from '../../../lib/toast/toast';
 import MoreModal from '../modal/MoreModal';
+import { mutationAddConnect, mutationAddConnectRequest, mutationAddNotification } from '../../../lib/graphql/CreateQuery';
+import ConnectModal from './ConnectModal';
+import { mutationDeleteConnectRequest } from '../../../lib/graphql/DeleteQuery';
+import { useNavigate } from 'react-router-dom';
 
-const UserInformation = ({ userData , refectCurrentUser }: { userData: UserType , refectCurrentUser : refectUserType}) => {
+const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, refectCurrentUser: refectUserType }) => {
 
   const UserContext = useUserContext()
   const [updateUser, { called, error, loading }] = useMutation(mutationUpdateUser)
   const [modalUser, setModalUser] = useState(false)
   const [modalMore, setModalMore] = useState(false)
+  const [modalConnect, setModalConnect] = useState(false)
+  const [addConnectionMutation] = useMutation(mutationAddConnect)
+  const [deleteConnectRequestMutation] = useMutation(mutationDeleteConnectRequest)
+  let connectedUser: boolean = false;
+  let connectionRequest: boolean = false;
+  let giveConnectionStatus: boolean = false
 
   const promiseBackground = (e: any) => {
     if ((e.target.files)[0] !== undefined) {
@@ -97,6 +107,11 @@ const UserInformation = ({ userData , refectCurrentUser }: { userData: UserType 
     else setModalMore(true)
   }
 
+  const handleConnectModal = () => {
+    if (modalConnect === false) setModalConnect(true)
+    else setModalConnect(false)
+  }
+
   useEffect(() => {
     if (!error) {
       if (called && !loading) {
@@ -111,12 +126,74 @@ const UserInformation = ({ userData , refectCurrentUser }: { userData: UserType 
     }
   }, [called, loading])
 
+  const accpetConnectionHandler = (user1ID: string, fromUserId: string, toUserId: string) => {
+    addConnectionMutation({
+      variables: {
+        user1ID: user1ID,
+        user2ID: UserContext.User.id,
+      }
+    }).then((e) => {
+      deleteConnectRequestMutation({
+        variables: {
+          fromUserId: fromUserId,
+          toUserId: toUserId
+        }
+      }).then((e) => {
+        UserContext.userRefetch()
+        refectCurrentUser().then((e) => {
+          toastSuccess("Success Accpet Connection", "top-right", "colored")
+        })
+      }).catch((e) => {
+        toastError((e), "top-right", "colored")
+      })
+    }).catch((e) => {
+      toastError((e), "top-right", "colored")
+    })
+  }
+
+  const declineConnectionHanlder = (fromUserId: string, toUserId: string) => {
+    deleteConnectRequestMutation({
+      variables: {
+        fromUserId: fromUserId,
+        toUserId: toUserId
+      }
+    }).then((e) => {
+      UserContext.userRefetch()
+      refectCurrentUser().then((e) => {
+        toastSuccess("Success Ignore Connection", "top-right", "colored")
+      })
+    }).catch((e) => {
+      toastError((e), "top-right", "colored")
+    })
+  }
+
+  UserContext.User.Connections.map((connectionData) => {
+    if (connectionData.user1.id === userData.id || connectionData.user2.id === userData.id) {
+      connectedUser = true;
+    }
+  })
+
+
+  userData.ConnectRequests.map((connectRequestData) => {
+    if (connectRequestData.fromUser.id === UserContext.User.id) {
+      connectionRequest = true;
+    }
+  })
+
+  UserContext.User.ConnectRequests.map((connectRequestData) => {
+    if (connectRequestData.toUser.id === UserContext.User.id) {
+      giveConnectionStatus = true;
+    }
+  })
+
   return (
     <>
       {
         modalUser === true && <UserInformationModal modalUser={modalUser} setModalUser={setModalUser} />
       }{
         modalMore === true && <MoreModal refectCurrentUser={refectCurrentUser} userData={userData} />
+      }{
+        modalConnect === true && <ConnectModal refectCurrentUser={refectCurrentUser} userData={userData} setModalConnect={setModalConnect} />
       }
       <div className='profile-container__mid-container__userInformation-container__user-background'>
         {
@@ -171,7 +248,8 @@ const UserInformation = ({ userData , refectCurrentUser }: { userData: UserType 
           <p className='experience'></p>
           <p className='location'>{userData.city} , {userData.country}</p>
           <p className='datas'>
-            <b>{userData.Follows.length}</b> Follower,
+            <b>{userData.Connections.length}</b> Connections,
+            <b> {userData.Follows.length}</b> Followers,
             <b> {userData.Visits.length}</b> Visit</p>
         </div>
         {/* <div className='profile-container__mid-container__userInformation-container__data-user-container__right'>
@@ -193,8 +271,27 @@ const UserInformation = ({ userData , refectCurrentUser }: { userData: UserType 
             :
             (
               <>
-                <button className='button3'>Connect</button>
-                {/* <button className='button2'>Message</button> */}
+                {
+                  connectedUser ?
+                    (<button className='button3'>Connected</button>)
+                    :
+                    (
+                      connectionRequest ?
+                        (<button className='button3'>Requested</button>)
+                        :
+                        (
+                          giveConnectionStatus ?
+                            (
+                              <>
+                                <button className='button1' onClick={() => declineConnectionHanlder(userData.id, UserContext.User.id)}>Ignore</button>
+                                <button className='button2' onClick={() => accpetConnectionHandler(userData.id, userData.id, UserContext.User.id)}>Accept</button>
+                              </>
+                            )
+                            :
+                            (<button className='button3' onClick={handleConnectModal}>Connect</button>)
+                        )
+                    )
+                }
                 <button className='button1' onClick={handleMoreModal}>More</button>
               </>
             )

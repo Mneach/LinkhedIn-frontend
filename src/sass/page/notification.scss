@@ -1,0 +1,76 @@
+@use '../abstracts' as abs;
+@use '../components' as component;
+@use '../layout/' as layout;
+
+.notification-container {
+    @include layout.Container-1(auto, auto);
+    @include abs.display-flex(center , center , column);
+    padding: 30px 200px;
+    gap: 30px;
+
+    .notification-mid-container{
+        @include layout.Container-1(50%, auto);
+        @include abs.display-flex(center , center , column);
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: white;
+        overflow: hidden;
+
+        .line{
+            @include layout.Container-1(100%, auto);
+            border-bottom: 1px solid abs.$gray-400;
+        }
+        
+        .notification-mid-title{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-start , center , row);
+            margin-left: 30px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+
+            p{
+                font-size: 24px;
+                font-weight: 500;
+            }
+        }   
+
+        .notification-mid-content-container{
+            @include layout.Container-1(100%, 80px);
+            @include abs.display-flex(flex-start , center , row);
+            gap: 20px;
+            transition-duration: 0.2s;
+
+            &:hover{
+                cursor: pointer;
+                background-color: abs.$gray-200
+            }
+
+            .notificaiton-left-card-container{
+                @include layout.Container-1(10%, auto);
+                @include abs.display-flex(flex-start , flex-start , column);
+                margin-left: 20px;
+                
+                img{
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+            
+            .notificaiton-right-card-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , flex-start , row);
+                gap: 3px;
+                .text{
+                    font-size: 16px;
+                    color: abs.$gray-900;
+
+                    .username{
+                        font-weight: 500;
+                    }
+                }      
+            }
+        }
+    }
+}

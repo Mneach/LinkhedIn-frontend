@@ -1,8 +1,9 @@
 import { useMutation } from '@apollo/client'
 import React from 'react'
 import { useUserContext } from '../../../hooks/UserContext'
-import { mutationFollowUser } from '../../../lib/graphql/CreateQuery'
-import { mutationUnFollowUser } from '../../../lib/graphql/DeleteQuery'
+import { messageFollowNotification, messageUnfollowNotification } from '../../../lib/function/NotificaionHandler'
+import { mutationAddBlock, mutationAddNotification, mutationFollowUser } from '../../../lib/graphql/CreateQuery'
+import { mutationDeleteBlock, mutationUnFollowUser } from '../../../lib/graphql/DeleteQuery'
 import { toastError, toastSuccess } from '../../../lib/toast/toast'
 import { refectUserType } from '../../../model/FormModel'
 import { UserType } from '../../../model/model'
@@ -13,6 +14,9 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
 
     const [followMutation] = useMutation(mutationFollowUser)
     const [unFollowMutation] = useMutation(mutationUnFollowUser)
+    const [blockMutation] = useMutation(mutationAddBlock)
+    const [deleteBlockMutation] = useMutation(mutationDeleteBlock)
+    const [notificationMutation] = useMutation(mutationAddNotification)
 
     const handleFollow = async () => {
         followMutation({
@@ -29,6 +33,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
 
             refectCurrentUser().then((e) => {
                 toastSuccess("Success Follow!", 'top-right', 'colored')
+                createNotification(UserContext.User.id, userData.id, messageFollowNotification())
             }).catch((error) => {
                 toastError(error, 'top-right', 'colored')
             })
@@ -52,6 +57,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
 
             refectCurrentUser().then((e) => {
                 toastSuccess("Success UnFollow!", 'top-right', 'colored')
+                createNotification(UserContext.User.id, userData.id, messageUnfollowNotification())
             }).catch((error) => {
                 toastError(error, 'top-right', 'colored')
             })
@@ -60,7 +66,40 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
         })
     }
 
+    const handleBlock = () => {
+        blockMutation({
+            variables: {
+                userId: UserContext.User.id,
+                blockId: userData.id
+            }
+        }).then((e) => {
+            UserContext.userRefetch()
+            refectCurrentUser().then((e) => {
+                toastSuccess("Success Block User!", "top-right", "colored")
+            })
+        }).catch((e) => {
+            toastError((e), "top-right", "colored")
+        })
+    }
+
+    const handleUnBlockUser = () => {
+        deleteBlockMutation({
+            variables: {
+                userId: UserContext.User.id,
+                blockId: userData.id,
+            }
+        }).then((e) => {
+            UserContext.userRefetch()
+            refectCurrentUser().then((e) => {
+                toastSuccess("Success UnBlock! User", "top-right", "colored")
+            })
+        }).catch((e) => {
+            toastError((e), "top-right", "colored")
+        })
+    }
+
     let checkFollowStatus = ""
+    let checkBlockUser = ""
     console.log(UserContext)
     console.log(userData)
     if (UserContext.User) {
@@ -72,8 +111,34 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
                 break
             }
         }
+
+        UserContext.User.Blocks.map((blockData) => {
+            if (blockData.blockId === userData.id) {
+                checkBlockUser = "blocked";
+            }
+        })
     }
-    
+
+    const createNotification = (fromUserId: string, toUserId: string, message: string) => {
+        if (fromUserId != toUserId) {
+            notificationMutation({
+                variables: {
+                    toUserId: toUserId,
+                    fromUserId: fromUserId,
+                    message: message
+                }
+            }).then((e) => {
+                console.log(e);
+            }).catch((e) => {
+                toastError((e), "top-right", "colored")
+            })
+        } else {
+            console.log("Cannot send notification to yourself");
+
+        }
+
+    }
+
     console.log(checkFollowStatus)
 
     return (
@@ -98,7 +163,12 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
                                     (<button onClick={handleFollow}>Follow</button>)
                             }
 
-                            <button>Block</button>
+                            {
+                                checkBlockUser === "blocked" ?
+                                    (<button onClick={handleUnBlockUser}>UnBlock</button>)
+                                    :
+                                    (<button onClick={handleBlock}>Block</button>)
+                            }
                         </div >
                     )
             }

@@ -44,6 +44,8 @@ export const UserProvider : React.FC<props> = ({ children }) => {
     }else{
         dataUser = data.User as unknown as UserType
     }
+
+    console.log(dataUser)
     
     return (
         <UserContext.Provider value={{User : dataUser , JwtToken : getToken , userRefetch : refechUserData}} >

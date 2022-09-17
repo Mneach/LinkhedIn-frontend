@@ -107,6 +107,7 @@
             .post-top-content{
                 @include layout.Container-1(100%, auto);
                 @include abs.display-flex(flex-start , center , row);
+                position: relative;
                 margin-top: 10px;
     
                 .profile-sender{
@@ -116,6 +117,9 @@
                         width: 50px;
                         height: 50px;
                         border-radius: 50%;
+                    }
+                    &:hover{
+                        cursor: pointer;
                     }
                 }
     
@@ -130,6 +134,9 @@
                     .follower{
                         font-size: 12px;
                     }
+                    &:hover{
+                        cursor: pointer;
+                    }
                 }
             }
     
@@ -141,6 +148,8 @@
                     @include abs.display-flex(flex-start , center , row);
                     margin-left: 20px;
                     p{
+                        overflow-wrap: break-word;
+                        text-align: justify;
                         font-size: 14px;
                     }
                 }
@@ -233,6 +242,10 @@
                 height: 50px;
                 border-radius: 50%;
             }
+
+            &:hover{
+                cursor: pointer;
+            }
         }
     
         .right-content-container{
@@ -254,21 +267,51 @@
                 font-size: 12px;
                 color: abs.$gray-700;
             }
-        }
 
-        .button3{
-            @include component.button-submit(5px ,5px ,  white , abs.$blue-700 , 20px);
-            border: none;
-            width: 70%;
-            transition-duration: 0.2s;
-            font-size: 14px;
-            border: 1px solid abs.$blue-700;
-            margin-top: 10px;
-            // margin-left: 30px;
-            &:hover{
-                background-color: abs.$blue-900;
-                color: white;
-            }        
+            .button1{
+                @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
+                @include abs.display-flex(center , center , row);
+                border: 1px solid gray;
+                width: 85%;
+                transition-duration: 0.2s;
+                gap: 5px;
+                font-size: 14px;
+
+                &:hover{
+                    background-color: abs.$gray-300;
+                }
+        
+                img{
+                    width: 20px;
+                }
+            }
+        
+            .button2{
+                @include component.button-submit(5px , 5px ,  white , white , 30px);
+                width: 85%;
+                color: abs.$blue-700;
+                border: 1px solid abs.$blue-700;
+                transition-duration: 0.2s;
+                font-size: 14px;
+
+                &:hover{
+                    color: white;
+                    background-color: abs.$blue-900;
+                }
+            }
+
+            .button3{
+                @include component.button-submit(5px , 5px ,  abs.$blue-700 , white , 30px);
+                border: none;
+                width: 85%;
+                transition-duration: 0.2s;
+                font-size: 14px;
+
+                // margin-left: 30px;
+                &:hover{
+                    background-color: abs.$blue-900;
+                }        
+            }
         }
     }
 }
@@ -451,6 +494,45 @@
                         cursor: pointer;
                     }
                 }
+            }
+        }
+    }
+}
+
+.modal-poster-card-container{
+    position: absolute;
+    min-width: 250px;
+    min-height: 100px;
+    left: -260px;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+
+    .modal-poster-card-profile-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(center , center , row);
+        margin-top: 20px;
+        gap: 10px;
+
+        .modal-poster-profile{
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+        }
+
+        .modal-poster-information-container{
+
+            .modal-poster-name{
+                font-size: 16px;
+                font-weight: 500;
+            }
+    
+            .modal-poster-headline{
+                font-size: 14px;
             }
         }
     }

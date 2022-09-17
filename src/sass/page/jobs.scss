@@ -1,0 +1,207 @@
+@use '../abstracts' as abs;
+@use '../components' as component;
+@use '../layout/' as layout;
+
+.job-container {
+    @include layout.Container-1(auto, auto);
+    @include abs.display-flex(center , center , column);
+    padding: 30px 200px;
+    gap: 30px;
+
+    .job-top-container{
+        @include layout.Container-1(50%, 100px);
+        @include abs.display-flex(center , center , row);
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: white;
+
+        .button2 {
+            @include component.button-submit(10px ,10px ,  white , abs.$blue-700 , 20px);
+            border: none;
+            width: 90%;
+            transition-duration: 0.2s;
+            font-size: 14px;
+            border: 1px solid abs.$blue-700;
+            // margin-left: 30px;
+            &:hover{
+                background-color: abs.$blue-900;
+                color: white;
+            }  
+        }
+    }
+
+    .job-mid-container{
+        @include layout.Container-1(50%, auto);
+        @include abs.display-flex(center , center , column);
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: white;
+        padding-bottom: 30px;
+
+        .line{
+            @include layout.Container-1(95%, auto);
+            border-bottom: 1px solid abs.$gray-400;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .job-mid-title{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-start , center , row);
+            margin-left: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            p{
+                font-size: 24px;
+                font-weight: 500;
+            }
+        }   
+
+        .job-mid-content-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-start , center , row);
+            padding-left: 30px;
+            .jobs-card-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , flex-start , column);
+                gap: 3px;
+                .title{
+                    font-size: 20px;
+                    color: abs.$blue-700;
+                    font-weight: 500;
+
+                    &:hover{
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+                }
+    
+                .company-name{
+                    font-size: 16px;
+                    color: abs.$gray-900;
+                }
+    
+                .location{
+                    font-size: 14px;
+                    color: abs.$gray-700;
+                }
+
+                .description{
+                    font-size: 14px;
+                    color: abs.$gray-600;
+                }
+            }
+        }
+    }
+}
+
+.modal-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+.modal-job-container{
+    @include layout.Container-1(45%, 600px);
+    @include abs.display-flex(flex-start , center , column);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 40px;
+    position: relative;
+    overflow: scroll;
+
+    .modal-job-title-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(space-between , center , row);
+        position: absolute;
+        padding-bottom: 10px;
+        border-bottom: 1px solid gray;
+
+        .title{
+            @include layout.Container-1(100%, auto);
+            font-size: 20px;
+            margin-left: 20px
+        }
+
+        .button1{
+            @include component.button-submit(8px , 8px ,  white , abs.$dark-500 , 30px);
+            @include abs.display-flex(center , center , row);
+            border: none;
+            transition-duration: 0.2s;
+            gap: 5px;
+            font-size: 14px;
+            margin-right: 20px;
+
+            &:hover{
+                background-color: abs.$gray-300;
+            }
+    
+            img{
+                width: 20px;
+            }
+        }
+    }
+
+    .modal-job-content-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(center , flex-start , column);
+        gap: 20px;
+        position: relative;
+        top: 60px;
+        .content{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , flex-start , column);
+            gap: 5px;
+            label{
+                font-size: 14px;
+            }
+
+            .inputSelect{
+                width: 98%;
+                padding: 10px ;
+                border-radius: 5px;
+            }
+
+            .inputText{
+                width: 95%;
+                padding: 10px;
+                border: 1px solid gray;
+                border-radius: 5px;
+            }
+
+            textarea{
+                width: 95%;
+                resize: none;
+                border-radius: 5px;
+                padding: 10px;
+                height: 50px;
+            }
+        }
+
+        .button-container{
+            @include layout.Container-1(97%, auto);
+            @include abs.display-flex(flex-end , center , row);    
+            margin-bottom: 20px;
+
+            .button-submit{ 
+                @include component.button-submit(10px , 10px ,  abs.$blue-700 , white , 30px);
+                border: none;
+                width: 20%;
+                transition-duration: 0.2s;
+                font-size: 16px;
+                &:hover{
+                    background-color: abs.$blue-900;
+                }    
+            }
+        }
+    }
+}

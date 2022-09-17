@@ -74,19 +74,54 @@
                 color: abs.$gray-600;
             }
 
-            .button3{
-                @include component.button-submit(10px ,30px ,  white , abs.$blue-700 , 20px);
-                border: none;
-                width: 100%;
-                transition-duration: 0.2s;
-                font-size: 14px;
-                border: 1px solid abs.$blue-700;
+            .right-content{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-end , center , row);
+                gap: 30px;
+                .button1{
+                    @include component.button-submit(10px , 5px ,  white , abs.$dark-500 , 30px);
+                    @include abs.display-flex(center , center , row);
+                    border: 1px solid gray;
+                    width: 50%;
+                    transition-duration: 0.2s;
+                    gap: 5px;
+                    font-size: 14px;
 
-                // margin-left: 30px;
-                &:hover{
-                    background-color: abs.$blue-900;
-                    color: white;
-                }        
+                    &:hover{
+                        background-color: abs.$gray-300;
+                    }
+            
+                    img{
+                        width: 20px;
+                    }
+                }
+            
+                .button2{
+                    @include component.button-submit(10px , 5px ,  white , white , 30px);
+                    width: 50%;
+                    color: abs.$blue-700;
+                    border: 1px solid abs.$blue-700;
+                    transition-duration: 0.2s;
+                    font-size: 14px;
+
+                    &:hover{
+                        color: white;
+                        background-color: abs.$blue-900;
+                    }
+                }
+
+                .button3{
+                    @include component.button-submit(10px , 5px ,  abs.$blue-700 , white , 30px);
+                    border: none;
+                    width: 50%;
+                    transition-duration: 0.2s;
+                    font-size: 14px;
+
+                    // margin-left: 30px;
+                    &:hover{
+                        background-color: abs.$blue-900;
+                    }        
+                }
             }
         }
     }

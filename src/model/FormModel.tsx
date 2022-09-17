@@ -41,8 +41,14 @@ export type setString = React.Dispatch<React.SetStateAction<string>>
 export type setBoolean = React.Dispatch<React.SetStateAction<boolean>>
 export type setNumber = React.Dispatch<React.SetStateAction<number>>
 export type setUserType = React.Dispatch<React.SetStateAction<UserType>>
+export type setReactMention = React.Dispatch<React.SetStateAction<reactMentionType>>
+
 export type refectUserType = (variables?: Partial<{userId: string;}> | undefined) => Promise<ApolloQueryResult<any>>
 export type refectPostType = (variables?: Partial<{Limit: number , Offset: number;}> | undefined) => Promise<ApolloQueryResult<any>>
+export type refectHastagType = (variables?: Partial<{}> | undefined) => Promise<ApolloQueryResult<any>>
+export type refectSearchType = (variables?: Partial<{Limit: number , Offset: number;}> | undefined) => Promise<ApolloQueryResult<any>>
+export type refectCommentType = (variables?: Partial<{Limit: number , Offset: number , postId : string;}> | undefined) => Promise<ApolloQueryResult<any>>
+export type refectJobType = (variables?: Partial<{}> | undefined) => Promise<ApolloQueryResult<any>>
 
 export type workerInputType = {
     userId: string,
@@ -99,6 +105,11 @@ export type setTimeInputType = React.Dispatch<React.SetStateAction<{
     yearStartDate: string,
     yearEndDate: string,
 }>>
+
+export type reactMentionType = {
+    id : string,
+    display : string,
+}
 
 export enum enumEmploymentType {
     Appreticeship = 'Appreticeship',
@@ -159,3 +170,9 @@ export enum enumMonthType {
     December = "December",
 }
 
+
+
+export const HastagRichText1 = /#[a-z0-9A-Z]+/g
+export const HastagRichText2 = /@\[#[a-z0-9A-Z]+/g
+export const MentionRichText = /@[a-z0-9A-Z]+/g
+export const URLRichText = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._]{2,1000}\.\b([a-zA-Z0-9@:%_\+.#?&//=]*)/g

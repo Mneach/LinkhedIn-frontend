@@ -1,22 +1,31 @@
-import { useMutation } from '@apollo/client'
+import { concat, useMutation, useQuery } from '@apollo/client'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import React, { useEffect, useState } from 'react'
 
 import { AiFillYoutube, AiFillPicture } from 'react-icons/ai'
 import { useUserContext } from '../../../hooks/UserContext'
 import { storage } from '../../../lib/firebase/FirebaseConfig'
-import { mutationCreatePost } from '../../../lib/graphql/CreateQuery'
+import { mutationAddHastag, mutationCreatePost } from '../../../lib/graphql/CreateQuery'
 import { toastError, toastSuccess } from '../../../lib/toast/toast'
-import { refectPostType, setBoolean } from '../../../model/FormModel'
+import { HastagRichText1, refectHastagType, refectPostType, setBoolean } from '../../../model/FormModel'
+import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions'
 
-const PostModal = ({ setPostModal, refechPost }: { setPostModal: setBoolean, refechPost: refectPostType }) => {
+import { mentionInputPostStyle, mentionStyle } from '../../../lib/function/mentionStyle'
+import RichTextTemplateHome from './RichTextTemplateHome'
+import { queryHastags } from '../../../lib/graphql/SelectQuery'
+import { HastagType } from '../../../model/model'
+
+const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { dataHastags : Array<HastagType> , setPostModal: setBoolean, refechHastag : refectHastagType , refechPost: refectPostType }) => {
 
     const UserContext = useUserContext()
     const [text, setText] = useState("")
+    const [inputText , setInputText] = useState("")
     const [mutationPost] = useMutation(mutationCreatePost)
     const [file, setFile] = useState<File>()
     const [buttonDisable, setButtonDisable] = useState(true)
     const [removeFileStyle, setRemoveFileStyle] = useState("none")
+    const [addHastagMutation] = useMutation(mutationAddHastag)
+
     const [localUrl, setLocalUrl] = useState({
         type: "",
         url: "",
@@ -66,18 +75,31 @@ const PostModal = ({ setPostModal, refechPost }: { setPostModal: setBoolean, ref
     }
 
     const postHandler = (url: string) => {
+
+        const texts = inputText.split(" ")
+        texts.map((inputText) => {
+            if(inputText.match(HastagRichText1)){
+                console.log(text);
+                const hastagSubstring = inputText.substring(1 , inputText.length)
+                addHastagMutation({variables : {hastag : hastagSubstring}}).then((e) => {
+                    console.log(e);
+                })
+            }
+        })
+
         if (localUrl.type === "image") {
             console.log("image")
             mutationPost({
                 variables: {
                     senderId: UserContext.User.id,
-                    text: text,
+                    text: inputText,
                     photoUrl: url,
                     videoUrl: "",
                 }
             }).then((e) => {
                 toastSuccess("Success Create Post", "top-right", "colored")
                 refechPost()
+                refechHastag()
             }).catch((e) => {
                 toastError((e), "top-right", "colored")
             })
@@ -86,13 +108,14 @@ const PostModal = ({ setPostModal, refechPost }: { setPostModal: setBoolean, ref
             mutationPost({
                 variables: {
                     senderId: UserContext.User.id,
-                    text: text,
+                    text: inputText,
                     photoUrl: "",
                     videoUrl: url,
                 }
             }).then((e) => {
                 toastSuccess("Success Create Post", "top-right", "colored")
                 refechPost()
+                refechHastag()
             }).catch((e) => {
                 toastError((e), "top-right", "colored")
             })
@@ -117,14 +140,46 @@ const PostModal = ({ setPostModal, refechPost }: { setPostModal: setBoolean, ref
     }, [localUrl.url])
 
     useEffect(() => {
-        console.log(text)
-        if(text === ""){
+        if (text === "") {
             setButtonDisable(true)
-        }else{
+        } else {
             setButtonDisable(false);
         }
-    } , [text])
+    }, [text])
 
+    const mentionDatas: SuggestionDataItem[] = []
+    UserContext.User.Connections.map((dataMention) => {
+        let mentionData: SuggestionDataItem = { id: "", display: "" }
+        let at: string = "@"
+        if (dataMention.user1.id != UserContext.User.id) {
+            mentionData.id = dataMention.user1.id   
+            mentionData.display = at.concat(dataMention.user1.firstName).concat(dataMention.user1.lastName)
+            mentionDatas.push(mentionData)
+        } else if (dataMention.user2.id != UserContext.User.id) {
+            mentionData.id = dataMention.user2.id
+            mentionData.display = at.concat(dataMention.user2.firstName).concat(dataMention.user2.lastName)
+            mentionDatas.push(mentionData)
+        }
+    })
+
+    const hastagDatas : SuggestionDataItem [] = []
+    dataHastags.map((dataHastag) => {
+        let hastagData: SuggestionDataItem = { id: "", display: "" }
+        let at: string = "#"
+        hastagData.id = at.concat(dataHastag.id) 
+        hastagData.display = at.concat(dataHastag.hastag)
+        hastagDatas.push(hastagData)
+    })
+    
+    const handleComment = (e: any , newValue : any , newPlainTextValue: any) => {
+        setText(e.target.value)
+        // setText(newPlainTextValue)
+        console.log(newPlainTextValue);
+        console.log(newValue);
+        
+        
+        setInputText(newPlainTextValue)
+    }
 
     return (
         <div className='modal-container'>
@@ -162,7 +217,18 @@ const PostModal = ({ setPostModal, refechPost }: { setPostModal: setBoolean, ref
                                         )
                                 )
                         }
-                        <textarea style={{ width: "100%", height: "100px" }} value={text} onChange={(e) => setText(e.target.value)} placeholder="What do you want to talk about"></textarea>
+                        <MentionsInput id='test-rich-text' value={text} style={{ width: "100%", height: "100px", ...mentionInputPostStyle }} placeholder="What do you want to talk about" onChange={handleComment}>
+                            <Mention
+                                trigger="@"
+                                data={mentionDatas}
+                                style={mentionStyle}
+                            />
+                            <Mention
+                                trigger="#"
+                                data={hastagDatas}
+                                style={mentionStyle}
+                            />
+                        </MentionsInput>
                     </div>
                     <div className="bottom-content-container">
                         <div className='bottom-left-content'>

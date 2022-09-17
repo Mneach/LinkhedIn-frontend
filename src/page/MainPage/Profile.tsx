@@ -6,15 +6,15 @@ import Experience from '../../component/MainPage/Profile/Experience'
 import FollowPeopleProfile from '../../component/MainPage/Profile/FollowPeopleProfile'
 import EducationModalAdd from '../../component/MainPage/modal/EducationModalAdd'
 import ExperienceModalAdd from '../../component/MainPage/modal/ExperienceModalAdd'
-import MoreModal from '../../component/MainPage/modal/MoreModal'
 import Navbar from '../../component/MainPage/Navbar'
 import UserInformation from '../../component/MainPage/Profile/UserInformation'
-import { UserProvider, useUserContext } from '../../hooks/UserContext'
-import { mutationVisitUser } from '../../lib/graphql/CreateQuery'
+import { useUserContext } from '../../hooks/UserContext'
+import { mutationAddNotification, mutationVisitUser } from '../../lib/graphql/CreateQuery'
 import { queryUser } from '../../lib/graphql/query'
 import { UserType } from '../../model/model'
 
 import '../../sass/page/profile.scss'
+import { queryUserSuggestion } from '../../lib/graphql/SelectQuery'
 
 const Profile = () => {
 
@@ -23,8 +23,18 @@ const Profile = () => {
     const [modalEducation, setModalEducation] = useState(false)
     const [modalExperience, setModalExperience] = useState(false)
     const [modalMore, setModalMore] = useState(false)
-    const { loading, error, data, called , refetch : currentUserRefect } = useQuery(queryUser, { variables: { userId }, errorPolicy: "all" })
+    const { loading, error, data, called, refetch: currentUserRefect } = useQuery(queryUser, { variables: { userId }, errorPolicy: "all" })
     const [VisitUserMutation, { loading: loadingVisit, error: errorVisit, data: dataVisit, called: calledVisit }] = useMutation(mutationVisitUser)
+
+    const { loading: loadingUserSuggestion, error: errorUserSuggestion, data: dataUserSuggestion, refetch: refetchUserSuggestion } = useQuery(queryUserSuggestion, {
+        variables: { userId: UserContext.User.id }
+    })
+
+    useEffect(() => {
+        UserContext.userRefetch()
+        refetchUserSuggestion()
+    },)
+
 
     useEffect(() => {
         if (UserContext.User.id !== userId) {
@@ -34,9 +44,11 @@ const Profile = () => {
                     id1: UserContext.User.id,
                     id2: userId
                 }
+            }).then((e) => {
+                console.log(e);
             })
         }
-    } , [])
+    }, [])
 
     useEffect(() => {
         if (dataVisit && data) {
@@ -44,6 +56,8 @@ const Profile = () => {
                 currentUserRefect()
             }
         }
+        console.log("test");
+        
     }, [loadingVisit, loading])
 
     if (loading) return <p>Get user data...</p>
@@ -59,7 +73,6 @@ const Profile = () => {
         if (modalExperience) setModalExperience(false);
         else setModalExperience(true)
     }
-
 
     return (
         <>
@@ -164,9 +177,24 @@ const Profile = () => {
                     <div className='profile-container__right-container'>
                         <div className='profile-container__right-container__content1-container'>
                             <p className='title'>People You Might Know</p>
-                            <FollowPeopleProfile />
-                            <FollowPeopleProfile />
-                            <FollowPeopleProfile />
+                            {
+                                loadingUserSuggestion === true ?
+                                    (<p>Loading...</p>)
+                                    :
+                                    (
+                                        !errorUserSuggestion ?
+                                            (
+                                                <>
+                                                    {/* <FeedContent userSuggestionData={dataUserSuggestion.UserSuggestion} /> */}
+                                                    <FollowPeopleProfile userSuggestionData={dataUserSuggestion.UserSuggestion} />
+                                                </>
+                                            )
+                                            :
+                                            (
+                                                <p>No data...</p>
+                                            )
+                                    )
+                            }
                         </div>
                     </div>
                 </div>

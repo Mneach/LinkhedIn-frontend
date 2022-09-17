@@ -1,5 +1,6 @@
 import React from 'react'
 import { PostType } from '../../../model/model'
+import RichTextTemplateSearch from './RichTextTemplateSearch'
 
 const PostCardSearch = ({ postData , index}: { postData: PostType , index : number }) => {
     return (
@@ -20,7 +21,7 @@ const PostCardSearch = ({ postData , index}: { postData: PostType , index : numb
             </div>
             <div className='post-mid-content'>
                 <div className='post-content-text'>
-                    <p>{postData.text}</p>
+                    <RichTextTemplateSearch texts={postData.text.split(" ")} />
                 </div>
                 <div className='post-content-photo'>
                     {

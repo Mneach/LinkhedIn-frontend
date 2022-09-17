@@ -211,6 +211,53 @@ export const queryUser = gql`
                 userId
                 followId
             }
+            Connections{
+                id
+                user1{
+                    id
+                    headline
+                    firstName
+                    lastName
+                    email
+                    password
+                    profileImageUrl
+                }
+                user2{
+                    id
+                    headline
+                    firstName
+                    lastName
+                    email
+                    password
+                    profileImageUrl
+                }
+            }
+            ConnectRequests{
+                id
+                fromUser{
+                    id
+                    headline
+                    firstName
+                    lastName
+                    email
+                    password
+                    profileImageUrl
+                }
+                toUser{
+                    id
+                    headline
+                    firstName
+                    lastName
+                    email
+                    password
+                    profileImageUrl
+                }
+                message
+            }
+            Blocks{
+                userId
+                blockId
+            }
     }
 }
 `

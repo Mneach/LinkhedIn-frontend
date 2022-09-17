@@ -1,10 +1,9 @@
 import { useMutation } from '@apollo/client'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useUserContext } from '../../../hooks/UserContext'
 import { mutationAddExperience } from '../../../lib/graphql/query'
 import { toastError, toastSuccess } from '../../../lib/toast/toast'
 import { enumCountryType, enumEmploymentType, enumIndustryType, enumMonthType, setBoolean } from '../../../model/FormModel'
-import { EducationType } from '../../../model/model'
 
 const ExperienceModalAdd = ({ modalExperience, setModalExperience }: { modalExperience: boolean, setModalExperience: setBoolean }) => {
 

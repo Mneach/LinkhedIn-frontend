@@ -1,9 +1,9 @@
 import React from 'react'
 import Navbar from '../../component/MainPage/Navbar'
-import ConnectionCard from '../../component/MainPage/Network/ConnectionCard'
 import MenuNetwork from '../../component/MainPage/Network/MenuNetwork'
 import FilterNavbar from '../../component/MainPage/Search/FilterNavbar'
 import '../../sass/page/network.scss'
+import InvitationCard from '../../component/MainPage/Network/InvitationCard'
 
 const Network = () => {
   return (
@@ -14,7 +14,7 @@ const Network = () => {
           {/* <MenuNetwork /> */}
         {/* </div> */}
         <div className="network-right-container">
-          <ConnectionCard />
+          <InvitationCard />
         </div>
       </div>
     </div>

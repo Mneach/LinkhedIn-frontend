@@ -5,7 +5,8 @@ import Navbar from '../../component/MainPage/Navbar'
 import FilterNavbar from '../../component/MainPage/Search/FilterNavbar'
 import PostCardSearch from '../../component/MainPage/Search/PostCardSearch'
 import SearchUserCard from '../../component/MainPage/SearchUserCard'
-import { querySearch } from '../../lib/graphql/SelectQuery'
+import { useUserContext } from '../../hooks/UserContext'
+import { querySearch, querySearchHastag } from '../../lib/graphql/SelectQuery'
 import { PostType, UserType } from '../../model/model'
 
 import '../../sass/page/search.scss'
@@ -13,14 +14,23 @@ import '../../sass/page/search.scss'
 
 const Search = () => {
 
+    const UserContext = useUserContext()
     const { keyword } = useParams()
     const [limit, setLimit] = useState(100)
     const [offset, setOffset] = useState(0)
     const [filter, setFilter] = useState("")
 
-    const { loading: loadingSearchUser, error: errorSearchUser, data: dataSearchUser, fetchMore } = useQuery(querySearch, {
+    console.log(keyword);   
+    
+
+    const { loading: loadingSearchUser, error: errorSearchUser, data: dataSearchUser, fetchMore , refetch : refectSearchData } = useQuery(querySearch, {
         variables: { Keyword: keyword, Limit: limit, Offset: offset }
     })
+
+    useEffect(() => {
+        UserContext.userRefetch()
+        refectSearchData()
+    } , [])
 
     if (loadingSearchUser) return
     if (errorSearchUser) console.log(errorSearchUser)
@@ -47,7 +57,7 @@ const Search = () => {
                                     {
                                         dataUser.map((userData) => {
                                             return (
-                                                <SearchUserCard dataUser={userData} />
+                                                <SearchUserCard  refectSearchData={refectSearchData} dataUser={userData}  />
                                             )
                                         })
                                     }
@@ -88,7 +98,7 @@ const Search = () => {
                                         {
                                             dataUser.map((userData) => {
                                                 return (
-                                                    <SearchUserCard dataUser={userData} />
+                                                    <SearchUserCard  refectSearchData={refectSearchData} dataUser={userData}  />
                                                 )
                                             })
                                         }

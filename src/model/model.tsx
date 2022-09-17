@@ -18,6 +18,9 @@ export type UserType = {
     Experiences: Array<ExperienceType>,
     Visits: Array<VisitType>,
     Follows: Array<FollowType>,
+    Blocks : Array<BlockType>
+    Connections : Array<ConnectionType>
+    ConnectRequests : Array<ConnectRequests>
 }
 
 export type EducationType = {
@@ -58,6 +61,7 @@ export type PostType = {
     videoUrl : string,
     Sender: UserType,
     Likes: Array<LikeType>
+    Comments : Array<CommentType>
 }
 
 export type VisitType = {
@@ -73,4 +77,60 @@ export type FollowType = {
 export type LikeType = {
     postId : string, 
     userId : string,
+}
+
+export type ConnectRequests ={
+    id: string
+    message: string
+    fromUser : UserType
+    toUser : UserType
+}
+
+export type ConnectionType = {
+    id : string,
+    user1 : UserType
+    user2 : UserType
+}
+
+export type BlockType = {
+    userId : string,
+    blockId : string,
+}
+
+export type CommentType = {
+    id: string,
+    postId : string,
+    Commenter : UserType,
+    Likes : Array<LikeCommentType>
+    Replies : Array<CommentType>
+    comment : string,
+}
+
+export type LikeCommentType = {
+    id : string,
+    commentId : string,
+    User : UserType
+}
+
+export type HastagType = {
+    id : string,
+    hastag : string,
+}
+
+export type JobsType = {
+    id: string,
+    title: string,
+    companyName: string,
+    workplace: string,
+    city: string,
+    country: string,
+    employmentType: string,
+    description: string,
+}
+
+export type NotificationType = {
+    id : string,
+    fromUser : UserType,
+    toUser : UserType,
+    message : string,
 }

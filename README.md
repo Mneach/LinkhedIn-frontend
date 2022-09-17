@@ -24,4 +24,11 @@ Update V1.5 (24 July 2022)
 - Add some query and mutation
 - Fix User Context 
 
-Update V1.6 (1 September 2022)
+Update V1.6 (17 September 2022)
+- Add Fitur Comment
+- Add FItur Post
+- Add Like Comment and Reply
+- Add Rich Text and auto Complete
+- Add User You Might Know
+- Add Fitur Jobs
+- Add Fitur Notification(Visit , Follow , Unfollow , Create Post , Comment Post, Reply Comment , Like Post , Like Reply)

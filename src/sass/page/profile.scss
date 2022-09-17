@@ -407,7 +407,7 @@
     }
 
     &__right-container{
-        @include layout.Container-1(40%, auto);
+        @include layout.Container-1(35%, auto);
         @include abs.display-flex(flex-end , center , column); 
         background-color: white;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
@@ -417,14 +417,16 @@
             @include layout.Container-1(100%, auto);
             @include abs.display-flex(center , flex-start , column); 
             margin-top: 20px;
-            margin-left: 40px;
             margin-bottom: 40px;
             .title{
+                margin-left: 35px;
                 font-size: 16px;
                 font-weight: 500
             }
 
             &__user-profile-container{
+                
+                margin-left: 40px;
                 @include layout.Container-1(100%, auto);
                 @include abs.display-flex(center , flex-start , row); 
                 margin-top: 20px;
@@ -432,8 +434,12 @@
                     @include layout.Container-1(30%, auto);
                     @include abs.display-flex(flex-start , center , row); 
                     img{
-                        width: 55px;
+                        width: 45px;
                         border-radius: 50%;
+                    }
+
+                    &:hover{
+                        cursor: pointer;
                     }
                 }
 
@@ -450,20 +456,54 @@
                         color: abs.$gray-600;
                     }
 
+                    .location{
+                        font-size: 12px;
+                        color: abs.$gray-600;
+                    }
+
                     .button1{
-                        @include component.button-submit(5px , 45px ,  white , abs.$dark-500 , 30px);
+                        @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
                         @include abs.display-flex(center , center , row);
                         border: 1px solid gray;
-                        color: gray;
-                        width: 15%;
+                        width: 65%;
                         transition-duration: 0.2s;
                         gap: 5px;
                         font-size: 14px;
-                        margin-top: 10px;
-    
+        
                         &:hover{
                             background-color: abs.$gray-300;
                         }
+                
+                        img{
+                            width: 20px;
+                        }
+                    }
+                
+                    .button2{
+                        @include component.button-submit(5px , 5px ,  white , white , 30px);
+                        width: 65%;
+                        color: abs.$blue-700;
+                        border: 1px solid abs.$blue-700;
+                        transition-duration: 0.2s;
+                        font-size: 14px;
+        
+                        &:hover{
+                            color: white;
+                            background-color: abs.$blue-900;
+                        }
+                    }
+        
+                    .button3{
+                        @include component.button-submit(5px , 5px ,  abs.$blue-700 , white , 30px);
+                        border: none;
+                        width: 65%;
+                        transition-duration: 0.2s;
+                        font-size: 14px;
+        
+                        // margin-left: 30px;
+                        &:hover{
+                            background-color: abs.$blue-900;
+                        }        
                     }
                 }
             }
@@ -598,9 +638,11 @@
             }
 
             textarea{
+                width: 95%;
                 resize: none;
                 border-radius: 5px;
                 padding: 10px;
+                height: 50px;
             }
 
             &__checkbox-container{
@@ -639,6 +681,127 @@
                 &:hover{
                     background-color: abs.$blue-900;
                 }    
+            }
+        }
+    }
+}
+
+.modal-connect-container{
+    // @include layout.Container-1(25%, 200px);
+    width: 25%;
+    min-height: 180px;
+    max-height: auto;
+    @include abs.display-flex(flex-start , center , column);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+
+    .modal-connect-title-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(space-between , center , row);
+        position: absolute;
+        padding-bottom: 10px;
+        border-bottom: 1px solid gray;
+
+        .title{
+            @include layout.Container-1(100%, auto);
+            font-size: 20px;
+            margin-left: 20px
+        }
+
+        .button-title{
+            @include component.button-submit(8px , 8px ,  white , abs.$dark-500 , 30px);
+            @include abs.display-flex(center , center , row);
+            border: none;
+            transition-duration: 0.2s;
+            gap: 5px;
+            font-size: 14px;
+            margin-right: 20px;
+
+            &:hover{
+                background-color: abs.$gray-300;
+            }
+    
+            img{
+                width: 20px;
+            }
+        }
+    }
+
+    .modal-connect-content-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(flex-start , flex-start , row);
+        position: relative;
+        top: 60px;
+
+        .modal-connect-content-input{
+            @include layout.Container-1(100%, 270px);
+            @include abs.display-flex(flex-start , flex-start , column);
+            gap: 10px;
+
+            textarea{
+                width: 95%;
+                height: 100px;
+                resize: none;
+                padding: 10px;
+                font-size: 16px;
+
+                &::placeholder{
+                    font-size: 16px;
+                }
+                
+            }
+        }
+    }
+
+    .modal-connect-button-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(flex-end , center , row);
+        position: absolute;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-top: 1px solid gray;
+        bottom: 0;
+        gap: 20px;
+
+        .button1{
+            @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
+            @include abs.display-flex(center , center , row);
+            border: 1px solid gray;
+            width: 20%;
+            transition-duration: 0.2s;
+            gap: 5px;
+            font-size: 14px;
+
+            &:hover{
+                background-color: abs.$gray-300;
+            }
+    
+            img{
+                width: 20px;
+            }
+        }
+    
+        .button2{
+            @include component.button-submit(5px , 5px ,  white , white , 30px);
+            width: 15%;
+            color: abs.$blue-700;
+            border: 1px solid abs.$blue-700;
+            transition-duration: 0.2s;
+            font-size: 14px;
+            margin-right: 20px;
+
+            &:hover{
+                color: white;
+                background-color: abs.$blue-900;
+            }
+
+            &:disabled{
+                border: 1px solid abs.$gray-300;
+                background-color: abs.$gray-300;
+                color: abs.$gray-500;
+                cursor: not-allowed;
             }
         }
     }

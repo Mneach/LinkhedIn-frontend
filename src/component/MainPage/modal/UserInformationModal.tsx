@@ -24,12 +24,10 @@ const UserInformationModal = ({ modalUser, setModalUser }: { modalUser: boolean,
     })
 
     const handleUpdateUser = () => {
-        if (userData.pronouns === "") {
-            setUserData((prev) => ({ ...prev, pronouns: UserContext.User.pronouns }))
-        } else if (userData.country === "") {
-            setUserData((prev) => ({ ...prev, country: UserContext.User.country }))
-        } else if (userData.city === "") {
-            setUserData((prev) => ({ ...prev, city: UserContext.User.city }))
+        if (userData.firstName === "") {
+            setUserData((prev) => ({ ...prev, firstName: UserContext.User.firstName }))
+        } else if (userData.lastName === "") {
+            setUserData((prev) => ({ ...prev, lastName: UserContext.User.lastName }))
         } else {
             updateUser({
                 variables: {

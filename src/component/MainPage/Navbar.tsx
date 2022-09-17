@@ -62,7 +62,7 @@ const Navbar = () => {
                 <NavLink to={'/mainPage/network'} className={handleActiveMenu}>
                     <NavbarMenu icon='/src/assets/network.png' text='My Network' />
                 </NavLink>
-                <NavLink to={'/mainPage/job'} className={handleActiveMenu}>
+                <NavLink to={'/mainPage/jobs'} className={handleActiveMenu}>
                     <NavbarMenu icon='/src/assets/job.png' text='Jobs' />
                 </NavLink>
                 <NavLink to={'/mainPage/message'} className={handleActiveMenu}>
