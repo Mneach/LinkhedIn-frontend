@@ -1,14 +1,17 @@
 import { useMutation } from '@apollo/client'
-import React from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
+import React, { useState } from 'react'
 import { useUserContext } from '../../../hooks/UserContext'
 import { messageFollowNotification, messageUnfollowNotification } from '../../../lib/function/NotificaionHandler'
 import { mutationAddBlock, mutationAddNotification, mutationFollowUser } from '../../../lib/graphql/CreateQuery'
 import { mutationDeleteBlock, mutationUnFollowUser } from '../../../lib/graphql/DeleteQuery'
 import { toastError, toastSuccess } from '../../../lib/toast/toast'
-import { refectUserType } from '../../../model/FormModel'
+import { refectUserType, setBoolean } from '../../../model/FormModel'
 import { UserType } from '../../../model/model'
+import ShareProfileModal from './ShareProfileModal'
 
-const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refectCurrentUser: refectUserType }) => {
+const MoreModal = ({ userData, refectCurrentUser, setModalMore }: { userData: UserType, refectCurrentUser: refectUserType, setModalMore: setBoolean }) => {
 
     const UserContext = useUserContext()
 
@@ -17,6 +20,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
     const [blockMutation] = useMutation(mutationAddBlock)
     const [deleteBlockMutation] = useMutation(mutationDeleteBlock)
     const [notificationMutation] = useMutation(mutationAddNotification)
+    const [modalShareProfile, setModalShareProfile] = useState(false)
 
     const handleFollow = async () => {
         followMutation({
@@ -34,6 +38,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
             refectCurrentUser().then((e) => {
                 toastSuccess("Success Follow!", 'top-right', 'colored')
                 createNotification(UserContext.User.id, userData.id, messageFollowNotification())
+                setModalMore(false)
             }).catch((error) => {
                 toastError(error, 'top-right', 'colored')
             })
@@ -58,6 +63,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
             refectCurrentUser().then((e) => {
                 toastSuccess("Success UnFollow!", 'top-right', 'colored')
                 createNotification(UserContext.User.id, userData.id, messageUnfollowNotification())
+                setModalMore(false)
             }).catch((error) => {
                 toastError(error, 'top-right', 'colored')
             })
@@ -77,6 +83,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
             refectCurrentUser().then((e) => {
                 toastSuccess("Success Block User!", "top-right", "colored")
             })
+            setModalMore(false)
         }).catch((e) => {
             toastError((e), "top-right", "colored")
         })
@@ -93,6 +100,7 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
             refectCurrentUser().then((e) => {
                 toastSuccess("Success UnBlock! User", "top-right", "colored")
             })
+            setModalMore(false)
         }).catch((e) => {
             toastError((e), "top-right", "colored")
         })
@@ -104,7 +112,6 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
     console.log(userData)
     if (UserContext.User) {
         for (let index = 0; index < userData.Follows.length; index++) {
-            console.log("adsf")
             const element = userData.Follows[index];
             if (element.followId === userData.id && element.userId === UserContext.User.id) {
                 checkFollowStatus = "followed"
@@ -139,40 +146,64 @@ const MoreModal = ({ userData, refectCurrentUser }: { userData: UserType, refect
 
     }
 
-    console.log(checkFollowStatus)
+    const handleShowShareProfile = () => {
+        setModalShareProfile(true)
+    }
+
+    const handlePrintToPdf = () => {
+        setModalMore(false)
+        const input = document.getElementById('profile-container-id');
+        const pdf = new jsPDF();
+        var width = pdf.internal.pageSize.getWidth();
+        var height = pdf.internal.pageSize.getHeight();
+        html2canvas(input as HTMLElement)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png', 100);
+
+                pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
+                // pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
+                // pdf.output('dataurlnewwindow');
+                pdf.save(`${userData.firstName.concat(" ").concat(userData.lastName).concat(".pdf")}`);
+            });
+    }
 
     return (
-        <div className='modal-more-container'>
+        <>
             {
-                userData.id === UserContext.User.id ?
-                    (
-                        <div className='modal-more-container__content'>
-                            <button>Share Profile</button>
-                            <button>Save As PDF</button>
-                        </div >
-                    )
-                    :
-                    (
-                        <div className='modal-more-container__content'>
-                            <button>Share Profile</button>
-                            <button>Save As PDF</button>
-                            {
-                                checkFollowStatus === "followed" ?
-                                    (<button onClick={handleUnfollow}>UnFollow</button>)
-                                    :
-                                    (<button onClick={handleFollow}>Follow</button>)
-                            }
-
-                            {
-                                checkBlockUser === "blocked" ?
-                                    (<button onClick={handleUnBlockUser}>UnBlock</button>)
-                                    :
-                                    (<button onClick={handleBlock}>Block</button>)
-                            }
-                        </div >
-                    )
+                modalShareProfile === true && <ShareProfileModal userData={userData} setModalShareProfile={setModalShareProfile} />
             }
-        </div >
+            <div className='modal-more-container'>
+                {
+                    userData.id === UserContext.User.id ?
+                        (
+                            <div className='modal-more-container__content'>
+                                <button onClick={handleShowShareProfile}>Share Profile</button>
+                                <button onClick={handlePrintToPdf}>Save As PDF</button>
+                            </div >
+                        )
+                        :
+                        (
+                            <div className='modal-more-container__content'>
+                                <button onClick={handleShowShareProfile}>Share Profile</button>
+                                <button onClick={handlePrintToPdf}>Save As PDF</button>
+                                {
+                                    checkFollowStatus === "followed" ?
+                                        (<button onClick={handleUnfollow}>UnFollow</button>)
+                                        :
+                                        (<button onClick={handleFollow}>Follow</button>)
+                                }
+
+                                {
+                                    checkBlockUser === "blocked" ?
+                                        (<button onClick={handleUnBlockUser}>UnBlock</button>)
+                                        :
+                                        (<button onClick={handleBlock}>Block</button>)
+                                }
+                            </div >
+                        )
+                }
+            </div >
+        </>
     )
 }
 

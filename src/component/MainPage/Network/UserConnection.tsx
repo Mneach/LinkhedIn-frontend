@@ -7,13 +7,16 @@ import { mutationDeleteConnectRequest } from '../../../lib/graphql/DeleteQuery'
 import { queryUser } from '../../../lib/graphql/query'
 import { toastError, toastSuccess } from '../../../lib/toast/toast'
 import { UserType } from '../../../model/model'
-import ConnectModal from '../Profile/ConnectModal'
+import '../../../sass/page/network.scss'
 
-const UserSuggestion = ({ userSuggestionData }: { userSuggestionData: UserType }) => {
+const UserConnection = ({ userSuggestionData }: { userSuggestionData: UserType }) => {
+
 
     const UserContext = useUserContext()
     const navigate = useNavigate()
     const { loading, error, data, called, refetch: currentUserRefect } = useQuery(queryUser, { variables: { userId: userSuggestionData.id }, errorPolicy: "all" })
+    const [modalUser, setModalUser] = useState(false)
+    const [modalMore, setModalMore] = useState(false)
     const [modalConnect, setModalConnect] = useState(false)
     const [addConnectionMutation] = useMutation(mutationAddConnect)
     const [deleteConnectRequestMutation] = useMutation(mutationDeleteConnectRequest)
@@ -30,7 +33,7 @@ const UserSuggestion = ({ userSuggestionData }: { userSuggestionData: UserType }
     }, [data])
 
     if (loading) return null
-    
+
     const userData = data.User as UserType
 
     const accpetConnectionHandler = (user1ID: string, fromUserId: string, toUserId: string) => {
@@ -94,56 +97,51 @@ const UserSuggestion = ({ userSuggestionData }: { userSuggestionData: UserType }
 
     UserContext.User.ConnectRequests.map((connectRequestData) => {
         console.log(connectRequestData);
-        
+
         if (connectRequestData.toUser.id === UserContext.User.id && connectRequestData.fromUser.id == userSuggestionData.id) {
             giveConnectionStatus = true;
         }
     })
 
     return (
-        <>
-            {
-                modalConnect === true && <ConnectModal refectCurrentUser={currentUserRefect} userData={userData} setModalConnect={setModalConnect} />
-            }
-
-            <div className="content-container">
-                <div className='left-content-container' onClick={() => handleGoToProfile(userSuggestionData.id)}>
-                    {
-                        userSuggestionData.profileImageUrl ?
-                            (<img src={userSuggestionData.profileImageUrl} alt="" />)
-                            :
-                            (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
-                    }
-                </div>
-                <div className='right-content-container'>
-                    <p className='name'>{userSuggestionData.firstName} {userSuggestionData.lastName}</p>
-                    <p className='degree'>{userSuggestionData.headline}</p>
-                    <p className='location'>{userSuggestionData.city} , {userSuggestionData.country}</p>
-                    {
-                        connectedUser ?
-                            (<button className='button3'>Connected</button>)
-                            :
-                            (
-                                connectionRequest ?
-                                    (<button className='button3'>Requested</button>)
-                                    :
-                                    (
-                                        giveConnectionStatus ?
-                                            (
-                                                <>
-                                                    <button className='button2' onClick={() => accpetConnectionHandler(userData.id, userData.id, UserContext.User.id)}>Accept</button>
-                                                    <button className='button1' onClick={() => declineConnectionHanlder(userData.id, UserContext.User.id)}>Ignore</button>
-                                                </>
-                                            )
-                                            :
-                                            (<button className='button2' onClick={handleConnectModal}>Connect</button>)
-                                    )
-                            )
-                    }
-                </div>
+        <div className='UYMK-card-content-container'>
+            <div className="UYMK-card-top-content">
+                {
+                    userSuggestionData.backgroundImageUrl === "" ?
+                        (<img className='UYMK-card-background-image' onClick={() => handleGoToProfile(userSuggestionData.id)} src={"../../../../src/assets/dummy_avatar.jpg"} alt="" />) : (<img className='UYMK-card-background-image' onClick={() => handleGoToProfile(userSuggestionData.id)} src={userSuggestionData.backgroundImageUrl} alt="" />)
+                }
             </div>
-        </>
+            <div className="UYMK-card-mid-content">
+                {
+                    userSuggestionData.profileImageUrl === "" ?
+                        (<img className='user-photo' onClick={() => handleGoToProfile(userSuggestionData.id)} src={"../../../../src/assets/dummy_avatar.jpg"} alt="" />) : (<img className='user-photo' onClick={() => handleGoToProfile(userSuggestionData.id)} src={userSuggestionData.profileImageUrl} alt="" />)
+                }
+                <p className='username' onClick={() => handleGoToProfile(userSuggestionData.id)}>{userSuggestionData.firstName} {userSuggestionData.lastName}</p>
+                <p className='headline' onClick={() => handleGoToProfile(userSuggestionData.id)}>{userSuggestionData.headline}</p>
+                {
+                    connectedUser ?
+                        (<button className='button3'>Connected</button>)
+                        :
+                        (
+                            connectionRequest ?
+                                (<button className='button3'>Requested</button>)
+                                :
+                                (
+                                    giveConnectionStatus ?
+                                        (
+                                            <>
+                                                <button className='button2' onClick={() => accpetConnectionHandler(userData.id, userData.id, UserContext.User.id)}>Accept</button>
+                                                <button className='button1' onClick={() => declineConnectionHanlder(userData.id, UserContext.User.id)}>Ignore</button>
+                                            </>
+                                        )
+                                        :
+                                        (<button className='button2' onClick={handleConnectModal}>Connect</button>)
+                                )
+                        )
+                }
+            </div>
+        </div>
     )
 }
 
-export default UserSuggestion
+export default UserConnection

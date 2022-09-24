@@ -15,6 +15,7 @@ import { UserType } from '../../model/model'
 
 import '../../sass/page/profile.scss'
 import { queryUserSuggestion } from '../../lib/graphql/SelectQuery'
+import jsPDF from 'jspdf'
 
 const Profile = () => {
 
@@ -57,7 +58,7 @@ const Profile = () => {
             }
         }
         console.log("test");
-        
+
     }, [loadingVisit, loading])
 
     if (loading) return <p>Get user data...</p>
@@ -84,8 +85,9 @@ const Profile = () => {
             }
             <div style={{ backgroundColor: "rgb(238 , 238 , 238)", minHeight: "100vh" }}>
                 <Navbar />
-                <div className='profile-container'>
-                    <div className='profile-container__mid-container'>
+
+                <div className='profile-container' >
+                    <div className='profile-container__mid-container' id='profile-container-id'>
                         <div className='profile-container__mid-container__userInformation-container'>
                             <UserInformation userData={userData} refectCurrentUser={currentUserRefect} />
                         </div>

@@ -5,7 +5,7 @@ import { useUserContext } from '../../../hooks/UserContext'
 import { mutationAddComment, mutationAddHastag, mutationAddNotification, mutationLikePost, mutationUnLikePost } from '../../../lib/graphql/CreateQuery'
 import { toastError, toastSuccess } from '../../../lib/toast/toast'
 import { HastagRichText1, refectHastagType, refectPostType } from '../../../model/FormModel'
-import { CommentType, HastagType, PostType } from '../../../model/model'
+import { CommentType, HastagType, PostType, LikeType } from '../../../model/model'
 import PostComment from './PostComment'
 import PosterCard from './PosterCard'
 
@@ -15,6 +15,8 @@ import RichTextTemplateHome from './RichTextTemplateHome'
 import { Mention, MentionsInput, SuggestionDataItem } from 'react-mentions'
 import { mentionInputCommentStyle, mentionInputPostStyle, mentionStyle } from '../../../lib/function/mentionStyle'
 import { messageCommentPostNotification, messageCreatePostNotification, messageLikePostNotification } from '../../../lib/function/NotificaionHandler'
+import ShareProfileModal from '../modal/ShareProfileModal'
+import SharePostModal from './SharePostModal'
 
 const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { postData: PostType, refectPostData: refectPostType, dataHastags: Array<HastagType>, refechHastag: refectHastagType }) => {
 
@@ -37,6 +39,7 @@ const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { pos
     const [limit, setLimit] = useState(2)
     const [offset, setOffset] = useState(0)
     const [hasMore, setHasMore] = useState(true);
+    const [shareModal, setShareModal] = useState(false)
     const [totalPostComment, setTotalPostComment] = useState(postData.Comments.length)
     const [totalComment, setTotalComment] = useState(initialValueTotalComment)
     const [notificationMutation] = useMutation(mutationAddNotification)
@@ -86,6 +89,16 @@ const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { pos
             checkLike = true
         }
     })
+
+    function isLike(postData: PostType) {
+        let check = false;
+        postData.Likes.forEach(e => {
+            if (e.userId === UserContext.User.id) {
+                check = true;
+            }
+        })
+        return check
+    }
 
     const handleGoToProfile = () => {
         navigate(`/mainPage/profile/${postData.Sender.id}`)
@@ -267,112 +280,121 @@ const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { pos
 
     }
 
-    return (
-        <div className='mid-content-container'>
-            <div className='post-container'>
-                <div className='post-top-content' onClick={handleGoToProfile}>
-                    {
-                        modalProfilePoster === true && <PosterCard postData={postData} />
-                    }
-                    <div className='profile-sender' onMouseEnter={() => setModalProfilePoster(true)} onMouseLeave={() => setModalProfilePoster(false)}>
-                        {
-                            postData.Sender.profileImageUrl === "" ?
-                                (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
-                                :
-                                (<img src={postData.Sender.profileImageUrl}></img>)
-                        }
-                    </div>
-                    <div className='profile-data'>
-                        <p className='sender'>{postData.Sender.firstName} {postData.Sender.lastName}</p>
-                        <p className='follower'>{postData.Sender.Follows.length} followers</p>
-                    </div>
-                </div>
-                <div className='post-mid-content'>
-                    <div className='post-content-text'>
-                        <p>
-                            <RichTextTemplateHome texts={texts} />
-                        </p>
-                    </div>
-                    <div className='post-content-photo'>
-                        {
-                            postData.photoUrl === "" && postData.videoUrl === "" ?
-                                (null)
-                                :
-                                (
-                                    postData.photoUrl !== "" ?
-                                        (<img src={postData.photoUrl}></img>)
-                                        :
-                                        (<video src={postData.videoUrl} controls />)
-                                )
-                        }
-                    </div>
-                </div>
-                <div className='post-bottom-content'>
-                    <div className='post-bottom-data'>
-                        <p>{postData.Likes.length} Likes</p>
-                        <p>{totalPostComment} Comment</p>
-                        <p>0 shares</p>
-                    </div>
-                    <div className='button-container'>
-                        {
-                            checkLike === false ?
-                                (
-                                    <button className='button' onClick={likeHandler}>Like</button>
-                                )
-                                :
-                                (
-                                    <button className='button' onClick={unlikeHandler}>Unlike</button>
-                                )
-                        }
+    const handleShowModal = () => {
+        setShareModal(true)
+    }
 
-                        <button className='button' onClick={handleCommentShow}>Comment</button>
-                        <button className='button'>Share</button>
-                        <button className='button'>Send</button>
-                    </div>
-                </div>
-                <div className='post-bottom-comment-container'>
-                    <div style={{ "display": `${displayInputComment}` }} className='post-comment-input-container' >
-                        <div className="post-comment-input-content">
+    return (
+        <>
+            {
+                shareModal === true && <SharePostModal postData={postData} setShareModal={setShareModal} />
+            }
+            <div className='mid-content-container'>
+                <div className='post-container'>
+                    <div className='post-top-content' onClick={handleGoToProfile}>
+                        {
+                            modalProfilePoster === true && <PosterCard postData={postData} />
+                        }
+                        <div className='profile-sender' onMouseEnter={() => setModalProfilePoster(true)} onMouseLeave={() => setModalProfilePoster(false)}>
                             {
-                                UserContext.User.profileImageUrl === "" ?
+                                postData.Sender.profileImageUrl === "" ?
                                     (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
                                     :
-                                    (<img src={UserContext.User.profileImageUrl}></img>)
+                                    (<img src={postData.Sender.profileImageUrl}></img>)
                             }
-                            {/* <form className='form-post-comment' onSubmit={(e) => handleCommentMutation(e, postData.id)}>
-                                <input value={comment} type="text" className='input-text' onChange={(e) => setComment(e.target.value)} placeholder='Add a comment...' />
-                            </form> */}
-                            <MentionsInput onKeyPress={(event) => pressHandleEnter(event, postData.id)} value={comment} style={{ width: "100%", minHeight: "50px", maxHeight: "auto", ...mentionInputPostStyle }} placeholder="Add a comment..." onChange={handleComment}>
-                                <Mention
-                                    trigger="@"
-                                    data={mentionDatas}
-                                    style={mentionStyle}
-                                />
-                                <Mention
-                                    trigger="#"
-                                    data={hastagDatas}
-                                    style={mentionStyle}
-                                />
-                            </MentionsInput>
+                        </div>
+                        <div className='profile-data'>
+                            <p className='sender'>{postData.Sender.firstName} {postData.Sender.lastName}</p>
+                            <p className='follower'>{postData.Sender.Follows.length} followers</p>
                         </div>
                     </div>
-                    {
-                        displayInputComment === "flex" &&
-                        commentTypeData?.map((commentTypeData) => {
-                            return (<PostComment key={commentTypeData.id} dataHastags={dataHastags} refechHastag={refechHastag} commentId={commentTypeData.id} commentReply={commentTypeData.Replies} totalComment={totalPostComment} setTotalComment={setTotalPostComment} />)
-                        })
-                    }
-                    {
-                        displayInputComment === "flex" && hasMore == true &&
-                        <div className='button-comment-container'>
-                            <button className='button-load-more' onClick={handleFetchMore}>Load more comment</button>
+                    <div className='post-mid-content'>
+                        <div className='post-content-text'>
+                            <p>
+                                <RichTextTemplateHome texts={texts} />
+                            </p>
                         </div>
-                    }
+                        <div className='post-content-photo'>
+                            {
+                                postData.photoUrl === "" && postData.videoUrl === "" ?
+                                    (null)
+                                    :
+                                    (
+                                        postData.photoUrl !== "" ?
+                                            (<img src={postData.photoUrl}></img>)
+                                            :
+                                            (<video src={postData.videoUrl} controls />)
+                                    )
+                            }
+                        </div>
+                    </div>
+                    <div className='post-bottom-content'>
+                        <div className='post-bottom-data'>
+                            <p>{postData.Likes.length} Likes</p>
+                            <p>{totalPostComment} Comment</p>
+                            <p>0 shares</p>
+                        </div>
+                        <div className='button-container'>
+                            {
+                                isLike(postData) === false ?
+                                    (
+                                        <button className='button' onClick={likeHandler}>Like</button>
+                                    )
+                                    :
+                                    (
+                                        <button className='button' onClick={unlikeHandler}>Unlike</button>
+                                    )
+                            }
+
+                            <button className='button' onClick={handleCommentShow}>Comment</button>
+                            <button className='button' onClick={handleShowModal}>Share</button>
+                            <button className='button'>Send</button>
+                        </div>
+                    </div>
+                    <div className='post-bottom-comment-container'>
+                        <div style={{ "display": `${displayInputComment}` }} className='post-comment-input-container' >
+                            <div className="post-comment-input-content">
+                                {
+                                    UserContext.User.profileImageUrl === "" ?
+                                        (<img src="../../src/assets/dummy_avatar.jpg" alt="" />)
+                                        :
+                                        (<img src={UserContext.User.profileImageUrl}></img>)
+                                }
+                                {/* <form className='form-post-comment' onSubmit={(e) => handleCommentMutation(e, postData.id)}>
+                                <input value={comment} type="text" className='input-text' onChange={(e) => setComment(e.target.value)} placeholder='Add a comment...' />
+                            </form> */}
+                                <MentionsInput onKeyPress={(event) => pressHandleEnter(event, postData.id)} value={comment} style={{ width: "100%", minHeight: "50px", maxHeight: "auto", ...mentionInputPostStyle }} placeholder="Add a comment..." onChange={handleComment}>
+                                    <Mention
+                                        trigger="@"
+                                        data={mentionDatas}
+                                        style={mentionStyle}
+                                    />
+                                    <Mention
+                                        trigger="#"
+                                        data={hastagDatas}
+                                        style={mentionStyle}
+                                    />
+                                </MentionsInput>
+                            </div>
+                        </div>
+                        {
+                            displayInputComment === "flex" &&
+                            commentTypeData?.map((commentTypeData) => {
+                                return (<PostComment key={commentTypeData.id} dataHastags={dataHastags} refechHastag={refechHastag} commentId={commentTypeData.id} commentReply={commentTypeData.Replies} totalComment={totalPostComment} setTotalComment={setTotalPostComment} />)
+                            })
+                        }
+                        {
+                            displayInputComment === "flex" && hasMore == true &&
+                            <div className='button-comment-container'>
+                                <button className='button-load-more' onClick={handleFetchMore}>Load more comment</button>
+                            </div>
+                        }
+
+                    </div>
 
                 </div>
-
             </div>
-        </div>
+        </>
     )
 }
 

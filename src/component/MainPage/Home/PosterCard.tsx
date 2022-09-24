@@ -14,6 +14,7 @@ const PosterCard = ({postData} : {postData : PostType}) => {
             <div className='modal-poster-information-container'>
                 <div className='modal-poster-name'>{postData.Sender.firstName} {postData.Sender.lastName}</div>
                 <div className="modal-poster-headline">{postData.Sender.headline}</div>
+                <div className="modal-poster-location">{postData.Sender.city} , {postData.Sender.country}</div>
             </div>
         </div>
     </div>

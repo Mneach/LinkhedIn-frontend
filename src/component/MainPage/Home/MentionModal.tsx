@@ -31,6 +31,7 @@ const MentionModal = ({ userId }: { userId: string }) => {
           <div className='modal-mention-right-content'>
             <p className='modal-mention-username'>{userData.firstName} {userData.lastName}</p>
             <p className='modal-mention-headline'>{userData.headline}</p>
+            <p className='modal-mention-location'>{userData.city} , {userData.country}</p>
           </div>
         </div>
       </div>

@@ -806,3 +806,254 @@
         }
     }
 }
+
+.modal-share-profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .modal-share-profile-content-container{
+        // @include layout.Container-1(400px, 400px);
+        min-height: 350px;
+        max-height: 550px;
+        @include abs.display-flex(flex-start , center , column);  
+        position: absolute;
+        z-index: 15;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 15px;
+        border-radius: 10px;
+        transition-duration: 0.2s;
+        
+        .modal-share-profile-top-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , center , row);
+            border: 1px solid gray; 
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+
+            .modal-share-top-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(space-between , center , row);
+                margin: 10px 20px;
+                
+                .title{
+                    font-size: 20px;
+                }
+
+                .button-exit{
+                    @include abs.display-flex(center , center , row);
+                    background-color: white;
+                    border: none;
+                    padding: 5px;
+                    border-radius: 50%;
+                    transition-duration: 0.2s;
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-300;
+                    }
+                }
+            }
+        }
+
+        .modal-share-profile-mid-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-start , flex-start , column); 
+            .modal-share-profile-mid-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , center , column); 
+                position: relative;   
+                
+                .user-information-search-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(center , center , column); 
+                    position: relative;   
+                    
+                    .search-user{
+                        @include layout.Container-1(380px, auto);
+                        padding: 10px;
+                        border:none;
+                        border-bottom: 1px solid gray;
+                        outline: none;
+                    }
+
+                    .search-user-content-container{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , column); 
+                        position: relative;   
+                    }
+                }
+
+                
+                .user-information-container{
+                    @include layout.Container-1(auto, auto);
+                    min-width: 60%;
+                    max-width: 65%;
+                    @include abs.display-flex(center , center , column);
+                    background-color: white; 
+                    margin-top: 20px;
+                    margin-bottom: 10px;  
+                    margin-right: 10px;   
+                    padding: 10px;                    
+                    border-radius: 5px;   
+                    border: 1px solid gray;
+                    gap: 7px;
+                    
+                    .user-information-top-container{
+                        @include layout.Container-1(40%, 100%);
+                        @include abs.display-flex(center , center , row);
+                        .profile-photo{
+                            @include layout.Container-1(100%, 100%);
+                            @include abs.display-flex(center , center , row);
+                            width: 80px;
+                            height: 80px;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .user-information-bottom-container{
+                        @include layout.Container-1(100%, 100%);
+                        @include abs.display-flex(flex-start , center , column);
+                        gap: 2px;
+                        .username{
+                            font-weight: 500;
+                            font-size: 16px
+                        }
+                        
+                        .headline{
+                            font-size: 14px;
+                        }
+                        
+                        .user-relation{ 
+                            color: abs.$gray-700;
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                .search-user-information-mid-container{
+                    @include layout.Container-1(100%, 100%);
+                    @include abs.display-flex(center , center , column);
+                    gap: 10px;
+                    margin-top: 10px;
+                    .title{
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+
+                    .search-user-information-content{
+                        @include layout.Container-1(60%, 100%);
+                        @include abs.display-flex(center , center , row);
+                        background-color: abs.$gray-100;
+                        border: 1px solid gray;
+                        gap: 10px;
+                        padding : 7px 0px;
+                        border-radius: 5px;
+                        .search-user-profile-photo{
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                        }
+
+                        .username{
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    
+        .modal-share-profile-bottom-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-end , center , row);
+            
+            .button-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-end , center , row);
+                gap: 10px;
+                margin-top: 20px;
+                border-top: 1px solid gray;
+                margin-bottom: 10px;
+                .button2{
+                    @include component.button-submit(5px , 5px ,  white , white , 30px);
+                    width: 20%;
+                    color: abs.$blue-700;
+                    border: 1px solid abs.$blue-700;
+                    transition-duration: 0.2s;
+                    font-size: 14px;
+                    margin-top: 10px;
+                    margin-right: 10px;
+                    transition-duration: 0.2s;
+
+                    &:hover{
+                        color: white;
+                        background-color: abs.$blue-900;
+                    }
+
+                    
+                    &:disabled{
+                        border: 1px solid abs.$gray-300;
+                        background-color: abs.$gray-300;
+                        color: abs.$gray-500;
+                        cursor: not-allowed;
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+.modal-search-user-container{
+    position: absolute;
+    width: 100%;
+    min-height: 0px;
+    max-height: 184px;
+    z-index: 10;
+    top: 0px;
+    background-color: white;
+    overflow-y: scroll;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+
+    .modal-search-user-content-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(space-between , flex-start , row);
+        padding: 10px 0px;
+        border-bottom: 1px solid gray;
+
+        &:hover{
+            cursor: pointer;
+            background-color: abs.$gray-200
+        }
+
+        .left-content-container{
+            @include layout.Container-1(20%, 100%);
+            @include abs.display-flex(center , center , row);
+            .profile-photo{
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+            }
+        }
+        .right-content-container{
+            @include layout.Container-1(100%, 100%);
+            @include abs.display-flex(center , flex-start , column);    
+            margin-top: 5px;
+            .username{
+                font-weight: 500;
+                font-size: 14px;
+            }
+
+            .headline{
+                font-size: 12px;
+            }
+        }
+    }
+}

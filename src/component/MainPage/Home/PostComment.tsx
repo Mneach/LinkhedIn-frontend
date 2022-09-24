@@ -51,7 +51,7 @@ const PostComment = ({ commentId, commentReply, totalComment, setTotalComment, d
     }).then((e) => {
       refetch().then((e) => {
         toastSuccess("Success Like Comment", "top-right", "colored")
-        createNotification(UserContext.User.id, commentData?.Commenter.id, messageLikeReplyNotification())
+        createNotification(UserContext.User.id, commentData?.Commenter.id, messageLikeCommentNotification())
       }).catch((e) => {
         toastError((e), "top-right", "colored")
       })

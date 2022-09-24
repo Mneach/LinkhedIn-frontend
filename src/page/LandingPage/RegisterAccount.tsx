@@ -34,6 +34,7 @@ const RegisterAccount = () => {
     lastName: "",
     country: "",
     city: "",
+    headline :"",
     backgroundImageUrl: "",
     profileImageUrl: "",
   })

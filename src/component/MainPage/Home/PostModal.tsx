@@ -6,7 +6,7 @@ import { AiFillYoutube, AiFillPicture } from 'react-icons/ai'
 import { useUserContext } from '../../../hooks/UserContext'
 import { storage } from '../../../lib/firebase/FirebaseConfig'
 import { mutationAddHastag, mutationCreatePost } from '../../../lib/graphql/CreateQuery'
-import { toastError, toastSuccess } from '../../../lib/toast/toast'
+import { toastError, toastPromise, toastSuccess } from '../../../lib/toast/toast'
 import { HastagRichText1, refectHastagType, refectPostType, setBoolean } from '../../../model/FormModel'
 import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions'
 
@@ -75,7 +75,8 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
     }
 
     const postHandler = (url: string) => {
-
+        console.log(inputText);
+        
         const texts = inputText.split(" ")
         texts.map((inputText) => {
             if(inputText.match(HastagRichText1)){
@@ -97,7 +98,7 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
                     videoUrl: "",
                 }
             }).then((e) => {
-                toastSuccess("Success Create Post", "top-right", "colored")
+                // toastSuccess("Success Create Post", "top-right", "colored")
                 refechPost()
                 refechHastag()
             }).catch((e) => {
@@ -113,7 +114,7 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
                     videoUrl: url,
                 }
             }).then((e) => {
-                toastSuccess("Success Create Post", "top-right", "colored")
+                // toastSuccess("Success Create Post", "top-right", "colored")
                 refechPost()
                 refechHastag()
             }).catch((e) => {
@@ -178,7 +179,11 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
         console.log(newValue);
         
         
-        setInputText(newPlainTextValue)
+        setInputText(newValue)
+    }
+
+    const promiseUpload = () => {
+        toastPromise(() => uploadHanlder() , "Loading Create Post..." , "Success Create Post" , "Failed To Create Post")
     }
 
     return (
@@ -249,7 +254,7 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
                         </div>
                         <div className='bottom-right-content'>
                             <button className={`button2 ${removeFileStyle}`} onClick={removeFileHandler}>Remove Attchment File</button>
-                            <button className='button1' disabled={buttonDisable} onClick={uploadHanlder}>Post</button>
+                            <button className='button1' disabled={buttonDisable} onClick={promiseUpload}>Post</button>
                         </div>
                     </div>
                 </div>

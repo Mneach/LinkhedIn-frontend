@@ -134,3 +134,31 @@ export type NotificationType = {
     toUser : UserType,
     message : string,
 }
+
+export type MessageType = {
+    id : string,
+    sender : UserType,
+    text : string,
+    imageUrl : string,
+    SharePost : PostType,
+    ShareProfile : UserType,
+    VideoCall : VideoCallType
+}
+
+export type RoomType = {
+    id : string,
+    user1 : UserType,
+    user2 : UserType,
+    lastMessage : MessageType,
+    messages: Array<MessageType>
+}
+
+export type VideoCallType = {
+    id: string,
+    title : string,
+    date : string,
+    time : string,
+    duration : string,
+    user1: UserType,
+    user2: UserType,
+}

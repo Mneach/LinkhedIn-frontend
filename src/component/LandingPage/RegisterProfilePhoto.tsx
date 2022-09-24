@@ -28,6 +28,7 @@ export const RegisterProfilePhoto = ({ registerData, educationData, workerData, 
         lastName: registerData.lastName,
         city: registerData.city,
         country: registerData.country,
+        headline : registerData.headline,
         profileImageUrl: imageUrl
       }
     }).then((e) => {

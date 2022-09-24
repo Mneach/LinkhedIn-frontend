@@ -50,8 +50,8 @@ export const queryCheckEmailUser = gql`
 `
 
 export const mutationRegisterUser = gql`
-    mutation registerUser($email:String!,$password:String!,$firstName:String!,$lastName:String!,$city:String!,$country:String!,$profileImageUrl:String!){
-    registerUser(input:{email:$email , password:$password , firstName:$firstName , lastName:$lastName , city:$city , country:$country , profileImageUrl:$profileImageUrl}){
+    mutation registerUser($email:String!,$password:String!,$firstName:String!,$lastName:String!,$city:String!,$country:String!,$profileImageUrl:String! , $headline:String!){
+    registerUser(input:{email:$email , password:$password , firstName:$firstName , lastName:$lastName , city:$city , country:$country , profileImageUrl:$profileImageUrl , headline:$headline}){
 		id
         email
         password

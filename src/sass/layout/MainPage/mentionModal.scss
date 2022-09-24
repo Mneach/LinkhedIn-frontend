@@ -32,14 +32,17 @@
 
         .modal-mention-right-content{
             @include layout.Container-1(100%, auto);
-            .modal-poster-name{
+            .modal-mention-name{
                 font-size: 16px;
                 font-weight: 500;
                 text-align: justify;
             }
-    
-            .modal-poster-headline{
+            .modal-mention-headline{
                 font-size: 14px;
+                text-align: justify;
+            }
+            .modal-mention-location{
+                font-size: 12px;
                 text-align: justify;
             }
         }

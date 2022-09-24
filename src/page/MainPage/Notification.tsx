@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import React from 'react'
+import React , {useEffect} from 'react'
 import Navbar from '../../component/MainPage/Navbar'
 import NotificationCard from '../../component/MainPage/Notification/NotificationCard'
 import { useUserContext } from '../../hooks/UserContext'
@@ -11,13 +11,22 @@ import '../../sass/page/notification.scss'
 const Notification = () => {
 
   const UserContext = useUserContext()
-  const { loading: loadingNotification, data: dataNotification, error: errorNotification } = useQuery(queryNotifications, {
+  const { loading: loadingNotification, data: dataNotification, error: errorNotification , startPolling } = useQuery(queryNotifications, {
     variables: {
       toUserId: UserContext.User.id
-    }
+    },
   })
 
+  useEffect(() => {
+    startPolling(500)
+  
+  }, [])
+  
+
   if (loadingNotification) return <p>Get notificatoin data...</p>
+
+  console.log(dataNotification);
+  
 
   const notificationData = dataNotification.userNotification as Array<NotificationType>
 

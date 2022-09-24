@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, refectCurrentUser: refectUserType }) => {
 
   const UserContext = useUserContext()
+  const navigate = useNavigate()
   const [updateUser, { called, error, loading }] = useMutation(mutationUpdateUser)
   const [modalUser, setModalUser] = useState(false)
   const [modalMore, setModalMore] = useState(false)
@@ -25,7 +26,8 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
   const [deleteConnectRequestMutation] = useMutation(mutationDeleteConnectRequest)
   let connectedUser: boolean = false;
   let connectionRequest: boolean = false;
-  let giveConnectionStatus: boolean = false
+  let giveConnectionStatus: boolean = false;
+  let checkBlockUser : string = "";
 
   const promiseBackground = (e: any) => {
     if ((e.target.files)[0] !== undefined) {
@@ -186,12 +188,22 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
     }
   })
 
+  UserContext.User.Blocks.map((blockData) => {
+    if (blockData.blockId === userData.id) {
+        checkBlockUser = "blocked";
+    }
+})
+
+  const handleMessage = () => {
+    navigate(`/mainPage/message/temp/${userData.id}`, { state: userData })
+  }
+
   return (
     <>
       {
         modalUser === true && <UserInformationModal modalUser={modalUser} setModalUser={setModalUser} />
       }{
-        modalMore === true && <MoreModal refectCurrentUser={refectCurrentUser} userData={userData} />
+        modalMore === true && <MoreModal setModalMore={setModalMore} refectCurrentUser={refectCurrentUser} userData={userData} />
       }{
         modalConnect === true && <ConnectModal refectCurrentUser={refectCurrentUser} userData={userData} setModalConnect={setModalConnect} />
       }
@@ -273,7 +285,14 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
               <>
                 {
                   connectedUser ?
-                    (<button className='button3'>Connected</button>)
+                    (
+                      <>
+                        <button className='button3'>Connected</button>
+                        {
+                          checkBlockUser === "" && <button className='button2' onClick={handleMessage}>Message</button>
+                        }
+                      </>
+                    )
                     :
                     (
                       connectionRequest ?

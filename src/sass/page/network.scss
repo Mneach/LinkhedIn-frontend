@@ -4,27 +4,59 @@
 
 .network-content-container{
     @include layout.Container-1(auto, auto);
-    @include abs.display-flex(space-between , center  , row);
+    @include abs.display-flex(space-between , flex-start  , row);
     padding: 30px 200px;
     gap: 30px;
     .network-left-container{
-        @include layout.Container-1(20%, auto);
+        @include layout.Container-1(40%, auto);
         @include abs.display-flex(center , center , column);
         gap: 30px;
         .menu-container{
-           .title{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , flex-start , column); 
+            border: 1px solid gray;
+            border-radius: 10px;
+            background-color: white;  
+            overflow: hidden; 
+            .title{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , center , row); 
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+            .menu{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , flex-start , column);   
 
-           }
-           
-           .menu{
-                .left-menu-content{
+                .menu-content{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(space-between , flex-start , row);   
+                    transition-duration: 0.3s;
 
+                    .left-menu-content{
+                        @include layout.Container-1(100%, 30px);
+                        @include abs.display-flex(flex-start , center , row); 
+                        margin-left: 30px;
+                        gap: 20px;
+                        p{
+                            font-size: 16px;
+                        }
+                    }
+    
+                    .right-menu-content{
+                        @include layout.Container-1(10%, 30px);
+                        @include abs.display-flex(flex-start , center , row); 
+                    }
+                    
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-400
+                    }
                 }
 
-                .right-menu-content{
-
-                }
-           }
+            }
 
         }
     }
@@ -33,104 +65,258 @@
         @include layout.Container-1(100%, auto);
         @include abs.display-flex(center , flex-start , column);
         gap: 30px;
-        border: 1px solid gray;
-        border-radius: 10px;
-        background-color: white;
-        .network-conenction-card-container{
+        .network-right-top-container{
             @include layout.Container-1(100%, auto);
-            @include abs.display-flex(center , flex-start , column);
-            gap: 15px;
-            margin-bottom: 20px;
-            .title{
-                @include layout.Container-1(100%, auto);
-                border-bottom: 1px solid gray;
-                font-size: 18px;
-                font-weight: 500;
-                
-                p{
-                    padding: 10px;
-                }
-            }
+            @include abs.display-flex(center , flex-start , column);            
+            border: 1px solid gray;
+            border-radius: 10px;
+            background-color: white;
 
-            .content{
+            .network-conenction-card-container{
                 @include layout.Container-1(100%, auto);
-                @include abs.display-flex(space-between , center , row);
-                gap: 30px;
-                .left-content{
+                @include abs.display-flex(center , flex-start , column);
+                gap: 15px;
+                margin-bottom: 20px;
+                .title{
                     @include layout.Container-1(100%, auto);
-                    @include abs.display-flex(flex-start , center , row);
-                    gap: 10px;
-                    margin-left: 20px;
-                    .user-photo{
-                        img{
-                            width: 60px;
-                            height: 60px;
-                            border-radius: 50%;
-                        }
-
-                        &:hover{
-                            cursor: pointer;
-                        }
-                    }
-                    .user-information{
-                        @include layout.Container-1(auto, auto);
-                        @include abs.display-flex(center , flex-start , column);
-                        gap: 2px;
-                        .name{
-                            font-size: 16px;
-                        }
-                        .headline{
-                            font-size: 14px;
-                            color: abs.$gray-700
-                        }
-                        .message{
-                            font-size: 14px;
-                            color: abs.$gray-600
-                        }
-                        &:hover{
-                            cursor: pointer;
-                        }
+                    border-bottom: 1px solid gray;
+                    font-size: 18px;
+                    font-weight: 500;
+                    
+                    p{
+                        padding: 10px;
                     }
                 }
-
-                .right-content{
-                    @include layout.Container-1(100%, auto);
-                    @include abs.display-flex(flex-end, center , row);
-                    padding-right: 30px;
-                    gap: 30px;
-                    .button1{
-                        @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
-                        @include abs.display-flex(center , center , row);
-                        border: 1px solid gray;
-                        width: 25%;
-                        transition-duration: 0.2s;
-                        gap: 5px;
-                        font-size: 14px;
     
-                        &:hover{
-                            background-color: abs.$gray-300;
+                .title2{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(center , center , row);
+                    font-size: 18px;
+                    font-weight: 500;
+                    
+                    p{
+                        padding: 10px;
+                    }
+                }
+    
+                .content{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(space-between , center , row);
+                    gap: 30px;
+                    .left-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , center , row);
+                        gap: 10px;
+                        margin-left: 20px;
+                        .user-photo{
+                            img{
+                                width: 60px;
+                                height: 60px;
+                                border-radius: 50%;
+                            }
+    
+                            &:hover{
+                                cursor: pointer;
+                            }
                         }
-                
-                        img{
-                            width: 20px;
+                        .user-information{
+                            @include layout.Container-1(auto, auto);
+                            @include abs.display-flex(center , flex-start , column);
+                            gap: 2px;
+                            .name{
+                                font-size: 16px;
+                            }
+                            .headline{
+                                font-size: 14px;
+                                color: abs.$gray-700
+                            }
+                            .message{
+                                font-size: 14px;
+                                color: abs.$gray-600
+                            }
+                            &:hover{
+                                cursor: pointer;
+                            }
                         }
                     }
-
-                    .button2{
-                        @include component.button-submit(5px ,5px ,  white , abs.$blue-700 , 20px);
-                        border: none;
-                        width: 25%;
-                        transition-duration: 0.2s;
-                        font-size: 14px;
-                        border: 1px solid abs.$blue-700;
-                        // margin-left: 30px;
-                        &:hover{
-                            background-color: abs.$blue-900;
-                            color: white;
-                        }      
+    
+                    .right-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-end, center , row);
+                        padding-right: 30px;
+                        gap: 30px;
+                        .button1{
+                            @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
+                            @include abs.display-flex(center , center , row);
+                            border: 1px solid gray;
+                            width: 25%;
+                            transition-duration: 0.2s;
+                            gap: 5px;
+                            font-size: 14px;
+        
+                            &:hover{
+                                background-color: abs.$gray-300;
+                            }
+                    
+                            img{
+                                width: 20px;
+                            }
+                        }
+    
+                        .button2{
+                            @include component.button-submit(5px ,5px ,  white , abs.$blue-700 , 20px);
+                            border: none;
+                            width: 25%;
+                            transition-duration: 0.2s;
+                            font-size: 14px;
+                            border: 1px solid abs.$blue-700;
+                            // margin-left: 30px;
+                            &:hover{
+                                background-color: abs.$blue-900;
+                                color: white;
+                            }      
+                        }
                     }
                 }
             }
+        }
+        
+    }
+}
+
+.UYMK-container{
+    @include layout.Container-1(100%, auto);
+    @include abs.display-flex(center , flex-start , column);            
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
+
+    .UYMK-top-container{
+        @include layout.Container-1(100%, auto);
+        margin-top: 20px;
+        margin-left: 20px;
+        .UYMK-title{
+            font-size: 20px;
+            font-weight: 500
+        }
+        .UYMK-title-error{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , center , row); 
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+    }
+
+    .UYMK-mid-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(center , flex-start , row);  
+        flex-wrap: wrap;
+    
+        .UYMK-card-content-container{
+            @include layout.Container-1(25%, auto);
+            @include abs.display-flex(flex-start , flex-start , column);
+            margin: 20px;
+            border: 1px solid gray;
+
+            transition-duration: 0.2s;
+
+            &:hover{
+                transform: scale(1.05);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+            }
+    
+            .UYMK-card-top-content{
+                @include layout.Container-1(100%, auto);
+                .UYMK-card-background-image{
+                    @include layout.Container-1(100%, 70px);
+                    object-fit: cover;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+    
+            .UYMK-card-mid-content{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , center , column);
+                .user-photo{
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    margin-top: -55px;
+                    margin-bottom: 10px;
+                    &:hover{
+                        cursor: pointer;
+                    }
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+        
+                .username{
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+        
+                .headline{
+                    font-size: 14px;
+                    color:abs.$gray-600;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                .button1{
+                    @include component.button-submit(7px , 5px ,  white , abs.$dark-500 , 30px);
+                    @include abs.display-flex(center , center , row);
+                    border: 1px solid gray;
+                    width: 90%;
+                    transition-duration: 0.2s;
+                    gap: 5px;
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                    &:hover{
+                        background-color: abs.$gray-300;
+                    }
+            
+                    img{
+                        width: 20px;
+                    }
+                }
+
+                .button2{
+                    @include component.button-submit(7px ,5px ,  white , abs.$blue-700 , 20px);
+                    border: none;
+                    width: 90%;
+                    transition-duration: 0.2s;
+                    font-size: 14px;
+                    border: 1px solid abs.$blue-700;
+                    margin-bottom: 10px;
+                    margin-top: 30px;
+                    &:hover{
+                        background-color: abs.$blue-900;
+                        color: white;
+                    }   
+                }
+    
+                .button3{
+                    @include component.button-submit(7px , 5px ,  abs.$blue-700 , white , 30px);
+                    border: none;
+                    width: 90%;
+                    transition-duration: 0.2s;
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                    margin-top: 30px;
+                    // margin-left: 30px;
+                    &:hover{
+                        background-color: abs.$blue-900;
+                    }        
+                }
+            }
+    
         }
     }
 }

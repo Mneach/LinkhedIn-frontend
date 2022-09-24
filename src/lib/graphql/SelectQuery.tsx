@@ -150,6 +150,8 @@ export const queryPosts = gql`
             lastName
             profileImageUrl
             headline
+            city
+            country
             Follows{
                 userId
                 followId
@@ -281,6 +283,7 @@ export const queryUserSuggestion = gql`
         city
         country
         profileImageUrl
+        backgroundImageUrl
     }
 }
 `
@@ -322,4 +325,150 @@ export const queryNotifications = gql `
         }
     }
 }
+`
+
+export const queryUserConnections = gql`
+    query UserConnected($userId:ID!){
+	UserConnected(userId:$userId){
+        id
+        firstName
+        lastName
+        headline
+        profileImageUrl
+        backgroundImageUrl
+    }
+}
+`
+
+export const queryRooms = gql `
+    query rooms($userId:ID!){
+        rooms(userId:$userId){
+            id
+            user1{
+                id
+                firstName
+                lastName
+                profileImageUrl
+            }
+            user2{
+                id
+                firstName
+                lastName
+                profileImageUrl
+            }
+            lastMessage{
+                id
+                sender{
+                    id
+                    firstName
+                    lastName
+                    profileImageUrl
+                }
+                text
+                imageUrl
+            }
+            # messages{
+            #     id
+            #     sender{
+            #         id
+            #         firstName
+            #         lastName
+            #         profileImageUrl
+            #     }
+            #     text
+            #     imageUrl
+            # }
+        }
+    }
+`
+
+
+export const queryRoom = gql `
+    query room($roomId:ID!){
+        room(roomId:$roomId){
+            id
+            user1{
+                id
+                firstName
+                lastName
+                profileImageUrl
+            }
+            user2{
+                id
+                firstName
+                lastName
+                profileImageUrl
+            }
+            lastMessage{
+                id
+                sender{
+                    id
+                    firstName
+                    lastName
+                    profileImageUrl
+                }
+                text
+                imageUrl
+            }
+            messages{
+                id
+                text
+                imageUrl
+                sender{
+                    id
+                    firstName
+                    lastName
+                    profileImageUrl
+                }
+                SharePost{
+                    id
+                    text
+                    photoUrl
+                    videoUrl
+                    Sender{
+                        id
+                        firstName
+                        lastName
+                        headline
+                        profileImageUrl
+                        Follows{
+                            userId
+                        }
+                    }
+                }
+                ShareProfile{
+                    id
+                    firstName
+                    lastName
+                    headline
+                    profileImageUrl
+                    Follows{
+                        userId
+                    }
+                    Visits{
+                        userId
+                    }
+                    Connections{
+                        id
+                    }
+                }
+                VideoCall{
+                    id
+                    title
+                    date
+                    time
+                    duration
+                }
+            }
+        }
+    }
+`
+
+export const queryBlocks = gql `
+    query blocks($userId:ID!){
+        blocks(userId:$userId){
+            userId
+            blockId
+        }
+    }
 `

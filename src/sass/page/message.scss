@@ -1,0 +1,1255 @@
+@use '../abstracts' as abs;
+@use '../components' as component;
+@use '../layout/' as layout;
+
+.message-content-container{
+    @include layout.Container-1(auto, auto);
+    @include abs.display-flex(flex-start , flex-start  , row);
+    padding: 30px 200px;
+    .message-left-container{
+        @include layout.Container-1(30%, auto);
+        @include abs.display-flex(flex-start , center , row);
+        .message-user-list-container{
+            @include layout.Container-1(100%, 640px);
+            @include abs.display-flex(flex-start , flex-start , column); 
+            border: 1px solid gray;
+            background-color: white;  
+            overflow-y: scroll; 
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            .message-user-list-top-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(space-between , center , row); 
+                border-bottom: 1px solid gray;
+                .title{
+                    font-weight: 500;
+                    margin: 10px;
+                    font-size: 18px;
+                }
+
+                .button-search-user{
+                    @include abs.display-flex(center , center , row); 
+                    margin: 10px;
+                    padding: 5px;
+                    border-radius: 50%;
+                    border: none;
+                    background-color: white;
+                    transition-duration: 0.2s;
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-300;
+                    }
+                }
+            }
+
+            a{
+                @include layout.Container-1(100%, auto);
+                text-decoration: none;
+                color: black;
+                .message-user-list-content-container{
+                    @include layout.Container-1(100%, 100%);
+                    @include abs.display-flex(center , flex-start , column);
+                    .message-user-list-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , row);
+                        border-bottom: 1px solid gray;
+                        transition-duration: 0.2s;
+    
+                        &:hover{
+                            cursor: pointer;
+                            background-color: abs.$gray-200
+                        }
+    
+                        .user-profile-container{
+                            @include layout.Container-1(30%, auto);
+                            @include abs.display-flex(flex-start , center , row);
+                            margin-left: 20px;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            .user-profile{
+                                width: 60px;
+                                height: 60px;
+                                border-radius: 50%;
+                            }
+                        }
+    
+                        .user-information-container{
+                            @include layout.Container-1(100%, 100%);
+                            @include abs.display-flex(center , flex-start , column);
+                            .headline{
+                                font-size: 13px;
+                            }
+                            .lastMessage{
+                                font-size: 13px;
+                                color: abs.$gray-700
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    .message-right-container{
+        @include layout.Container-1(40%, auto);
+        @include abs.display-flex(flex-start , center , row);
+        .room-new-container{
+            @include layout.Container-1(100%, 640px);
+            @include abs.display-flex(flex-start , flex-start , column); 
+            border: 1px solid gray;
+            background-color: white;  
+            overflow: hidden;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            .room-new-top-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(space-between , center , row); 
+                border-bottom: 1px solid gray;
+                margin-top: 9px;
+                .title{
+                    font-weight: 500;
+                    margin: 10px;
+                    font-size: 18px;
+                }
+            }
+
+            .room-new-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , flex-start , column); 
+                
+                .room-new-search-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column); 
+                    position: relative;    
+
+                    .room-new-search-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , column); 
+                        position: relative;   
+                    }
+
+                    .input-search-user{
+                        @include layout.Container-1(100%, auto);
+                        padding: 12px;
+                        border:none;
+                        border-bottom: 1px solid gray;
+                        outline: none;
+                    }
+
+                }
+
+
+
+                .room-new-mid-content-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column); 
+                    .mid-content{
+                        @include layout.Container-1(100%, 350px);
+                        overflow-y: scroll;
+                        border-bottom: 1px solid gray;
+                        @include abs.display-flex(center , center , column); 
+                        .user-photo{
+                            width: 100px;
+                            height: 100px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+
+                        .username{
+                            margin-top: 10px;
+                            font-weight: 500;
+                            font-size: 18px;
+                        }
+
+                        .headline{
+                            font-size: 16px;
+                        }
+                    }
+                }
+
+                .room-new-bottom-content-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column); 
+                    position: relative;
+                    .buttom-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , column); 
+                        .textarea-container{
+                            @include layout.Container-1(100%, 130px);
+                            @include abs.display-flex(center , center , row);
+                            border-bottom: 1px solid gray;
+                            .textarea{
+                                @include layout.Container-1(90%, 80px);
+                                background-color: abs.$gray-200;
+                                border: none;
+                                resize: none;
+                                padding: 10px;
+                                border-radius: 10px;
+                                font-size: 14px;
+
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
+                        }
+
+                        .button-container{
+                            @include layout.Container-1(100%, auto);
+                            @include abs.display-flex(space-between , center , row); 
+                            // border: 1px solid gray;
+                            margin-top: 10px;
+                            .button-left-container{
+                                @include layout.Container-1(20%, auto);
+                                @include abs.display-flex(center , center , row); 
+                                margin-left: 20px;
+                                // margin-top: 10px;
+                                gap: 5px;
+                                
+                                .button-input{
+                                    background-color: white;
+                                    border: none;
+                                    border-radius: 50%;
+                                    padding: 5px;
+                                    &:hover{
+                                        cursor: pointer;
+                                        background-color: abs.$gray-300
+                                    }
+                                }
+                            }
+                            .button-right-container{
+                                @include layout.Container-1(100%, auto);
+                                @include abs.display-flex(flex-end , center , row);
+                                .button-send{
+                                    @include component.button-submit(3px ,20px ,  white , abs.$blue-700 , 20px);
+                                    border: none;
+                                    width: 20%;
+                                    transition-duration: 0.2s;
+                                    font-size: 14px;
+                                    border: 1px solid abs.$blue-700;
+                                    margin-right: 30px;
+                                    &:hover{
+                                        background-color: abs.$blue-900;
+                                        color: white;
+                                    }
+                
+                                    &:disabled{
+                                        border: 1px solid abs.$gray-300;
+                                        background-color: abs.$gray-300;
+                                        color: abs.$gray-500;
+                                        cursor: not-allowed;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .room-chat-container{
+            @include layout.Container-1(100%, 640px);
+            @include abs.display-flex(flex-start , flex-start , column); 
+            border: 1px solid gray;
+            background-color: white;  
+            overflow: hidden;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            .room-chat-top-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(space-between , center , row); 
+                border-bottom: 1px solid gray;
+                margin-top: 9px;
+                .title{
+                    font-weight: 500;
+                    margin: 10px;
+                    font-size: 18px;
+                }
+
+                .button-videocall{
+                    @include abs.display-flex(center , center , row); 
+                    background-color: white;
+                    border: none;
+                    padding: 2px;
+                    margin-right: 10px;
+                    border-radius: 50%;
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-300;
+                    }
+                }
+            }
+
+            .room-chat-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , flex-start , column); 
+                
+                .room-chat-search-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column); 
+                    position: relative;    
+
+                    .room-chat-search-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , column); 
+                        position: relative;   
+                    }
+
+                    .input-search-user{
+                        @include layout.Container-1(100%, auto);
+                        padding: 12px;
+                        border:none;
+                        border-bottom: 1px solid gray;
+                        outline: none;
+                    }
+
+                }
+
+
+
+                .room-chat-mid-content-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column); 
+                    .mid-content{
+                        @include layout.Container-1(100%, 380px);
+                        @include abs.display-flex(flex-start , flex-start , column); 
+                        max-height: 380px;
+                        overflow-y: scroll;
+                        border-bottom: 1px solid gray;
+                        padding-bottom: 10px;
+
+                        .dummy{
+                            flex: 1 1 auto;
+                        }
+
+                        .my-chat-container{
+                            @include layout.Container-1(100%, auto);
+                            @include abs.display-flex(flex-end , center , row);
+
+                            .chat-content{
+                                @include layout.Container-1(100%, auto);
+                                @include abs.display-flex(flex-end , flex-end , column);
+
+                                .my-text-container{
+                                    @include layout.Container-1(auto, auto);
+                                    @include abs.display-flex(flex-end , center , row);
+                                    max-width: 55%;
+                                    background-color: abs.$green-400;
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;   
+                                    margin-right: 10px; 
+                                    padding: 10px;                    
+                                    border-radius: 5px;                           
+                                    word-wrap: break-word;
+    
+                                    .text{
+                                        @include layout.Container-1(100%, 100%);
+                                        // @include abs.display-flex(flex-end , center , row);
+                                        font-size: 14px;
+                                    }
+                                }
+
+                                .my-image-container{
+                                    @include layout.Container-1(auto, auto);
+                                    max-width: 55%;
+                                    @include abs.display-flex(flex-start , center , row);
+                                    // background-color: abs.$green-400; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    // margin-right: 10px;   
+                                    padding: 10px;                    
+                                    border-radius: 5px;   
+                                    
+                                    .image-with-text{
+                                        width: 200px;
+                                        height: 200px;
+                                    }
+                                }
+
+                                .my-profile-container{
+                                    @include layout.Container-1(auto, auto);
+                                    min-width: 60%;
+                                    max-width: 65%;
+                                    @include abs.display-flex(flex-start , center , column);
+                                    background-color: white; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    margin-right: 10px;   
+                                    padding: 10px;                    
+                                    border-radius: 5px;   
+                                    border: 1px solid gray;
+                                    gap: 7px;
+
+                                    &:hover{
+                                        cursor: pointer;
+                                    }
+                                    .my-profile-left-container{
+                                        @include layout.Container-1(40%, 100%);
+                                        @include abs.display-flex(center , center , row);
+                                        .profile-photo{
+                                            @include layout.Container-1(100%, 100%);
+                                            @include abs.display-flex(center , center , row);
+                                            width: 80px;
+                                            height: 80px;
+                                            border-radius: 50%;
+                                        }
+                                    }
+
+                                    .my-profile-right-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , center , column);
+                                        gap: 2px;
+                                        .username{
+                                            font-weight: 500;
+                                            font-size: 16px
+                                        }
+                                        
+                                        .headline{
+                                            font-size: 14px;
+                                        }
+                                        
+                                        .user-relation{ 
+                                            color: abs.$gray-700;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
+
+                                .my-post-container{
+                                    @include layout.Container-1(auto, auto);
+                                    min-width: 65%;
+                                    max-width: 65%;
+                                    @include abs.display-flex(flex-start , center , column);
+                                    background-color: white; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    margin-right: 10px;                   
+                                    border-radius: 5px;   
+                                    border: 1px solid gray;
+                                    word-wrap: break-word;
+                                    
+                                    .my-post-top-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , center , row);
+                                        border-bottom: 1px solid gray;
+                                        .left-content{
+                                            @include layout.Container-1(20%, 100%);
+                                            @include abs.display-flex(flex-start , flex-start , row);
+                                            margin-left: 10px;
+                                            margin-top: 10px;
+                                            margin-bottom: 10px;
+                                            .poster-profile{
+                                                width: 40px;
+                                                height: 40px;
+                                                border-radius: 50%;
+                                            }
+                                        }
+
+                                        .right-content{
+                                            @include layout.Container-1(100%, 100%);
+                                            @include abs.display-flex(flex-start , flex-start , column);
+                                            margin-left: 10px;
+                                            margin-top: 10px;
+                                            margin-bottom: 10px;
+                                            .username{
+                                                @include layout.Container-1(100%, 100%);
+                                                font-size: 16px;
+                                                font-weight: 500;
+                                            }
+                                            
+                                            .follower{
+                                                @include layout.Container-1(100%, 100%);
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+
+                                    .my-post-mid-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , center , column);
+
+                                        .my-post-content-text{
+                                            
+                                            @include layout.Container-1(100%, 100%);
+                                            .post-text{
+                                                margin-top: 10px;
+                                                margin-bottom: 10px;
+                                                margin-left: 10px;
+                                                margin-right: 10px;
+                                                font-size: 14px
+                                            }
+                                        }
+                                        .my-post-content-photo{
+                                            @include layout.Container-1(100%, auto);
+                                            @include abs.display-flex(center , center , column);
+                                            margin-top: 10px;
+                                            .post-photo{
+                                                width: 100%;
+                                                height: 200px;
+                                                object-fit: cover;
+                                                border-bottom-left-radius: 5px;
+                                                border-bottom-right-radius: 5px;
+                                            }
+
+                                            .post-video{
+                                                width: 100%;
+                                                height: 200px;
+                                                border-bottom-left-radius: 5px;
+                                                border-bottom-right-radius: 5px;
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                .my-video-call-container{
+                                    @include layout.Container-1(auto, auto);
+                                    min-width: 65%;
+                                    max-width: 65%;
+                                    @include abs.display-flex(flex-start , center , row);
+                                    background-color: white; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    margin-right: 10px;                 
+                                    border-radius: 5px;   
+                                    border: 1px solid gray;
+                                    gap: 7px;
+
+                                    .my-video-call-left-container{
+                                        @include layout.Container-1(20%, 100%);
+                                        @include abs.display-flex(center , center , row);
+                                        .video-call-photo{
+                                            @include layout.Container-1(100%, 100%);
+                                            @include abs.display-flex(center , center , row);
+                                            border-radius: 50%;
+                                        }
+                                    }
+                                    
+                                    .my-video-call-right-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , flex-start , column);
+                                        border-left: 1px solid gray;
+                                        gap: 2px;
+                                        padding-top: 10px;
+                                        padding-bottom: 10px;
+                                        .title{
+                                            margin-left: 10px;
+                                            margin-right: 10px;
+                                            font-weight: 500;
+                                            font-size: 14px
+                                        }
+                                        
+                                        .time{ 
+                                            margin-left: 10px;
+                                            margin-right: 10px;
+                                            color: abs.$gray-700;
+                                            font-size: 12px;
+                                        }
+
+                                        .duration{ 
+                                            margin-left: 10px;
+                                            margin-right: 10px;
+                                            color: abs.$gray-700;
+                                            font-size: 12px;
+                                        }
+
+                                        .buttonVideoCall{
+                                            font-size: 14px;
+                                            margin-left: 5px;
+                                            margin-right: 5px;
+                                            padding: 5px;
+                                            color: abs.$blue-900;
+                                            font-weight: 500;
+                                            background-color: white;
+                                            border: none;
+                                            transition-duration: 0.2s;
+                                            border-radius: 5px;
+                                            &:hover{
+                                                cursor: pointer;
+                                                // background-color:abs.$blue-300;
+                                                background-color: rgba(abs.$blue-300, 0.3)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+                        }
+
+                        .friend-chat-container{
+                            @include layout.Container-1(100%, auto);
+                            @include abs.display-flex(flex-start , flex-start , row);
+
+                            .friend-photo{
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                margin-top: 10px;
+                                margin-left: 15px; 
+                            }
+
+                            .chat-content{
+                                @include layout.Container-1(100%, auto);
+                                @include abs.display-flex(flex-start , flex-start , column);
+                                overflow: hidden;
+                                margin-left: 10px;   
+                                
+                                .friend-text-container{
+                                    @include layout.Container-1(auto, auto);
+                                    max-width: 55%;
+                                    @include abs.display-flex(flex-start , center , row);
+                                    background-color: abs.$gray-200;      
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    // margin-left: 10px;   
+                                    padding: 10px;                    
+                                    border-radius: 5px;                           
+                                    word-wrap: break-word;
+    
+                                    .text{
+                                        @include layout.Container-1(100%, 100%);
+                                        font-size: 14px;
+                                    }
+                                }
+
+                                .friend-image-container{
+                                    @include layout.Container-1(auto, auto);
+                                    @include abs.display-flex(center , center , row);
+                                    max-width: 55%;
+                                    // background-color: abs.$gray-200;
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;            
+                                    border-radius: 5px;   
+                                    
+                                    .image-with-text{
+                                        width: 200px;
+                                        height: 200px;
+                                    }
+                                }
+
+                                .friend-profile-container{
+                                    @include layout.Container-1(auto, auto);
+                                    min-width: 69%;
+                                    max-width: 75%;
+                                    @include abs.display-flex(flex-start , center , column);
+                                    background-color: white; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    margin-right: 10px;   
+                                    padding: 10px;                    
+                                    border-radius: 5px;   
+                                    border: 1px solid gray;
+                                    gap: 7px;
+
+                                    &:hover{
+                                        cursor: pointer;
+                                    }
+                                    .friend-profile-left-container{
+                                        @include layout.Container-1(40%, 100%);
+                                        @include abs.display-flex(center , center , row);
+                                        .profile-photo{
+                                            @include layout.Container-1(100%, 100%);
+                                            @include abs.display-flex(center , center , row);
+                                            width: 80px;
+                                            height: 80px;
+                                            border-radius: 50%;
+                                        }
+                                    }
+
+                                    .friend-profile-right-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , center , column);
+                                        gap: 2px;
+                                        .username{
+                                            font-weight: 500;
+                                            font-size: 16px
+                                        }
+                                        
+                                        .headline{
+                                            font-size: 14px;
+                                        }
+                                        
+                                        .user-relation{ 
+                                            color: abs.$gray-700;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
+
+                                .friend-post-container{
+                                    @include layout.Container-1(auto, auto);
+                                    min-width: 65%;
+                                    max-width: 75%;
+                                    @include abs.display-flex(flex-start , center , column);
+                                    background-color: white; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    margin-right: 10px;                   
+                                    border-radius: 5px;   
+                                    border: 1px solid gray;
+                                    word-wrap: break-word;
+                                    
+                                    .friend-post-top-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , center , row);
+                                        border-bottom: 1px solid gray;
+                                        .left-content{
+                                            @include layout.Container-1(20%, 100%);
+                                            @include abs.display-flex(flex-start , flex-start , row);
+                                            margin-left: 10px;
+                                            margin-top: 10px;
+                                            margin-bottom: 10px;
+                                            .poster-profile{
+                                                width: 40px;
+                                                height: 40px;
+                                                border-radius: 50%
+                                            }
+                                        }
+
+                                        .right-content{
+                                            @include layout.Container-1(100%, 100%);
+                                            @include abs.display-flex(flex-start , flex-start , column);
+                                            margin-left: 10px;
+                                            margin-top: 10px;
+                                            margin-bottom: 10px;
+                                            .username{
+                                                @include layout.Container-1(100%, 100%);
+                                                font-size: 16px;
+                                                font-weight: 500;
+                                            }
+                                            
+                                            .follower{
+                                                @include layout.Container-1(100%, 100%);
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+
+                                    .friend-post-mid-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , center , column);
+
+                                        .friend-post-content-text{
+                                            
+                                            @include layout.Container-1(100%, 100%);
+                                            .post-text{
+                                                margin-top: 10px;
+                                                margin-bottom: 10px;
+                                                margin-left: 10px;
+                                                margin-right: 10px;
+                                                font-size: 14px
+                                            }
+                                        }
+                                        .friend-post-content-photo{
+                                            @include layout.Container-1(100%, auto);
+                                            @include abs.display-flex(center , center , column);
+                                            margin-top: 10px;
+                                            .post-photo{
+                                                width: 100%;
+                                                height: 300px;
+                                                object-fit: cover;
+                                                border-bottom-left-radius: 10px;
+                                                border-bottom-right-radius: 10px;
+                                            }
+
+                                            .post-video{
+                                                width: 100%;
+                                                height: 200px;
+                                                border-bottom-left-radius: 5px;
+                                                border-bottom-right-radius: 5px;
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                .friend-video-call-container{
+                                    @include layout.Container-1(auto, auto);
+                                    min-width: 75%;
+                                    max-width: 75%;
+                                    @include abs.display-flex(flex-start , center , row);
+                                    background-color: white; 
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;  
+                                    margin-right: 10px;                 
+                                    border-radius: 5px;   
+                                    border: 1px solid gray;
+                                    gap: 7px;
+
+                                    .friend-video-call-left-container{
+                                        @include layout.Container-1(20%, 100%);
+                                        @include abs.display-flex(center , center , row);
+                                        .video-call-photo{
+                                            @include layout.Container-1(100%, 100%);
+                                            @include abs.display-flex(center , center , row);
+                                            border-radius: 50%;
+                                        }
+                                    }
+                                    
+                                    .friend-video-call-right-container{
+                                        @include layout.Container-1(100%, 100%);
+                                        @include abs.display-flex(flex-start , flex-start , column);
+                                        border-left: 1px solid gray;
+                                        gap: 2px;
+                                        padding-top: 10px;
+                                        padding-bottom: 10px;
+                                        .title{
+                                            margin-left: 10px;
+                                            margin-right: 10px;
+                                            font-weight: 500;
+                                            font-size: 14px
+                                        }
+                                        
+                                        .time{ 
+                                            margin-left: 10px;
+                                            margin-right: 10px;
+                                            color: abs.$gray-700;
+                                            font-size: 12px;
+                                        }
+
+                                        .duration{ 
+                                            margin-left: 10px;
+                                            margin-right: 10px;
+                                            color: abs.$gray-700;
+                                            font-size: 12px;
+                                        }
+
+                                        .buttonVideoCall{
+                                            font-size: 14px;
+                                            margin-left: 5px;
+                                            margin-right: 5px;
+                                            padding: 5px;
+                                            color: abs.$blue-900;
+                                            font-weight: 500;
+                                            background-color: white;
+                                            border: none;
+                                            transition-duration: 0.2s;
+                                            border-radius: 5px;
+                                            &:hover{
+                                                cursor: pointer;
+                                                // background-color:abs.$blue-300;
+                                                background-color: rgba(abs.$blue-300, 0.3)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .mid-content-blocked{
+                        @include layout.Container-1(100%, 640px);
+                        @include abs.display-flex(center , center , column); 
+                        // max-height: 380px;
+                        // overflow-y: scroll;
+                        border-bottom: 1px solid gray;
+                        padding-bottom: 10px;
+
+                        .title-block{
+                            font-size: 20px;
+                            text-align: center;
+                            margin: 0px 10px;
+                            color: abs.$gray-500
+                        }
+                    }
+                }
+
+                .room-chat-bottom-content-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column); 
+                    position: relative;
+                    .buttom-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , column); 
+                        .textarea-container{
+                            @include layout.Container-1(100%, 130px);
+                            @include abs.display-flex(center , center , row);
+                            border-bottom: 1px solid gray;
+                            .textarea{
+                                @include layout.Container-1(90%, 80px);
+                                background-color: abs.$gray-200;
+                                border: none;
+                                resize: none;
+                                padding: 10px;
+                                border-radius: 10px;
+                                font-size: 14px;
+
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
+                        }
+
+                        .button-container{
+                            @include layout.Container-1(100%, auto);
+                            @include abs.display-flex(space-between , center , row); 
+                            // border: 1px solid gray;
+                            margin-top: 10px;
+                            .button-left-container{
+                                @include layout.Container-1(20%, auto);
+                                @include abs.display-flex(center , center , row); 
+                                margin-left: 20px;
+                                // margin-top: 10px;
+                                gap: 5px;
+                                
+                                .button-input{
+                                    background-color: white;
+                                    border: none;
+                                    border-radius: 50%;
+                                    padding: 5px;
+                                    &:hover{
+                                        cursor: pointer;
+                                        background-color: abs.$gray-300
+                                    }
+                                }
+                            }
+                            .button-right-container{
+                                @include layout.Container-1(100%, auto);
+                                @include abs.display-flex(flex-end , center , row);
+                                .button-send{
+                                    @include component.button-submit(3px ,20px ,  white , abs.$blue-700 , 20px);
+                                    border: none;
+                                    width: 20%;
+                                    transition-duration: 0.2s;
+                                    font-size: 14px;
+                                    border: 1px solid abs.$blue-700;
+                                    margin-right: 30px;
+                                    &:hover{
+                                        background-color: abs.$blue-900;
+                                        color: white;
+                                    }
+                
+                                    &:disabled{
+                                        border: 1px solid abs.$gray-300;
+                                        background-color: abs.$gray-300;
+                                        color: abs.$gray-500;
+                                        cursor: not-allowed;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modal-message-search-user-container{
+    position: absolute;
+    width: 100%;
+    min-height: 0px;
+    max-height: 350px;
+    z-index: 10;
+    top: 0px;
+    background-color: white;
+    overflow-y: scroll;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+
+    .modal-message-search-user-content-container{
+        @include layout.Container-1(100%, auto);
+        @include abs.display-flex(space-between , flex-start , row);
+        padding: 10px 0px;
+        border-bottom: 1px solid gray;
+
+        &:hover{
+            cursor: pointer;
+            background-color: abs.$gray-200
+        }
+
+        .left-content-container{
+            @include layout.Container-1(20%, 100%);
+            @include abs.display-flex(center , center , row);
+            .profile-photo{
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+            }
+        }
+        .right-content-container{
+            @include layout.Container-1(100%, 100%);
+            @include abs.display-flex(center , flex-start , column);    
+            margin-top: 5px;
+            .username{
+                font-weight: 500;
+                font-size: 14px;
+            }
+
+            .headline{
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.select-image-container{
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    z-index: 9;
+    top: -53px;
+    background-color: white;
+    border-top: 1px solid gray;
+    @include abs.display-flex(space-between , center , row);  
+
+    .select-image-left-container{
+        @include layout.Container-1(50%, 100%);
+        @include abs.display-flex(center , center , row);  
+        .image-information-container{
+            @include layout.Container-1(100%, 100%);
+            @include abs.display-flex(center , center , row);  
+            .image-photo-container{
+                @include layout.Container-1(30%, 100%);
+                @include abs.display-flex(center , center , row); 
+                margin-left: 10px;
+                margin-right: 10px;
+                .image{
+                    width: 40px;
+                    height: 40px;
+                    object-fit: contain;
+                }
+
+                .video{
+                    width: 40px;
+                    height: 40px;
+                    object-fit: contain;
+                }
+            }
+
+            .image-data-container{
+                @include layout.Container-1(100%, 100%);
+                @include abs.display-flex(center , flex-start , column);  
+                .image-name{
+                    font-size: 12px;
+                    font-weight: 500;   
+                    color: abs.$gray-700;
+                }
+                .attached{
+                    font-size: 12px;
+                    color: abs.$gray-600;
+                }
+            }
+        }
+
+    }
+
+    .select-image-right-container{
+        @include layout.Container-1(50%, 100%);
+        @include abs.display-flex(flex-end , center , row);  
+        margin-right: 20px;
+        button{
+            @include abs.display-flex(center , center , row);  
+            background-color: white;
+            border-radius: 50%;
+            border : none;
+
+            &:hover{
+                cursor: pointer;
+                background-color: abs.$gray-200
+            }                
+        }
+    }
+
+
+}
+
+.modal-video-call-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .modal-content-container{
+        @include layout.Container-1(400px, 350px);
+        @include abs.display-flex(flex-start , center , column);  
+        position: absolute;
+        z-index: 15;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 15px;
+        border-radius: 10px;
+        gap: 10px;
+
+        .modal-video-call-top-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , center , row);
+            border: 1px solid gray; 
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+
+            .modal-video-call-top-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(space-between , center , row);
+                margin: 10px 20px;
+                
+                .title{
+                    font-size: 20px;
+                }
+
+                .button-exit{
+                    @include abs.display-flex(center , center , row);
+                    background-color: white;
+                    border: none;
+                    padding: 5px;
+                    border-radius: 50%;
+                    transition-duration: 0.2s;
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-300;
+                    }
+                }
+            }
+        }
+
+        .modal-video-call-mid-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-start , center , column);
+            margin-top: 10px;
+            .modal-video-call-mid-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , center , column);
+                gap: 10px;
+                .instant{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , center , row);
+                    // border: 1px solid gray;
+                    transition-duration: 0.2s;
+                    
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-300;
+                    }
+
+                    .instant-content{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , center , row);
+                        margin-left: 20px;
+                        padding: 10px 0px;
+                        gap: 20px;
+                        .title{
+                            font-size: 14px;
+                            font-weight: 500
+                        }
+                    }
+
+                }
+                .schedule{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , center , row);
+                    // border: 1px solid gray;
+                    transition-duration: 0.2s;
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: abs.$gray-300;
+                    }
+
+                    .schedule-left-content{
+                        padding: 10px 0px;
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , center , row);
+                        gap: 20px;
+                        margin-left: 20px;
+                        .title{
+                            font-size: 14px;
+                            font-weight: 500
+                        }
+                    }
+
+                    .schedule-right-content{
+                        // border: 1px solid gray;
+                        @include layout.Container-1(20%, auto);
+                        @include abs.display-flex(flex-end , center , row);
+                        margin-right: 20px;
+                    }
+                }
+            }
+
+            .modal-video-call-mid-schedule-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , center , column);
+                gap: 10px;
+                .content-input{
+                    @include layout.Container-1(90%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column);
+
+                    .input1-container{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , row);
+                        gap: 10px;
+                        margin-top: 5px;
+                        input{
+                            @include layout.Container-1(50%, auto);
+                            padding: 5px;
+                        }
+    
+                        select{
+                            @include layout.Container-1(50%, auto);
+                            padding: 6px;
+                        }
+                    }
+
+                    .input2-container{
+                        @include layout.Container-1(100%, auto);
+                        @include abs.display-flex(flex-start , flex-start , column);
+                        margin-top: 10px;
+                        gap: 5px;
+                        select{
+                            @include layout.Container-1(100%, auto);
+                            padding: 6px;
+                        }
+                    }
+                }
+                .schedule-button-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-end , center , row);
+                    gap: 10px;
+                    margin-top: 80px;
+                    border-top: 1px solid gray;
+                    .button1{
+                        @include component.button-submit(5px , 5px ,  white , abs.$dark-500 , 30px);
+                        @include abs.display-flex(center , center , row);
+                        border: 1px solid gray;
+                        width: 20%;
+                        transition-duration: 0.2s;
+                        gap: 5px;
+                        font-size: 14px;
+                        margin-top: 10px;
+        
+                        &:hover{
+                            background-color: abs.$gray-300;
+                        }
+                
+                        img{
+                            width: 20px;
+                        }
+                    }
+                
+                    .button2{
+                        @include component.button-submit(5px , 5px ,  white , white , 30px);
+                        width: 20%;
+                        color: abs.$blue-700;
+                        border: 1px solid abs.$blue-700;
+                        transition-duration: 0.2s;
+                        font-size: 14px;
+                        margin-top: 10px;
+                        margin-right: 10px;
+        
+                        &:hover{
+                            color: white;
+                            background-color: abs.$blue-900;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

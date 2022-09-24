@@ -10,7 +10,7 @@ const RegisterName = ({ registerData, setRegisterData, registerStateData, setReg
 
 
   const resetRegisterName = () => {
-    setRegisterData((prev) => ({ ...prev, firstName: "", lastName: "" }))
+    setRegisterData((prev) => ({ ...prev, firstName: "", lastName: "" , headline : "" }))
   }
   
   const RegisterNameHandler = () => {
@@ -18,6 +18,8 @@ const RegisterName = ({ registerData, setRegisterData, registerStateData, setReg
       toastError("Please Enter Your First Name" , "top-right" , "colored")
     }else if(registerData.lastName === ""){
       toastError("Please Enter Your Last Name" , "top-right" , "colored")
+    }else if(registerData.headline == ""){
+      toastError("Please Enter Your Headline" , "top-right" , "colored")
     }else{
       setRegisterState(registerStateData.at(2))
     }
@@ -40,6 +42,8 @@ const RegisterName = ({ registerData, setRegisterData, registerStateData, setReg
           <input required type="text" placeholder='Enter Your First Name' value={registerData.firstName} onChange={(e) => setRegisterData((prev) => ({ ...prev, firstName: e.target.value }))} />
           <label htmlFor="lastName">Last Name</label>
           <input required type="text" placeholder='Enter Your Last Name' value={registerData.lastName} onChange={(e) => setRegisterData((prev) => ({ ...prev, lastName: e.target.value }))} />
+          <label htmlFor="headline">Headline</label>
+          <input required type="text" placeholder='Enter Your Headline' value={registerData.headline} onChange={(e) => setRegisterData((prev) => ({ ...prev, headline: e.target.value }))} />
         </div>
         <button className='contentpage__button__signin' onClick={RegisterNameHandler}>Continue</button>
         <button className='contentpage__button__google' onClick={backButton}>Back</button>

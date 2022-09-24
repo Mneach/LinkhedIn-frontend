@@ -32,3 +32,15 @@ Update V1.6 (17 September 2022)
 - Add User You Might Know
 - Add Fitur Jobs
 - Add Fitur Notification(Visit , Follow , Unfollow , Create Post , Comment Post, Reply Comment , Like Post , Like Reply)
+
+Update V1.8 (24 September 2022)
+- Add Fitur Real Time Chat (Text , Image)
+- Add Fitur send message via profile user
+- Implement Block User to fitur chat (user blocked = cannot chat)
+- Add New Model (Room , Message , Video Call)
+- Make A New Modal (Profile , Post , Video Call)
+- Add Fitur Share Profile To Message
+- Add Fitur Share Post To Message (text , image , video)
+- Add Fitur To Create Schedule Video Call
+- Implement Block User to all share fitur
+- Add Fitur Save As Pdf

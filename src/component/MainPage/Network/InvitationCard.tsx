@@ -61,11 +61,23 @@ const InvitationCard = () => {
     },)
 
 
+
     return (
         <div className="network-conenction-card-container">
-            <div className="title">
-                <p>Invitations</p>
-            </div>
+            {
+                UserContext.User.ConnectRequests.length != 0 ?
+                    (
+                        <div className="title">
+                            <p>Invitations</p>
+                        </div>
+                    )
+                    :
+                    (
+                        <div className="title2">
+                            <p>No Pending Invitation</p>
+                        </div>
+                    )
+            }
             {
                 UserContext.User.ConnectRequests ?
                     (

@@ -9,6 +9,7 @@ export type registerInputType = {
     lastName: string,
     country: string,
     city: string,
+    headline : string,
     backgroundImageUrl: string,
     profileImageUrl: string,
 }
@@ -22,6 +23,7 @@ export type setRegisterInputType = React.Dispatch<React.SetStateAction<{
     city: string;
     backgroundImageUrl: string;
     profileImageUrl: string;
+    headline : string,
 }>>
 
 export type registerStateType = {
@@ -42,6 +44,8 @@ export type setBoolean = React.Dispatch<React.SetStateAction<boolean>>
 export type setNumber = React.Dispatch<React.SetStateAction<number>>
 export type setUserType = React.Dispatch<React.SetStateAction<UserType>>
 export type setReactMention = React.Dispatch<React.SetStateAction<reactMentionType>>
+export type setSearchUserMessageType = React.Dispatch<React.SetStateAction<searchUserMessageType>>
+
 
 export type refectUserType = (variables?: Partial<{userId: string;}> | undefined) => Promise<ApolloQueryResult<any>>
 export type refectPostType = (variables?: Partial<{Limit: number , Offset: number;}> | undefined) => Promise<ApolloQueryResult<any>>
@@ -71,6 +75,14 @@ export type setWorkerInputType = React.Dispatch<React.SetStateAction<{
     isActive: boolean,
     industry: string,
 }>>
+
+export type searchUserMessageType = {
+    userId : string,
+    profileImageUrl: string,
+    firstName: string,
+    lastName: string,
+    headline: string,
+} 
 
 export type educationInputType = {
     userId: string,
