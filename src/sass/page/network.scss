@@ -59,6 +59,55 @@
             }
 
         }
+        .left-footer-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(flex-start , center , column);
+            // border-top-left-radius: 10px;
+            // border-top-right-radius: 10px;
+            gap: 20px;
+            .left-footer-top-container{
+                background-color: white;
+                @include layout.Container-1(100%, 200px);
+                border: 1px solid gray;
+                // @include abs.display-flex(flex-start , center , column);
+                .left-advertise-image{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        
+            .left-footer-mid-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , center , row);
+                flex-wrap: wrap;
+                gap: 10px;
+                a{
+                    text-decoration: none;
+                    color: abs.$gray-600;
+                    font-size: 12px;
+                    &:hover{
+                        text-decoration: underline
+                    }
+                }
+    
+    
+            }
+    
+            .left-footer-bottom-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , center , column);
+                gap: 5px;
+                .linkhedin-logo{
+                    width: 70px;
+                    height: 20px;
+                    object-fit: contain;
+                }
+    
+                .linkhedin-copyright{
+                    font-size: 12px;
+                }
+            }
+        }
     }
 
     .network-right-container{

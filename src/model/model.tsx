@@ -62,6 +62,7 @@ export type PostType = {
     Sender: UserType,
     Likes: Array<LikeType>
     Comments : Array<CommentType>
+    Shares : number
 }
 
 export type VisitType = {

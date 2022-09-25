@@ -8,6 +8,7 @@ import SearchUserCard from '../../component/MainPage/SearchUserCard'
 import { useUserContext } from '../../hooks/UserContext'
 import { querySearch, querySearchHastag } from '../../lib/graphql/SelectQuery'
 import { PostType, UserType } from '../../model/model'
+import { ColorRing } from 'react-loader-spinner'
 
 import '../../sass/page/search.scss'
 
@@ -16,24 +17,59 @@ const Search = () => {
 
     const UserContext = useUserContext()
     const { keyword } = useParams()
-    const [limit, setLimit] = useState(100)
+    const [limit, setLimit] = useState(3)
     const [offset, setOffset] = useState(0)
     const [filter, setFilter] = useState("")
+    const [hasMoreSearch , setHasMoreSearch] = useState(true)
 
-    console.log(keyword);   
-    
+    console.log(keyword);
 
-    const { loading: loadingSearchUser, error: errorSearchUser, data: dataSearchUser, fetchMore , refetch : refectSearchData } = useQuery(querySearch, {
-        variables: { Keyword: keyword, Limit: limit, Offset: offset }
+
+    const { loading: loadingSearchUser, error: errorSearchUser, data: dataSearchUser, fetchMore: fetchMoreSearchData, refetch: refectSearchData, networkStatus } = useQuery(querySearch, {
+        variables: { Keyword: keyword, Limit: limit, Offset: offset },
+        notifyOnNetworkStatusChange: true
     })
 
     useEffect(() => {
         UserContext.userRefetch()
         refectSearchData()
-    } , [])
+    }, [])
 
-    if (loadingSearchUser) return
+    if (!dataSearchUser) return <p>getting search data...</p>
     if (errorSearchUser) console.log(errorSearchUser)
+
+
+    window.onscroll = () => {
+        if (window.innerHeight + window.scrollY > document.body.offsetHeight) {
+            if(hasMoreSearch && networkStatus !== 3){
+                fetchMoreSearchData({
+                    variables: { Offset: dataSearchUser.Search.Posts.length },
+                    updateQuery: (previousResult, { fetchMoreResult }) => {
+                        let check = false;
+                        console.log(previousResult);
+                        console.log(fetchMoreResult);
+    
+                        if(!fetchMoreResult.Search.Posts.length) setHasMoreSearch(false)
+                        else setHasMoreSearch(true)
+    
+                        for (let index = 0; index < previousResult.Search.Posts.length; index++) {
+                            for (let index2 = 0; index2 < fetchMoreResult.Search.Posts.length; index2++) {
+                                if (previousResult.Search.Posts[index].id === fetchMoreResult.Search.Posts[index2].id) {
+                                    check = true
+                                }
+                            }
+                        }
+    
+                        if (check === true) {
+                            return previousResult
+                        } else {
+                            return { Search: { Users: [...previousResult.Search.Users], Posts: [...previousResult.Search.Posts, ...fetchMoreResult.Search.Posts] } }
+                        }
+                    },
+                })
+            }
+        }
+    }
 
     const dataUser = dataSearchUser.Search.Users as Array<UserType>
     const dataPost = dataSearchUser.Search.Posts as Array<PostType>
@@ -57,7 +93,7 @@ const Search = () => {
                                     {
                                         dataUser.map((userData) => {
                                             return (
-                                                <SearchUserCard  refectSearchData={refectSearchData} dataUser={userData}  />
+                                                <SearchUserCard refectSearchData={refectSearchData} dataUser={userData} />
                                             )
                                         })
                                     }
@@ -98,7 +134,7 @@ const Search = () => {
                                         {
                                             dataUser.map((userData) => {
                                                 return (
-                                                    <SearchUserCard  refectSearchData={refectSearchData} dataUser={userData}  />
+                                                    <SearchUserCard refectSearchData={refectSearchData} dataUser={userData} />
                                                 )
                                             })
                                         }
@@ -132,10 +168,19 @@ const Search = () => {
                                 )
                         )
                 }
-                {
-
-                }
+                <div className="loading-container">
+                    {networkStatus === 3 && <ColorRing
+                        visible={true}
+                        height="70"
+                        width="70"
+                        ariaLabel="blocks-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="blocks-wrapper"
+                        colors={['#1B262C', '#0F4C75', '#3282B8', '#BBE1FA', '#364F6B']}
+                    />}
+                </div>
             </div>
+
         </div>
     )
 }

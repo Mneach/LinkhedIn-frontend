@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { isArray } from '@apollo/client/cache/inmemory/helpers'
 import React, { useEffect, useState } from 'react'
+import Footer from '../../component/MainPage/Footer'
 import PostCard from '../../component/MainPage/Home/PostCard'
 import JobsCard from '../../component/MainPage/Jobs/JobsCard'
 import JobsModal from '../../component/MainPage/Jobs/JobsModal'
@@ -35,32 +36,38 @@ const Jobs = () => {
       }
       <div style={{ backgroundColor: "rgb(238 , 238 , 238)", minHeight: "100vh" }}>
         <Navbar />
-        <div className='job-container'>
-          <div className="job-top-container">
-            <button className='button2' onClick={handleJobsModal}>Create Job</button>
-          </div>
-          <div className="job-mid-container">
-            <div className="job-mid-title">
-              <p>Jobs For You</p>
+        <div className='job-content-container'>
+          <div className='job-container'>
+            <div className="job-top-container">
+              <button className='button2' onClick={handleJobsModal}>Create Job</button>
             </div>
+            <div className="job-mid-container">
+              <div className="job-mid-title">
+                <p>Jobs For You</p>
+              </div>
 
-            {
-              isArray(jobsData) && jobsData.map((job , index) => {
-                return (
-                  <>
-                    
+              {
+                isArray(jobsData) && jobsData.map((job, index) => {
+                  return (
+                    <>
+
                       <JobsCard job={job} />
-                    
-                    {
-                      index === jobsData.length - 1 ? (null) : ( <div className='line'></div>)
-                    }
-                  </>
-                )
-              })
-            }
 
+                      {
+                        index === jobsData.length - 1 ? (null) : (<div className='line'></div>)
+                      }
+                    </>
+                  )
+                })
+              }
+
+            </div>
+          </div>
+          <div className="jobs-left-container">
+            <Footer />
           </div>
         </div>
+
       </div>
 
     </>

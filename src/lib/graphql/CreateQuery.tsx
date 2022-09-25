@@ -19,14 +19,49 @@ export const mutationCreatePost = gql`
         {
             senderId:$senderId,text:$text,photoUrl:$photoUrl,videoUrl:$videoUrl
         }){
-        id
+            id
         text
-        photoUrl
         videoUrl
+        photoUrl
         Sender{
             id
             firstName
             lastName
+            profileImageUrl
+            headline
+            city
+            country
+            Follows{
+                userId
+                followId
+            }
+        }
+        Likes{
+            userId
+            postId
+        }
+        Comments{
+            id
+            postId
+            Commenter{
+                firstName
+                lastName
+                profileImageUrl
+                headline
+            }
+            comment
+            Likes{
+                id
+                commentId
+                User{
+                    id
+                    firstName
+                    lastName
+                }
+            }
+            Replies{
+                id
+            }
         }
     }
     }

@@ -153,6 +153,8 @@ const MoreModal = ({ userData, refectCurrentUser, setModalMore }: { userData: Us
     const handlePrintToPdf = () => {
         setModalMore(false)
         const input = document.getElementById('profile-container-id');
+        const hideModal = document.getElementById('modal-more-container') as HTMLElement
+        hideModal.style.display = 'none'
         const pdf = new jsPDF();
         var width = pdf.internal.pageSize.getWidth();
         var height = pdf.internal.pageSize.getHeight();
@@ -164,6 +166,7 @@ const MoreModal = ({ userData, refectCurrentUser, setModalMore }: { userData: Us
                 // pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
                 // pdf.output('dataurlnewwindow');
                 pdf.save(`${userData.firstName.concat(" ").concat(userData.lastName).concat(".pdf")}`);
+                hideModal.style.display = 'block'
             });
     }
 
@@ -172,32 +175,32 @@ const MoreModal = ({ userData, refectCurrentUser, setModalMore }: { userData: Us
             {
                 modalShareProfile === true && <ShareProfileModal userData={userData} setModalShareProfile={setModalShareProfile} />
             }
-            <div className='modal-more-container'>
+            <div className='modal-more-container' id='modal-more-container'>
                 {
                     userData.id === UserContext.User.id ?
                         (
                             <div className='modal-more-container__content'>
-                                <button onClick={handleShowShareProfile}>Share Profile</button>
-                                <button onClick={handlePrintToPdf}>Save As PDF</button>
+                                <button className='modal-more-container__content__current-user-button' onClick={handleShowShareProfile}>Share Profile</button>
+                                <button className='modal-more-container__content__current-user-button' onClick={handlePrintToPdf}>Save As PDF</button>
                             </div >
                         )
                         :
                         (
                             <div className='modal-more-container__content'>
-                                <button onClick={handleShowShareProfile}>Share Profile</button>
-                                <button onClick={handlePrintToPdf}>Save As PDF</button>
+                                <button className='modal-more-container__content__current-user-button' onClick={handleShowShareProfile}>Share Profile</button>
+                                <button className='modal-more-container__content__current-user-button' onClick={handlePrintToPdf}>Save As PDF</button>
                                 {
                                     checkFollowStatus === "followed" ?
-                                        (<button onClick={handleUnfollow}>UnFollow</button>)
+                                        (<button className='modal-more-container__content__current-user-button' onClick={handleUnfollow}>UnFollow</button>)
                                         :
-                                        (<button onClick={handleFollow}>Follow</button>)
+                                        (<button className='modal-more-container__content__current-user-button' onClick={handleFollow}>Follow</button>)
                                 }
 
                                 {
                                     checkBlockUser === "blocked" ?
-                                        (<button onClick={handleUnBlockUser}>UnBlock</button>)
+                                        (<button className='modal-more-container__content__current-user-button' onClick={handleUnBlockUser}>UnBlock</button>)
                                         :
-                                        (<button onClick={handleBlock}>Block</button>)
+                                        (<button className='modal-more-container__content__current-user-button' onClick={handleBlock}>Block</button>)
                                 }
                             </div >
                         )

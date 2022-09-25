@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
+import Footer from '../../component/MainPage/Footer'
 import Navbar from '../../component/MainPage/Navbar'
 import MenuNetwork from '../../component/MainPage/Network/MenuNetwork'
 import UserConnection from '../../component/MainPage/Network/UserConnection'
@@ -31,6 +32,7 @@ const Connection = () => {
             <div className="network-content-container">
                 <div className="network-left-container">
                     <MenuNetwork />
+                    <Footer />
                 </div>
                 <div className="network-right-container">
                     <div className='UYMK-container'>

@@ -9,6 +9,7 @@ import { useUserContext } from '../../hooks/UserContext'
 import { useQuery } from '@apollo/client'
 import { queryUserSuggestion } from '../../lib/graphql/SelectQuery'
 import { UserType } from '../../model/model'
+import Footer from '../../component/MainPage/Footer'
 
 const Network = () => {
 
@@ -39,6 +40,7 @@ const Network = () => {
       <div className="network-content-container">
         <div className="network-left-container">
           <MenuNetwork />
+          <Footer />
         </div>
         <div className="network-right-container">
           <div className='network-right-top-container'>

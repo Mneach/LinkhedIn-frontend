@@ -7,7 +7,7 @@ import { useUserContext } from '../../../hooks/UserContext'
 import { storage } from '../../../lib/firebase/FirebaseConfig'
 import { mutationAddHastag, mutationCreatePost } from '../../../lib/graphql/CreateQuery'
 import { toastError, toastPromise, toastSuccess } from '../../../lib/toast/toast'
-import { HastagRichText1, refectHastagType, refectPostType, setBoolean } from '../../../model/FormModel'
+import { HastagRichText1, HastagRichText2, refectHastagType, refectPostType, setBoolean } from '../../../model/FormModel'
 import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions'
 
 import { mentionInputPostStyle, mentionStyle } from '../../../lib/function/mentionStyle'
@@ -15,11 +15,11 @@ import RichTextTemplateHome from './RichTextTemplateHome'
 import { queryHastags } from '../../../lib/graphql/SelectQuery'
 import { HastagType } from '../../../model/model'
 
-const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { dataHastags : Array<HastagType> , setPostModal: setBoolean, refechHastag : refectHastagType , refechPost: refectPostType }) => {
+const PostModal = ({ dataHastags, setPostModal, refechHastag, refechPost, fetchMorePost }: { dataHastags: Array<HastagType>, setPostModal: setBoolean, refechHastag: refectHastagType, refechPost: refectPostType, fetchMorePost: any }) => {
 
     const UserContext = useUserContext()
     const [text, setText] = useState("")
-    const [inputText , setInputText] = useState("")
+    const [inputText, setInputText] = useState("")
     const [mutationPost] = useMutation(mutationCreatePost)
     const [file, setFile] = useState<File>()
     const [buttonDisable, setButtonDisable] = useState(true)
@@ -76,13 +76,13 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
 
     const postHandler = (url: string) => {
         console.log(inputText);
-        
+
         const texts = inputText.split(" ")
         texts.map((inputText) => {
-            if(inputText.match(HastagRichText1)){
+            if (inputText.match(HastagRichText1) && !inputText.match(HastagRichText2)) {
                 console.log(text);
-                const hastagSubstring = inputText.substring(1 , inputText.length)
-                addHastagMutation({variables : {hastag : hastagSubstring}}).then((e) => {
+                const hastagSubstring = inputText.substring(1, inputText.length)
+                addHastagMutation({ variables: { hastag: hastagSubstring } }).then((e) => {
                     console.log(e);
                 })
             }
@@ -99,8 +99,19 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
                 }
             }).then((e) => {
                 // toastSuccess("Success Create Post", "top-right", "colored")
-                refechPost()
+                // refechPost()
                 refechHastag()
+                fetchMorePost({
+                    updateQuery: (previousResult : any) => {
+                        console.log(previousResult);
+                        console.log(e.data);
+                        if (!previousResult.Posts) {
+                            return { Posts: [e.data.CreatePost] }
+                        } else {
+                            return { Posts: [e.data.CreatePost, ...previousResult.Posts] }
+                        }
+                    }
+                })
             }).catch((e) => {
                 toastError((e), "top-right", "colored")
             })
@@ -115,8 +126,21 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
                 }
             }).then((e) => {
                 // toastSuccess("Success Create Post", "top-right", "colored")
-                refechPost()
+                // refechPost()
                 refechHastag()
+                fetchMorePost({
+                    updateQuery: (previousResult : any) => {
+                        console.log(previousResult);
+                        console.log(e.data);
+                        console.log(e.data.CreatePost);
+                        
+                        if (!previousResult.Posts) {
+                            return { Posts: [e.data.CreatePost] }
+                        } else {
+                            return { Posts: [e.data.CreatePost, ...previousResult.Posts] }
+                        }
+                    }
+                })
             }).catch((e) => {
                 toastError((e), "top-right", "colored")
             })
@@ -153,7 +177,7 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
         let mentionData: SuggestionDataItem = { id: "", display: "" }
         let at: string = "@"
         if (dataMention.user1.id != UserContext.User.id) {
-            mentionData.id = dataMention.user1.id   
+            mentionData.id = dataMention.user1.id
             mentionData.display = at.concat(dataMention.user1.firstName).concat(dataMention.user1.lastName)
             mentionDatas.push(mentionData)
         } else if (dataMention.user2.id != UserContext.User.id) {
@@ -163,27 +187,27 @@ const PostModal = ({ dataHastags , setPostModal, refechHastag , refechPost }: { 
         }
     })
 
-    const hastagDatas : SuggestionDataItem [] = []
+    const hastagDatas: SuggestionDataItem[] = []
     dataHastags.map((dataHastag) => {
         let hastagData: SuggestionDataItem = { id: "", display: "" }
         let at: string = "#"
-        hastagData.id = at.concat(dataHastag.id) 
+        hastagData.id = at.concat(dataHastag.id)
         hastagData.display = at.concat(dataHastag.hastag)
         hastagDatas.push(hastagData)
     })
-    
-    const handleComment = (e: any , newValue : any , newPlainTextValue: any) => {
+
+    const handleComment = (e: any, newValue: any, newPlainTextValue: any) => {
         setText(e.target.value)
         // setText(newPlainTextValue)
         console.log(newPlainTextValue);
         console.log(newValue);
-        
-        
+
+
         setInputText(newValue)
     }
 
     const promiseUpload = () => {
-        toastPromise(() => uploadHanlder() , "Loading Create Post..." , "Success Create Post" , "Failed To Create Post")
+        toastPromise(() => uploadHanlder(), "Loading Create Post...", "Success Create Post", "Failed To Create Post")
     }
 
     return (

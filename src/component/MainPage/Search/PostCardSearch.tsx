@@ -39,15 +39,9 @@ const PostCardSearch = ({ postData , index}: { postData: PostType , index : numb
             </div>
             <div className='post-bottom-content'>
                 <div className='post-bottom-data'>
-                    <p>0 Likes</p>
-                    <p>10 comments</p>
-                    <p>20 shares</p>
-                </div>
-                <div className='button-container'>
-                    <button className='button'>Like</button>
-                    <button className='button'>Comment</button>
-                    <button className='button'>Share</button>
-                    <button className='button'>Send</button>
+                    <p>{postData.Likes.length} Likes</p>
+                    <p>{postData.Comments.length} comments</p>
+                    <p>{postData.Shares} shares</p>
                 </div>
             </div>
         </>

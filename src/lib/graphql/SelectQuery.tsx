@@ -109,6 +109,16 @@ export const querySearch = gql`
                     followId
                 }
             }
+            Likes{
+                userId
+            }
+            Comments{
+                id
+                Replies{
+                    id
+                }
+            }
+            Shares
         } 
     }
 }
@@ -132,6 +142,16 @@ export const querySearchHastag = gql`
                     followId
                 }
             }
+            Likes{
+                userId
+            }
+            Comments{
+                id
+                Replies{
+                    id
+                }
+            }
+            Shares
         } 
     }
 }
@@ -184,6 +204,7 @@ export const queryPosts = gql`
                 id
             }
         }
+        Shares
     }
     }
 `

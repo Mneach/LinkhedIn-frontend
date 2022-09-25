@@ -16,6 +16,7 @@ import { UserType } from '../../model/model'
 import '../../sass/page/profile.scss'
 import { queryUserSuggestion } from '../../lib/graphql/SelectQuery'
 import jsPDF from 'jspdf'
+import Footer from '../../component/MainPage/Footer'
 
 const Profile = () => {
 
@@ -178,7 +179,6 @@ const Profile = () => {
 
                     <div className='profile-container__right-container'>
                         <div className='profile-container__right-container__content1-container'>
-                            <p className='title'>People You Might Know</p>
                             {
                                 loadingUserSuggestion === true ?
                                     (<p>Loading...</p>)
@@ -187,17 +187,19 @@ const Profile = () => {
                                         !errorUserSuggestion ?
                                             (
                                                 <>
+                                                    <p className='title'>People You Might Know</p>
                                                     {/* <FeedContent userSuggestionData={dataUserSuggestion.UserSuggestion} /> */}
                                                     <FollowPeopleProfile userSuggestionData={dataUserSuggestion.UserSuggestion} />
                                                 </>
                                             )
                                             :
                                             (
-                                                <p>No data...</p>
+                                                <p className='title-error'>There is no user suggestion</p>
                                             )
                                     )
                             }
                         </div>
+                        <Footer />
                     </div>
                 </div>
             </div>

@@ -18,12 +18,7 @@ import { messageCommentPostNotification, messageCreatePostNotification, messageL
 import ShareProfileModal from '../modal/ShareProfileModal'
 import SharePostModal from './SharePostModal'
 
-const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { postData: PostType, refectPostData: refectPostType, dataHastags: Array<HastagType>, refechHastag: refectHastagType }) => {
-
-    let initialValueTotalComment = postData.Comments.length
-    postData.Comments.map((commentData) => {
-        initialValueTotalComment -= commentData.Replies.length
-    })
+const PostCard = ({ initialValueTotalComment , postData, refectPostData, dataHastags, refechHastag }: {initialValueTotalComment : number , postData: PostType, refectPostData: refectPostType, dataHastags: Array<HastagType>, refechHastag: refectHastagType }) => {
 
     const UserContext = useUserContext()
     const navigate = useNavigate()
@@ -44,15 +39,6 @@ const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { pos
     const [totalComment, setTotalComment] = useState(initialValueTotalComment)
     const [notificationMutation] = useMutation(mutationAddNotification)
     let commentTypeData: Array<CommentType> | null = null
-    // let totalComment : number = postData.Comments.length;
-    useEffect(() => {
-        let initialValueTotalComment = postData.Comments.length
-        postData.Comments.map((commentData) => {
-            initialValueTotalComment -= commentData.Replies.length
-        })
-
-        setTotalComment(initialValueTotalComment)
-    }, [postData])
 
     const likeHandler = () => {
         likeMutation({
@@ -332,7 +318,7 @@ const PostCard = ({ postData, refectPostData, dataHastags, refechHastag }: { pos
                         <div className='post-bottom-data'>
                             <p>{postData.Likes.length} Likes</p>
                             <p>{totalPostComment} Comment</p>
-                            <p>0 shares</p>
+                            <p>{postData.Shares} shares</p>
                         </div>
                         <div className='button-container'>
                             {

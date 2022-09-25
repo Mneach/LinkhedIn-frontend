@@ -2,99 +2,163 @@
 @use '../components' as component;
 @use '../layout/' as layout;
 
-.job-container {
-    @include layout.Container-1(auto, auto);
-    @include abs.display-flex(center , center , column);
-    padding: 30px 200px;
-    gap: 30px;
-
-    .job-top-container{
-        @include layout.Container-1(50%, 100px);
-        @include abs.display-flex(center , center , row);
-        border: 1px solid gray;
-        border-radius: 10px;
-        background-color: white;
-
-        .button2 {
-            @include component.button-submit(10px ,10px ,  white , abs.$blue-700 , 20px);
-            border: none;
-            width: 90%;
-            transition-duration: 0.2s;
-            font-size: 14px;
-            border: 1px solid abs.$blue-700;
-            // margin-left: 30px;
-            &:hover{
-                background-color: abs.$blue-900;
-                color: white;
-            }  
+.job-content-container{
+    @include layout.Container-1(100%, auto);
+    @include abs.display-flex(center , flex-start , row);
+    gap: 60px;
+    .job-container {
+        @include layout.Container-1(40%, auto);
+        @include abs.display-flex(center , center , column);
+        padding: 30px 0px;
+        gap: 30px;
+    
+        .job-top-container{
+            @include layout.Container-1(100%, 100px);
+            @include abs.display-flex(center , center , row);
+            border: 1px solid gray;
+            border-radius: 10px;
+            background-color: white;
+    
+            .button2 {
+                @include component.button-submit(10px ,10px ,  white , abs.$blue-700 , 20px);
+                border: none;
+                width: 90%;
+                transition-duration: 0.2s;
+                font-size: 14px;
+                border: 1px solid abs.$blue-700;
+                // margin-left: 30px;
+                &:hover{
+                    background-color: abs.$blue-900;
+                    color: white;
+                }  
+            }
+        }
+    
+        .job-mid-container{
+            @include layout.Container-1(100%, auto);
+            @include abs.display-flex(center , center , column);
+            border: 1px solid gray;
+            border-radius: 10px;
+            background-color: white;
+            padding-bottom: 30px;
+    
+            .line{
+                @include layout.Container-1(95%, auto);
+                border-bottom: 1px solid abs.$gray-400;
+                margin-bottom: 20px;
+                margin-top: 10px;
+            }
+    
+            .job-mid-title{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , center , row);
+                margin-left: 30px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+    
+                p{
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+            }   
+    
+            .job-mid-content-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(flex-start , center , row);
+                padding-left: 30px;
+                .jobs-card-container{
+                    @include layout.Container-1(100%, auto);
+                    @include abs.display-flex(flex-start , flex-start , column);
+                    gap: 3px;
+                    .title{
+                        font-size: 20px;
+                        color: abs.$blue-700;
+                        font-weight: 500;
+    
+                        &:hover{
+                            cursor: pointer;
+                            text-decoration: underline;
+                        }
+                    }
+        
+                    .company-name{
+                        font-size: 16px;
+                        color: abs.$gray-900;
+                    }
+        
+                .location{
+                        font-size: 14px;
+                        color: abs.$gray-700;
+                    }
+    
+                    .description{
+                        font-size: 14px;
+                        color: abs.$gray-600;
+                    }
+                }
+            }
         }
     }
 
-    .job-mid-container{
-        @include layout.Container-1(50%, auto);
-        @include abs.display-flex(center , center , column);
-        border: 1px solid gray;
-        border-radius: 10px;
-        background-color: white;
-        padding-bottom: 30px;
+    .jobs-left-container{
+        @include layout.Container-1(20%, auto);
+        @include abs.display-flex(flex-start , flex-start , row);  
+        padding: 30px 0px;  
 
-        .line{
-            @include layout.Container-1(95%, auto);
-            border-bottom: 1px solid abs.$gray-400;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
-
-        .job-mid-title{
+        .left-footer-container{
             @include layout.Container-1(100%, auto);
-            @include abs.display-flex(flex-start , center , row);
-            margin-left: 30px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-
-            p{
-                font-size: 24px;
-                font-weight: 500;
+            @include abs.display-flex(flex-start , flex-start , column);
+            // border-top-left-radius: 10px;
+            // border-top-right-radius: 10px;
+            gap: 20px;
+            .left-footer-top-container{
+                background-color: white;
+                @include layout.Container-1(100%, 200px);
+                border: 1px solid gray;
+                // @include abs.display-flex(flex-start , center , column);
+                .left-advertise-image{
+                    width: 100%;
+                    height: 100%;
+                }
             }
-        }   
-
-        .job-mid-content-container{
-            @include layout.Container-1(100%, auto);
-            @include abs.display-flex(flex-start , center , row);
-            padding-left: 30px;
-            .jobs-card-container{
+        
+            .left-footer-mid-container{
                 @include layout.Container-1(100%, auto);
-                @include abs.display-flex(flex-start , flex-start , column);
-                gap: 3px;
-                .title{
-                    font-size: 20px;
-                    color: abs.$blue-700;
-                    font-weight: 500;
-
+                @include abs.display-flex(center , center , row);
+                flex-wrap: wrap;
+                gap: 10px;
+                a{
+                    text-decoration: none;
+                    color: abs.$gray-600;
+                    font-size: 12px;
                     &:hover{
-                        cursor: pointer;
-                        text-decoration: underline;
+                        text-decoration: underline
                     }
                 }
     
-                .company-name{
-                    font-size: 16px;
-                    color: abs.$gray-900;
+    
+            }
+    
+            .left-footer-bottom-container{
+                @include layout.Container-1(100%, auto);
+                @include abs.display-flex(center , center , column);
+                gap: 5px;
+                .linkhedin-logo{
+                    width: 70px;
+                    height: 20px;
+                    object-fit: contain;
                 }
     
-                .location{
-                    font-size: 14px;
-                    color: abs.$gray-700;
-                }
-
-                .description{
-                    font-size: 14px;
-                    color: abs.$gray-600;
+                .linkhedin-copyright{
+                    font-size: 12px;
                 }
             }
         }
     }
+
 }
+
+
 
 .modal-container{
     display: flex;

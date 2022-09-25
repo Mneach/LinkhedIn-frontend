@@ -8,6 +8,11 @@
     // padding: auto;
     padding: 80px 200px;
     gap: 10px;
+
+    .loading-container{
+        @include layout.Container-1(50%, auto);
+        @include abs.display-flex(center , center , column);
+    }
 }
 
 .user-container{

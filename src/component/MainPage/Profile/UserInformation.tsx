@@ -27,7 +27,7 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
   let connectedUser: boolean = false;
   let connectionRequest: boolean = false;
   let giveConnectionStatus: boolean = false;
-  let checkBlockUser : string = "";
+  let checkBlockUser: string = "";
 
   const promiseBackground = (e: any) => {
     if ((e.target.files)[0] !== undefined) {
@@ -190,9 +190,9 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
 
   UserContext.User.Blocks.map((blockData) => {
     if (blockData.blockId === userData.id) {
-        checkBlockUser = "blocked";
+      checkBlockUser = "blocked";
     }
-})
+  })
 
   const handleMessage = () => {
     navigate(`/mainPage/message/temp/${userData.id}`, { state: userData })
@@ -202,8 +202,6 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
     <>
       {
         modalUser === true && <UserInformationModal modalUser={modalUser} setModalUser={setModalUser} />
-      }{
-        modalMore === true && <MoreModal setModalMore={setModalMore} refectCurrentUser={refectCurrentUser} userData={userData} />
       }{
         modalConnect === true && <ConnectModal refectCurrentUser={refectCurrentUser} userData={userData} setModalConnect={setModalConnect} />
       }
@@ -276,7 +274,12 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
               <>
                 {/* <button className='button3'>Connect</button> */}
                 {/* <button className='button2'>Message</button> */}
+
                 <button className='button1' onClick={handleMoreModal}>More</button>
+                {
+                  modalMore === true && <MoreModal setModalMore={setModalMore} refectCurrentUser={refectCurrentUser} userData={userData} />
+                }
+
               </>
 
             )
@@ -311,7 +314,13 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
                         )
                     )
                 }
-                <button className='button1' onClick={handleMoreModal}>More</button>
+                <button className='button1-relative' onClick={handleMoreModal}>
+                  More
+                  {
+                    modalMore === true && <MoreModal setModalMore={setModalMore} refectCurrentUser={refectCurrentUser} userData={userData} />
+                  }
+                </button>
+
               </>
             )
         }

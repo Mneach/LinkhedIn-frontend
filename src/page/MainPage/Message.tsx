@@ -11,6 +11,7 @@ import MessageRoom from '../../component/MainPage/Message/MessageRoom';
 import { useQuery } from '@apollo/client';
 import { queryBlocks, queryRooms } from '../../lib/graphql/SelectQuery';
 import MessagetTemporary from '../../component/MainPage/Message/MessagetTemporary';
+import Footer from '../../component/MainPage/Footer';
 
 const Message = () => {
 
@@ -55,6 +56,7 @@ const Message = () => {
             <Route path='/new' element={<MessageNew roomData={data.rooms} userBlockData={dataBlock.blocks} />}></Route>
           </Routes>
         </div>
+        <Footer />
       </div>
 
     </div>
