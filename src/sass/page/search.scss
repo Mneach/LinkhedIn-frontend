@@ -19,7 +19,9 @@
     @include layout.Container-1(50%, auto);
     @include abs.display-flex(center , center , column);
     gap: 20px;
-    background-color: white;
+    background-color: var(--secondary-color-1);
+    color: var(--font-color-1);
+    transition-duration: 1s;
     padding: 30px;
     box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
 
@@ -72,11 +74,11 @@
             }
 
             .degree{
-                color: abs.$gray-700;
+                color: var(--font-color-2);
             }
 
             .location{
-                color: abs.$gray-600;
+                color: var(--font-color-3);
             }
 
             .right-content{
@@ -135,7 +137,9 @@
 .post-search-container {
     @include layout.Container-1(50%, auto);
     @include abs.display-flex(center , center , column);
-    background-color: white;
+    background-color: var(--secondary-color-1);
+    color: var(--font-color-1);
+    transition-duration: 1s;
     gap: 20px;
     padding: 30px;
     box-shadow: var(--shadow-navbar-1) 0px 5px 15px;

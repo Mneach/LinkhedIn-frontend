@@ -78,7 +78,7 @@ const Search = () => {
     console.log(filter)
 
     return (
-        <div style={{ backgroundColor: "rgb(238 , 238 , 238)", minHeight: "100vh" }}>
+        <div style={{ backgroundColor: "var(--primary-color-1)", transitionDuration : "1s", minHeight: "100vh" }}>
             <Navbar />
             <FilterNavbar setFilter={setFilter} />
             <div className='search-container'>
