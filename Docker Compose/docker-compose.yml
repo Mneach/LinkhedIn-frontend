@@ -1,0 +1,50 @@
+services:
+  database:
+    container_name: database
+    image: postgres:14.5
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=LinkhedIn
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - '5050:80'
+  backend:
+    container_name: backend
+    build: ./LinkhedIn-backend
+    ports:
+      - '8080:8080'
+    links:
+      - database
+    depends_on:
+      - database
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./LinkhedIn-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./LinkhedIn-frontend:/app
+    ports:
+      - '5173:5173'
+    links:
+      - backend
+    depends_on:
+      - backend
+volumes:
+  pgdata:
+  pgadmin:
