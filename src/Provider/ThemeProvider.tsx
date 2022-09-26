@@ -49,9 +49,8 @@ export const ThemeProvider: React.FC<props> = ({ children }) => {
         
     }, [currentTheme])
 
-
     return (
-        <div className={currentTheme == enumThemeType.light ? "darkClass" : "lightClass"}>
+        <div className={currentTheme == enumThemeType.light ? "lightClass" : "darkClass"}>
 
             <themeContext.Provider value={{ currentTheme : currentTheme, setCurrentTheme : setCurrentTheme, changeCurrTheme : changeCurrTheme}} >
                 {

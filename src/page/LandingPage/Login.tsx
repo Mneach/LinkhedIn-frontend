@@ -10,12 +10,14 @@ import { toastError } from '../../lib/toast/toast'
 import { ParseJwt } from '../../lib/token/token'
 import { CredentialResponse, GoogleCredentialModel, GsiButtonConfiguration, PromptMomentNotification } from '../../model/GoogleModel'
 import { UserType } from '../../model/model'
+import { useThemeContext } from '../../Provider/ThemeProvider'
 
 import '../../sass/layout/LandingPage/content.scss'
 
 const Login = () => {
 
     const navigate = useNavigate()
+    const ThemeProvider = useThemeContext()
     const clientId = "422574871920-kg9q019092ta0mot2d808egu8gd6hc07.apps.googleusercontent.com"
     const googleId = window.google?.accounts.id
     const [login, { loading, error, data, called }] = useLazyQuery(queryLogin, { errorPolicy: "all" })
@@ -26,6 +28,19 @@ const Login = () => {
         email: "",
         password: "",
     })
+
+    useEffect(() => {
+        const getBody = document.getElementById('body') as HTMLElement;
+        console.log(ThemeProvider.currentTheme);
+        
+        if (ThemeProvider.currentTheme === "Light"){
+            getBody.style.backgroundColor = "#fff" 
+        } else{
+            getBody.style.backgroundColor = "#222"
+        } 
+        console.log("test");
+        
+    } , [])
 
     useEffect(() => {
         if (localStorage.getItem(StorageKey.JwtTokenKey) !== null) {
