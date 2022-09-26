@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import { AiFillHome, AiOutlineHome, AiOutlineMail } from 'react-icons/ai'
+import { HiOutlineUserGroup } from 'react-icons/hi'
+import { MdOutlineArrowDropDown, MdOutlineWorkOutline } from 'react-icons/md'
+import { IoMdNotificationsOutline } from 'react-icons/io'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useUserContext } from '../../hooks/UserContext'
 import { StorageKey } from '../../lib/keys/key'
-
+import { useThemeContext } from '../../Provider/ThemeProvider'
 import '../../sass/layout/MainPage/navbar.scss'
 import { NavbarMenu } from './NavbarMenu'
+import { IoSearchOutline } from 'react-icons/io5'
 
 const Navbar = () => {
 
@@ -12,6 +17,7 @@ const Navbar = () => {
     const UserContext = useUserContext()
     const [modalUser, setModalUser] = useState("hide")
     const [keyword, setKeywoard] = useState("")
+    const ThemeContext = useThemeContext()
 
     const handleActiveMenu = (state: any) => {
         if (state.isActive) {
@@ -42,34 +48,47 @@ const Navbar = () => {
         navigate(`/mainPage/search/${keyword}`)
     }
 
+    const handleToggleTheme = () => {
+        ThemeContext.changeCurrTheme()
+    }
+
+    const handleGotoHome = () => {
+        navigate(`/mainPage`)
+    }
+
     return (
         <nav className="navMainPage">
             <div className='navMainPage__leftContent'>
-                <img src={"/src/assets/linkedin.png"} alt="" />
+                <img className='logo-linkhedin' src={"/src/assets/linkedin.png"} alt="" onClick={handleGotoHome} />
 
                 <div className='navMainPage__leftContent__form-search'>
                     {/* <img src="" alt="" /> */}
                     <input className='input__serch' value={keyword} onChange={(e) => setKeywoard(e.target.value)} type="text" placeholder='Search' />
                     <button onClick={handleSearch}>
-                        <img src="../../src/assets/search.png" alt="" />
+                        <IoSearchOutline size={25} />
                     </button>
                 </div>
             </div>
             <div className='navMainPage__rightContent'>
                 <NavLink to={'/mainPage/home'} className={handleActiveMenu}>
-                    <NavbarMenu icon='/src/assets/home.png' text='Home' />
+                    <AiOutlineHome size={25} />
+                    <p>Home</p>
                 </NavLink>
                 <NavLink to={'/mainPage/network'} className={handleActiveMenu}>
-                    <NavbarMenu icon='/src/assets/network.png' text='My Network' />
+                    <HiOutlineUserGroup size={25} />
+                    <p>My Network</p>
                 </NavLink>
                 <NavLink to={'/mainPage/jobs'} className={handleActiveMenu}>
-                    <NavbarMenu icon='/src/assets/job.png' text='Jobs' />
+                    <MdOutlineWorkOutline size={25} />
+                    <p>Jobs</p>
                 </NavLink>
                 <NavLink to={'/mainPage/message/new'} className={handleActiveMenu}>
-                    <NavbarMenu icon='/src/assets/message.png' text='Message' />
+                    <AiOutlineMail size={25} />
+                    <p>Message</p>
                 </NavLink>
                 <NavLink to={'/mainPage/notification'} className={handleActiveMenu}>
-                    <NavbarMenu icon='/src/assets/notification.png' text='Notification' />
+                    <IoMdNotificationsOutline size={25} />
+                    <p>Notification</p>
                 </NavLink>
                 <button onClick={showModalUser} className={"navMainPage__rightContent__button-profile"}>
                     <div className='navMainPage__rightContent__menu__user'>
@@ -81,7 +100,7 @@ const Navbar = () => {
                         }
                         <div className='navMainPage__rightContent__menu__user__text-container'>
                             <p>Me</p>
-                            <img src="/src/assets/arrow_down.png" alt="" />
+                            <MdOutlineArrowDropDown size={25} />
                         </div>
                     </div>
                     <div className={`navMainPage__rightContent__modal-user ${modalUser}`}>
@@ -113,6 +132,9 @@ const Navbar = () => {
                             </Link>
                             <Link to={"/"}>
                                 <p className='content'>Job Posting Account</p>
+                            </Link>
+                            <Link to={"#"}>
+                                <p className='content' onClick={handleToggleTheme}>{localStorage.getItem(StorageKey.theme)} Theme</p>
                             </Link>
                         </div>
                         <div className='line'></div>

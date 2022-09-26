@@ -11,6 +11,7 @@ import { PostType, RoomType, UserType } from '../../../model/model'
 import SearchUserModalProfile from '../modal/SearchUserModalProfile'
 import RichTextTemplateHome from './RichTextTemplateHome'
 import SearchUserModalHome from './SearchUserModalHome'
+import { Audio , ColorRing } from 'react-loader-spinner'
 
 const SharePostModal = ({ postData, setShareModal }: { postData: PostType, setShareModal: setBoolean }) => {
     const navigate = useNavigate()
@@ -44,7 +45,15 @@ const SharePostModal = ({ postData, setShareModal }: { postData: PostType, setSh
         }
     }, [selectedUser.userId])
 
-    if (loadingConnection || loading || loadingBLock) return <p>Get Message Data...</p>
+    if (loadingConnection || loading || loadingBLock) return <ColorRing
+        visible={true}
+        height="70"
+        width="70"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={['#1B262C', '#0F4C75', '#3282B8', '#BBE1FA', '#364F6B']}
+    />
 
     const UserConnectionData = dataConnection.UserConnected as Array<UserType>
     const connectionDataFilter = UserConnectionData.filter((connectionData) => {
@@ -66,7 +75,7 @@ const SharePostModal = ({ postData, setShareModal }: { postData: PostType, setSh
             }
         }).then((e) => {
             setSelectedUser((prev) => ({ firstName: "", lastName: "", profileImageUrl: "", userId: "", headline: "" }))
-            toastSuccess("Success Share Post" , "top-right" , "colored")
+            toastSuccess("Success Share Post", "top-right", "colored")
             navigate(`/mainPage/message/${roomId}`)
         }).catch((e) => {
             toastError((e), "top-right", "colored")

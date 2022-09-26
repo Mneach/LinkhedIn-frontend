@@ -18,9 +18,10 @@
             @include abs.display-flex(center , center , column);
             border: 1px solid gray;
             border-radius: 10px;
-            background-color: white;
+            background-color: var(--secondary-color-1);
+            color: var(--font-color-1);
             overflow: hidden;
-    
+            transition-duration: 1s;
             .line{
                 @include layout.Container-1(100%, auto);
                 border-bottom: 1px solid abs.$gray-400;
@@ -47,7 +48,7 @@
     
                 &:hover{
                     cursor: pointer;
-                    background-color: abs.$gray-200
+                    background-color: var(--highlight-background-hover-1)
                 }
     
                 .notificaiton-left-card-container{
@@ -59,7 +60,7 @@
                         width: 50px;
                         height: 50px;
                         object-fit: cover;
-                        border-radius:10;
+                        border-radius:50%;
                     }
                 }
                 
@@ -69,7 +70,8 @@
                     gap: 3px;
                     .text{
                         font-size: 16px;
-                        color: abs.$gray-900;
+                        color: var(--font-color-1);
+                        transition-duration: 1s;
     
                         .username{
                             font-weight: 500;

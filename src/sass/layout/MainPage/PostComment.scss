@@ -47,7 +47,7 @@
                 padding: 10px;
                 border: none;
                 font-size: 16px;
-
+                color: var(--font-color-1);
                 &::placeholder{
                     font-size: 16px;
                 }
@@ -85,7 +85,7 @@
                 .content{
                     @include layout.Container-1(100%, auto);
                     @include abs.display-flex(center , flex-start , column);
-                    background-color: abs.$gray-300;
+                    background-color: var(--primary-color-1);
                     
                     .name{
                         margin-top: 10px;

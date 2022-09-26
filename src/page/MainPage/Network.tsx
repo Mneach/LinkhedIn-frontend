@@ -35,7 +35,7 @@ const Network = () => {
 
 
   return (
-    <div style={{ backgroundColor: "rgb(238 , 238 , 238)", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "var(--primary-color-1)", transitionDuration : "1s", minHeight: "100vh" }}>
       <Navbar />
       <div className="network-content-container">
         <div className="network-left-container">

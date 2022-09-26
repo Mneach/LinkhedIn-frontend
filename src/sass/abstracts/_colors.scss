@@ -100,5 +100,59 @@ $orange-700 : #F76707;
 $orange-800 : #E8590C;
 $orange-900 : #D9480F;
 
-$primary : $blue-500;
+$accent-color-1-light : $blue-500;
 $secondary : $green-400;
+
+.lightClass * {
+    --primary-color-1 : rgb(238 , 238 , 238);
+    --secondary-color-1 : #fff;
+    --accent-color-1 : #1C7ED6;
+
+    --highlight-focus:rgb(88 , 88 , 88);
+    --highlight-background : rgb(222 , 222 , 222);
+    --highlight-background-hover-1 : rgb(222 , 222 , 222);
+    --highlight-background-hover-2 : rgb(200 , 200 , 200);
+    --highlight-background-mention : #b6cfff;
+
+    --font-color-1 : #222;
+    --font-color-2 : #666;
+    --font-color-3 : rgb(80 , 80 , 80);
+
+    --icon-color-1 :  rgb(0 , 0 , 0);
+    --border-color-1 : rgb(0,0,0);
+
+    --modal-background-color-1 : rgba(0, 0, 0, 0.7);
+
+    --navbar-bottom-border : rgb(0 , 0 , 0);
+    --navbar-icon-color-1 :  rgb(0 , 0 , 0);
+
+    --shadow-navbar-1 : rgba(0, 0, 0, 0.2);
+    --shadow-color-1 : rgba(0, 0, 0, 0.02)
+}  
+
+.darkClass *{
+    --primary-color-1 : rgb(28, 28, 28);
+    --secondary-color-1 : rgb(20, 20, 20);
+    --accent-color-1 : #0A66C2;
+    --highlight-background : rgb(38 , 38 , 38);
+    --highlight-background-hover-1 : rgb(68 , 68 , 68);
+    --highlight-background-hover-2 : rgb(140 , 140 , 140);
+    --highlight-focus:rgb(88 , 88 , 88);
+    --highlight-background-mention : #103b8b;
+
+    --font-color-1 : rgb(250 , 250 , 250);
+    --font-color-2 : rgb(200, 200, 200);
+    --font-color-3 : rgb(180 , 180 , 180);
+
+
+    --icon-color-1 :  rgb(255 , 255 , 255);
+    --border-color-1 : rgb(255,255,255);
+
+    --modal-background-color-1 : rgba(255, 255, 255, 0.3);
+
+
+    --shadow-navbar-1 : rgba(255, 255, 255, 0.03)
+    --shadow-color-1 : rgba(255, 255, 255, 0.02)
+
+    --navbar-bottom-border : rgb(255 , 255 , 255);
+}

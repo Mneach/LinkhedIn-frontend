@@ -13,7 +13,9 @@
             @include layout.Container-1(100%, 640px);
             @include abs.display-flex(flex-start , flex-start , column); 
             border: 1px solid gray;
-            background-color: white;  
+            background-color: var(--secondary-color-1);  
+            color: var(--font-color-1);
+            transition-duration: 1s;
             overflow-y: scroll; 
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
@@ -46,7 +48,7 @@
             a{
                 @include layout.Container-1(100%, auto);
                 text-decoration: none;
-                color: black;
+                color: var(--font-color-1);
                 .message-user-list-content-container{
                     @include layout.Container-1(100%, 100%);
                     @include abs.display-flex(center , flex-start , column);
@@ -54,11 +56,13 @@
                         @include layout.Container-1(100%, auto);
                         @include abs.display-flex(flex-start , flex-start , row);
                         border-bottom: 1px solid gray;
-                        transition-duration: 0.2s;
-    
+                        background-color: var(--secondary-color-1);
+                        transition-duration: 1s;
+                        
                         &:hover{
+                            transition-duration: 0.2s;
                             cursor: pointer;
-                            background-color: abs.$gray-200
+                            background-color: var(--highlight-background-hover-1)
                         }
     
                         .user-profile-container{
@@ -82,7 +86,7 @@
                             }
                             .lastMessage{
                                 font-size: 13px;
-                                color: abs.$gray-700
+                                color: var(--font-color-2)
                             }
                         }
                     }
@@ -98,7 +102,9 @@
             @include layout.Container-1(100%, 640px);
             @include abs.display-flex(flex-start , flex-start , column); 
             border: 1px solid gray;
-            background-color: white;  
+            background-color: var(--secondary-color-1); 
+            color: var(--font-color-1);
+            transition-duration: 1s;
             overflow: hidden;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -107,10 +113,13 @@
                 @include abs.display-flex(space-between , center , row); 
                 border-bottom: 1px solid gray;
                 margin-top: 9px;
+                background-color: var(--secondary-color-1);
+                transition-duration: 1s;
                 .title{
                     font-weight: 500;
                     margin: 10px;
                     font-size: 18px;
+                    color: var(--font-color-1)
                 }
             }
 
@@ -135,6 +144,9 @@
                         border:none;
                         border-bottom: 1px solid gray;
                         outline: none;
+                        background-color: var(--secondary-color-1);
+                        color: var(--font-color-1);
+                        transition-duration: 1s
                     }
 
                 }
@@ -181,7 +193,9 @@
                             border-bottom: 1px solid gray;
                             .textarea{
                                 @include layout.Container-1(90%, 80px);
-                                background-color: abs.$gray-200;
+                                background-color: var(--primary-color-1);
+                                color: var(--font-color-1);
+                                transition-duration: 1s;
                                 border: none;
                                 resize: none;
                                 padding: 10px;
@@ -251,7 +265,9 @@
             @include layout.Container-1(100%, 640px);
             @include abs.display-flex(flex-start , flex-start , column); 
             border: 1px solid gray;
-            background-color: white;  
+            background-color: var(--secondary-color-1);  
+            color: var(--font-color-1);
+            transition-duration: 1s;
             overflow: hidden;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -326,7 +342,7 @@
                         .my-chat-container{
                             @include layout.Container-1(100%, auto);
                             @include abs.display-flex(flex-end , center , row);
-
+                            color: var(--font-color-1);
                             .chat-content{
                                 @include layout.Container-1(100%, auto);
                                 @include abs.display-flex(flex-end , flex-end , column);
@@ -372,7 +388,7 @@
                                     min-width: 60%;
                                     max-width: 65%;
                                     @include abs.display-flex(flex-start , center , column);
-                                    background-color: white; 
+                                    background-color: var(--secondary-color-1);  
                                     margin-top: 10px;
                                     margin-bottom: 10px;  
                                     margin-right: 10px;   
@@ -421,7 +437,8 @@
                                     min-width: 65%;
                                     max-width: 65%;
                                     @include abs.display-flex(flex-start , center , column);
-                                    background-color: white; 
+                                    background-color: var(--primary-color-1); 
+                                    transition-duration: 1s;
                                     margin-top: 10px;
                                     margin-bottom: 10px;  
                                     margin-right: 10px;                   
@@ -508,13 +525,15 @@
                                     min-width: 65%;
                                     max-width: 65%;
                                     @include abs.display-flex(flex-start , center , row);
-                                    background-color: white; 
                                     margin-top: 10px;
                                     margin-bottom: 10px;  
                                     margin-right: 10px;                 
                                     border-radius: 5px;   
                                     border: 1px solid gray;
                                     gap: 7px;
+                                    background-color: var(--primary-color-1);
+                                    color: var(--font-color-1);
+                                    transition-duration: 1s;
 
                                     .my-video-call-left-container{
                                         @include layout.Container-1(20%, 100%);
@@ -533,6 +552,9 @@
                                         gap: 2px;
                                         padding-top: 10px;
                                         padding-bottom: 10px;
+                                        background-color: var(--primary-color-1);
+                                        color: var(--font-color-1);
+                                        transition-duration: 1s;
                                         .title{
                                             margin-left: 10px;
                                             margin-right: 10px;
@@ -543,14 +565,16 @@
                                         .time{ 
                                             margin-left: 10px;
                                             margin-right: 10px;
-                                            color: abs.$gray-700;
+                                            color: var(--font-color-2);
+                                            transition-duration: 1s;
                                             font-size: 12px;
                                         }
 
                                         .duration{ 
                                             margin-left: 10px;
                                             margin-right: 10px;
-                                            color: abs.$gray-700;
+                                            color: var(--font-color-2);
+                                            transition-duration: 1s;
                                             font-size: 12px;
                                         }
 
@@ -561,13 +585,14 @@
                                             padding: 5px;
                                             color: abs.$blue-900;
                                             font-weight: 500;
-                                            background-color: white;
+                                            background-color: var(--primary-color-1);
                                             border: none;
-                                            transition-duration: 0.2s;
+                                            transition-duration: 1s;
                                             border-radius: 5px;
                                             &:hover{
                                                 cursor: pointer;
                                                 // background-color:abs.$blue-300;
+                                                transition-duration: 0.2s;
                                                 background-color: rgba(abs.$blue-300, 0.3)
                                             }
                                         }
@@ -600,7 +625,7 @@
                                     @include layout.Container-1(auto, auto);
                                     max-width: 55%;
                                     @include abs.display-flex(flex-start , center , row);
-                                    background-color: abs.$gray-200;      
+                                    background-color: var(--highlight-background-hover-1);      
                                     margin-top: 10px;
                                     margin-bottom: 10px;  
                                     // margin-left: 10px;   
@@ -618,7 +643,7 @@
                                     @include layout.Container-1(auto, auto);
                                     @include abs.display-flex(center , center , row);
                                     max-width: 55%;
-                                    // background-color: abs.$gray-200;
+                                    // background-color: var(--highlight-background-hover-1);
                                     margin-top: 10px;
                                     margin-bottom: 10px;            
                                     border-radius: 5px;   
@@ -683,7 +708,9 @@
                                     min-width: 65%;
                                     max-width: 75%;
                                     @include abs.display-flex(flex-start , center , column);
-                                    background-color: white; 
+                                    background-color: var(--primary-color-1); 
+                                    color: var(--font-color-1);
+                                    transition-duration: 1s;
                                     margin-top: 10px;
                                     margin-bottom: 10px;  
                                     margin-right: 10px;                   
@@ -770,7 +797,9 @@
                                     min-width: 75%;
                                     max-width: 75%;
                                     @include abs.display-flex(flex-start , center , row);
-                                    background-color: white; 
+                                    background-color: var(--primary-color-1); 
+                                    color: var(--font-color-1);
+                                    transition-duration: 1s;
                                     margin-top: 10px;
                                     margin-bottom: 10px;  
                                     margin-right: 10px;                 
@@ -805,14 +834,14 @@
                                         .time{ 
                                             margin-left: 10px;
                                             margin-right: 10px;
-                                            color: abs.$gray-700;
+                                            color: var(--font-color-2);
                                             font-size: 12px;
                                         }
 
                                         .duration{ 
                                             margin-left: 10px;
                                             margin-right: 10px;
-                                            color: abs.$gray-700;
+                                            color: var(--font-color-2);
                                             font-size: 12px;
                                         }
 
@@ -823,12 +852,14 @@
                                             padding: 5px;
                                             color: abs.$blue-900;
                                             font-weight: 500;
-                                            background-color: white;
+                                            background-color: var(--primary-color-1); 
+                                            transition-duration: 1s;
+                                            
                                             border: none;
-                                            transition-duration: 0.2s;
                                             border-radius: 5px;
                                             &:hover{
                                                 cursor: pointer;
+                                                transition-duration: 0.2s;
                                                 // background-color:abs.$blue-300;
                                                 background-color: rgba(abs.$blue-300, 0.3)
                                             }
@@ -869,7 +900,9 @@
                             border-bottom: 1px solid gray;
                             .textarea{
                                 @include layout.Container-1(90%, 80px);
-                                background-color: abs.$gray-200;
+                                background-color: var(--primary-color-1);
+                                color: var(--font-color-1);
+                                transition-duration: 1s;
                                 border: none;
                                 resize: none;
                                 padding: 10px;
@@ -983,6 +1016,7 @@
 
             .linkhedin-copyright{
                 font-size: 12px;
+                color: var(--font-color-1);
             }
         }
     }
@@ -995,9 +1029,9 @@
     max-height: 350px;
     z-index: 10;
     top: 0px;
-    background-color: white;
+    background-color: var(--secondary-color-1);
     overflow-y: scroll;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    box-shadow: var(--shadow-color-1) 0px 5px 15px;
 
     .modal-message-search-user-content-container{
         @include layout.Container-1(100%, auto);
@@ -1007,7 +1041,7 @@
 
         &:hover{
             cursor: pointer;
-            background-color: abs.$gray-200
+            background-color: var(--highlight-background-hover-1)
         }
 
         .left-content-container{
@@ -1042,7 +1076,9 @@
     height: 50px;
     z-index: 9;
     top: -53px;
-    background-color: white;
+    background-color: var(--primary-color-1);
+    color: var(--font-color-1);
+    transition-duration: 1s;
     border-top: 1px solid gray;
     @include abs.display-flex(space-between , center , row);  
 
@@ -1076,11 +1112,11 @@
                 .image-name{
                     font-size: 12px;
                     font-weight: 500;   
-                    color: abs.$gray-700;
+                    color: var(--font-color-2);
                 }
                 .attached{
                     font-size: 12px;
-                    color: abs.$gray-600;
+                    color: var(--font-color-3);
                 }
             }
         }
@@ -1099,7 +1135,7 @@
 
             &:hover{
                 cursor: pointer;
-                background-color: abs.$gray-200
+                background-color: var(--highlight-background-hover-1)
             }                
         }
     }

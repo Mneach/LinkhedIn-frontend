@@ -8,11 +8,13 @@
     padding-top: 10px;
     padding-bottom: 10px;
     z-index: 10;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    background-color: var(--secondary-color-1);
+    box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
     position: fixed;
     top: 0;
-    
+    color: var(--font-color-1);
+    transition-duration: 1s;
+
     &__leftContent{
         @include layout.Container-1(30%, 40px); 
         @include abs.display-flex(flex-start , center , row);
@@ -25,13 +27,19 @@
             height: 40px;
         }
 
+        .logo-linkhedin{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
         &__form-search{
             @include layout.Container-1(auto, auto);
             @include abs.display-flex(center , center , row);
             // border: 1px solid black;
 
             .input__serch{
-                background-color: abs.$gray-200;
+                background-color: var(--highlight-background);
                 color: black;
                 font-size: 15px;
                 width: 250px;
@@ -39,15 +47,21 @@
                 border-radius: 2px;
                 padding-left:10px;
                 border: none;
-
+                transition-duration: 1s;
+                &:focus{
+                    outline-color: var(--highlight-focus);
+                    // outline: none;
+                    // border: 1px solid var(--highlight-focus);
+                }
             }
 
             button{
-                background-color: abs.$gray-200;
+                background-color: var(--highlight-background);
                 width: 40px;
                 height: 40px;
                 border: none;
-                transition-duration: 0.2s;
+                transition-duration: 1s;
+                color: var(--icon-color-1);
 
                 img{
                     width: 20px;
@@ -56,7 +70,7 @@
 
                 &:hover{
                     cursor: pointer;
-                    background-color: abs.$gray-400;
+                    background-color: var(--highlight-background-hover-1);
                 }
             }
         }
@@ -68,13 +82,13 @@
         // border: 1px solid black;
         position: relative;
         font-size: 14px;
-        color: abs.$dark-200;
+        color: var(--icon-color-1);
         gap: 30px;
         margin-right: 12%;
 
         a{
             text-decoration: none;
-            color: abs.$dark-200;
+            color: var(--icon-color-1);
         }
 
         &__menu{
@@ -92,7 +106,7 @@
                 img {
                     opacity: 1;
                 }
-                color: abs.$dark-900;
+                color: var(--icon-color-1);
                 cursor: pointer;
             }
         }
@@ -100,8 +114,8 @@
         &__menu__active{
             @include layout.Container-1(auto, auto);
             @include abs.display-flex(center , center , column);        
-            padding: 8px 10px;
-            border-bottom: 2px solid abs.$dark-900;
+            padding: 7px 10px;
+            border-bottom: 2px solid var(--navbar-bottom-border);
             gap:3px;
             img{
                 width: 20px;
@@ -109,7 +123,7 @@
             }   
 
             p{
-                color: abs.$dark-900;
+                color: var(--icon-color-1);
             }
 
             &:hover{
@@ -122,6 +136,7 @@
             @include abs.display-flex(center , center , column);      
             position: relative;  
             padding: 0px 10px;
+            margin-top: 5px;
             img{
                 width: 25px;
                 height: 25px;
@@ -130,13 +145,12 @@
             }   
 
             &:hover{
-                color: abs.$dark-900;
+                color: var(--icon-color-1);
                 cursor: pointer;
             }                  
 
             &__text-container{
                 @include abs.display-flex(center , center , row);   
-                gap: 5px; 
                 img{
                     width: 14px;
                     height: 14px;
@@ -147,15 +161,16 @@
                     img{
                         opacity: 1;
                     }
-                    color: abs.$dark-900;
+                    color: var(--icon-color-1);
                 }  
             }
         }
 
         &__button-profile{
             border: none;
-            background-color: white;
-            color: abs.$dark-200;
+            background-color: var(--secondary-color-1);
+            color: var(--icon-color-1);
+            transition-duration: 1s;
         }
 
         &__modal-user{
@@ -170,7 +185,7 @@
             z-index: 100;
             font-size: 14px;
             padding: 10px 20px;
-            background-color: white;
+            background-color: var(--secondary-color-1);
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
             &__profile{
@@ -189,7 +204,7 @@
 
                 .title {
                     font-weight: 500;
-                    color: abs.$dark-900;
+                    color: var(--icon-color-1);
                 }
             }
 
@@ -215,7 +230,7 @@
                 gap: 10px;
                 .title {
                     font-weight: 500;
-                    color: abs.$dark-900;
+                    color: var(--font-color-1);
                 }
                 
                 .content{
@@ -232,9 +247,9 @@
                 
                 button{
                     font-size: 14px;
-                    background-color: white;
+                    background-color: var(--secondary-color-1);
                     border: none;
-                    color: abs.$dark-200;
+                    color: var(--font-color-1);
                     cursor: pointer;
 
                     &:hover{
@@ -245,7 +260,7 @@
             
             .line{
                 width: 290px;
-                border-bottom: 1px solid abs.$gray-500;
+                border-bottom: 1px solid var(--border-color-1);
             }
         }
 

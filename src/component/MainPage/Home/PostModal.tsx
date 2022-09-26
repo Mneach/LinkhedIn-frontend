@@ -246,7 +246,7 @@ const PostModal = ({ dataHastags, setPostModal, refechHastag, refechPost, fetchM
                                         )
                                 )
                         }
-                        <MentionsInput id='test-rich-text' value={text} style={{ width: "100%", height: "100px", ...mentionInputPostStyle }} placeholder="What do you want to talk about" onChange={handleComment}>
+                        <MentionsInput id='test-rich-text' value={text} style={{ width: "100%", height: "100px", backgroundColor : "var(--primary-color-1)" , color : "var(--font-color-1)" , ...mentionInputPostStyle }} placeholder="What do you want to talk about" onChange={handleComment}>
                             <Mention
                                 trigger="@"
                                 data={mentionDatas}

@@ -22,7 +22,7 @@
             background-color: white;
             border-radius: 10px;
             position: relative;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+            box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
 
             &__user-background{
                 @include layout.Container-1(100%, auto);
@@ -74,7 +74,7 @@
 
                     &:hover{
                         cursor: pointer;
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                         img{
                             opacity: 1;
                         }
@@ -147,7 +147,7 @@
                     position: relative;
 
                     &:hover{
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                     }
                 }
                 .button1{
@@ -160,7 +160,7 @@
                     font-size: 14px;
 
                     &:hover{
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                     }
             
                     img{
@@ -226,7 +226,7 @@
             border-radius: 10px;
             position: relative;
             padding-bottom: 20px;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+            box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
             
 
             &__header{
@@ -254,7 +254,7 @@
                     border-radius: 50%;
                     &:hover{
                         cursor: pointer;
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                         opacity: 1;
                     }
                     
@@ -306,7 +306,7 @@
                         border-radius: 50%;
                         &:hover{
                             cursor: pointer;
-                            background-color: abs.$gray-300;
+                            background-color: var(--highlight-background-hover-2);
                             opacity: 1;
                         }
                         
@@ -326,7 +326,7 @@
             border-radius: 10px;
             padding-bottom: 20px;
             position: relative;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+            box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
             
 
             &__header{
@@ -354,7 +354,7 @@
                     border-radius: 50%;
                     &:hover{
                         cursor: pointer;
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                         opacity: 1;
                     }
                     
@@ -408,7 +408,7 @@
                         border-radius: 50%;
                         &:hover{
                             cursor: pointer;
-                            background-color: abs.$gray-300;
+                            background-color: var(--highlight-background-hover-2);
                             opacity: 1;
                         }
                         
@@ -433,7 +433,7 @@
             @include abs.display-flex(center , flex-start , column); 
             min-height: 100px;
             max-height: auto;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+            box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
             margin-bottom: 40px;
             padding: 20px 0px;
             background-color: white;
@@ -498,7 +498,7 @@
                         font-size: 14px;
         
                         &:hover{
-                            background-color: abs.$gray-300;
+                            background-color: var(--highlight-background-hover-2);
                         }
                 
                         img{
@@ -598,7 +598,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 20;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: --modal-background-color-1;
 
 }
 
@@ -665,7 +665,7 @@
             margin-right: 20px;
 
             &:hover{
-                background-color: abs.$gray-300;
+                background-color: var(--highlight-background-hover-2);
             }
     
             img{
@@ -768,7 +768,7 @@
     min-height: 180px;
     max-height: auto;
     @include abs.display-flex(flex-start , center , column);
-    background-color: white;
+    background-color: var(--secondary-color-1);
     border-radius: 10px;
     padding: 20px;
     position: relative;
@@ -796,7 +796,7 @@
             margin-right: 20px;
 
             &:hover{
-                background-color: abs.$gray-300;
+                background-color: var(--highlight-background-hover-2);
             }
     
             img{
@@ -822,7 +822,8 @@
                 resize: none;
                 padding: 10px;
                 font-size: 16px;
-
+                color: var(--font-color-1);
+                background-color: var(--primary-color-1);
                 &::placeholder{
                     font-size: 16px;
                 }
@@ -851,7 +852,7 @@
             font-size: 14px;
 
             &:hover{
-                background-color: abs.$gray-300;
+                background-color: var(--highlight-background-hover-2);
             }
     
             img{
@@ -874,8 +875,8 @@
             }
 
             &:disabled{
-                border: 1px solid abs.$gray-300;
-                background-color: abs.$gray-300;
+                border: 1px solid var(--highlight-background-hover-2);
+                background-color: var(--highlight-background-hover-2);
                 color: abs.$gray-500;
                 cursor: not-allowed;
             }
@@ -932,7 +933,7 @@
                     transition-duration: 0.2s;
                     &:hover{
                         cursor: pointer;
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                     }
                 }
             }
@@ -1026,7 +1027,7 @@
                     .search-user-information-content{
                         @include layout.Container-1(60%, 100%);
                         @include abs.display-flex(center , center , row);
-                        background-color: abs.$gray-100;
+                        background-color: var(--primary-color-1);
                         border: 1px solid gray;
                         gap: 10px;
                         padding : 7px 0px;
@@ -1074,8 +1075,8 @@
 
                     
                     &:disabled{
-                        border: 1px solid abs.$gray-300;
-                        background-color: abs.$gray-300;
+                        border: 1px solid var(--highlight-background-hover-2);
+                        background-color: var(--highlight-background-hover-2);
                         color: abs.$gray-500;
                         cursor: not-allowed;
                     }
@@ -1105,7 +1106,7 @@
 
         &:hover{
             cursor: pointer;
-            background-color: abs.$gray-200
+            background-color: var(--highlight-background-hover-1)
         }
 
         .left-content-container{

@@ -16,7 +16,9 @@
             @include abs.display-flex(center , flex-start , column); 
             border: 1px solid gray;
             border-radius: 10px;
-            background-color: white;  
+            background-color: var(--secondary-color-1);
+            color: var(--font-color-1);
+            transition-duration: 1s;  
             overflow: hidden; 
             .title{
                 @include layout.Container-1(100%, auto);
@@ -52,7 +54,7 @@
                     
                     &:hover{
                         cursor: pointer;
-                        background-color: abs.$gray-400
+                        background-color: var(--highlight-background-hover-1)
                     }
                 }
 
@@ -66,7 +68,9 @@
             // border-top-right-radius: 10px;
             gap: 20px;
             .left-footer-top-container{
-                background-color: white;
+                background-color: var(--secondary-color-1);
+                color: var(--font-color-1);
+                transition-duration: 1s;
                 @include layout.Container-1(100%, 200px);
                 border: 1px solid gray;
                 // @include abs.display-flex(flex-start , center , column);
@@ -105,6 +109,7 @@
     
                 .linkhedin-copyright{
                     font-size: 12px;
+                    color: var(--font-color-1)
                 }
             }
         }
@@ -119,7 +124,9 @@
             @include abs.display-flex(center , flex-start , column);            
             border: 1px solid gray;
             border-radius: 10px;
-            background-color: white;
+            background-color: var(--secondary-color-1);
+            color: var(--font-color-1);
+            transition-duration: 1s;
 
             .network-conenction-card-container{
                 @include layout.Container-1(100%, auto);
@@ -177,11 +184,11 @@
                             }
                             .headline{
                                 font-size: 14px;
-                                color: abs.$gray-700
+                                color: var(--font-color-2)
                             }
                             .message{
                                 font-size: 14px;
-                                color: abs.$gray-600
+                                color: var(--font-color-3)
                             }
                             &:hover{
                                 cursor: pointer;
@@ -204,7 +211,7 @@
                             font-size: 14px;
         
                             &:hover{
-                                background-color: abs.$gray-300;
+                                background-color: var(--highlight-background-hover-2);
                             }
                     
                             img{
@@ -238,7 +245,9 @@
     @include abs.display-flex(center , flex-start , column);            
     border: 1px solid gray;
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--secondary-color-1);
+    color: var(--font-color-1);
+    transition-duration: 1s;
 
     .UYMK-top-container{
         @include layout.Container-1(100%, auto);
@@ -272,7 +281,7 @@
 
             &:hover{
                 transform: scale(1.05);
-                box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+                box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
             }
     
             .UYMK-card-top-content{
@@ -328,7 +337,7 @@
                     font-size: 14px;
                     margin-bottom: 10px;
                     &:hover{
-                        background-color: abs.$gray-300;
+                        background-color: var(--highlight-background-hover-2);
                     }
             
                     img{

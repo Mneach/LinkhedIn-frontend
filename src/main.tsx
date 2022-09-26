@@ -7,6 +7,8 @@ import { UserProvider } from './hooks/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { offsetLimitPagination } from '@apollo/client/utilities';
+import { ThemeProvider } from './Provider/ThemeProvider';
+import './sass/abstracts/_colors.scss';
 
 const backendUrl = 'http://localhost:8080/query'
 const apolloLink = new ApolloLink((operation, forward) => {
@@ -38,7 +40,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <ToastContainer />
-      <App />
+      <ThemeProvider >
+        <App />
+      </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>
 )

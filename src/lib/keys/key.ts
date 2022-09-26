@@ -1,3 +1,4 @@
 export enum StorageKey {
-    JwtTokenKey = 'JETTOKENKEY'
+    JwtTokenKey = 'JETTOKENKEY',
+    theme = 'theme'
 }

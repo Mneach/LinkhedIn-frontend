@@ -21,7 +21,7 @@
     gap: 20px;
     background-color: white;
     padding: 30px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
 
     &__title-container{
         @include layout.Container-1(100%, auto);
@@ -138,7 +138,7 @@
     background-color: white;
     gap: 20px;
     padding: 30px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    box-shadow: var(--shadow-navbar-1) 0px 5px 15px;
 
     &__title-container{
         @include layout.Container-1(100%, auto);

@@ -32,7 +32,7 @@ const Notification = () => {
   const notificationData = dataNotification.userNotification as Array<NotificationType>
 
   return (
-    <div style={{ backgroundColor: "rgb(238 , 238 , 238)", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "var(--primary-color-1)", transitionDuration : "1s" , minHeight: "100vh" }}>
       <Navbar />
       <div className="notification-content-container">
         <div className='notification-container'>

@@ -1,6 +1,8 @@
+import { color } from "html2canvas/dist/types/css/types/color"
+
 export const mentionInputPostStyle  = {
     control: {
-        backgroundColor: '#fff',
+        backgroundColor: 'var(--primary-color-1)',
         fontSize: 14,
         fontWeight: 'normal',
     } as React.CSSProperties,
@@ -38,7 +40,7 @@ export const mentionInputPostStyle  = {
 
     suggestions: {
         list: {
-            backgroundColor: 'white',
+            backgroundColor: 'var(--primary-color-1)',
             border: '1px solid rgba(0,0,0,0.15)',
             fontSize: 14,
         },
@@ -54,12 +56,12 @@ export const mentionInputPostStyle  = {
 
 export const mentionInputCommentStyle = {
     control: {
-        backgroundColor: '#fff',
+        backgroundColor: 'var(--primary-color-1)',
         width: "100%",
         fontSize: 14,
         fontWeight: 'normal',
         minHeight : 50,
-        maxHeight : "auto"
+        maxHeight : "auto",
     } as React.CSSProperties,
 
     '&multiLine': {
@@ -97,7 +99,7 @@ export const mentionInputCommentStyle = {
 
     suggestions: {
         list: {
-            backgroundColor: 'white',
+            backgroundColor: 'var(--primary-color-1)',
             border: '1px solid rgba(0,0,0,0.15)',
             fontSize: 14,
         },
@@ -112,9 +114,10 @@ export const mentionInputCommentStyle = {
 }
 
 export const mentionStyle : React.CSSProperties = {
-    backgroundColor: "#0078AA",
-    opacity: 0.2,
+    color : "var(--font-color-1)",
+    backgroundColor: "var(--highlight-background-mention)",
+    opacity: 1,
     padding: 1,
     marginLeft: -1,
-    borderRadius: 3
+    borderRadius: 3,
 }

@@ -17,8 +17,8 @@
             @include abs.display-flex(center , center , row);
             border: 1px solid gray;
             border-radius: 10px;
-            background-color: white;
-    
+            background-color: var(--secondary-color-1);
+            transition-duration: 1s;
             .button2 {
                 @include component.button-submit(10px ,10px ,  white , abs.$blue-700 , 20px);
                 border: none;
@@ -39,9 +39,10 @@
             @include abs.display-flex(center , center , column);
             border: 1px solid gray;
             border-radius: 10px;
-            background-color: white;
+            background-color: var(--secondary-color-1);
+            color: var(--font-color-1);
             padding-bottom: 30px;
-    
+            transition-duration: 1s;
             .line{
                 @include layout.Container-1(95%, auto);
                 border-bottom: 1px solid abs.$gray-400;
@@ -83,17 +84,17 @@
         
                     .company-name{
                         font-size: 16px;
-                        color: abs.$gray-900;
+                        color: var(--font-color-1);
                     }
         
                 .location{
                         font-size: 14px;
-                        color: abs.$gray-700;
+                        color: var(--font-color-2);
                     }
     
                     .description{
                         font-size: 14px;
-                        color: abs.$gray-600;
+                        color: var(--font-color-3);
                     }
                 }
             }
@@ -112,7 +113,7 @@
             // border-top-right-radius: 10px;
             gap: 20px;
             .left-footer-top-container{
-                background-color: white;
+                background-color: var(--secondary-color-1);
                 @include layout.Container-1(100%, 200px);
                 border: 1px solid gray;
                 // @include abs.display-flex(flex-start , center , column);
@@ -151,6 +152,7 @@
     
                 .linkhedin-copyright{
                     font-size: 12px;
+                    color: var(--font-color-1);
                 }
             }
         }
@@ -170,14 +172,14 @@
     width: 100vw;
     height: 100vh;
     z-index: 20;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: var(--modal-background-color-1);
 
 }
 
 .modal-job-container{
     @include layout.Container-1(45%, 600px);
     @include abs.display-flex(flex-start , center , column);
-    background-color: white;
+    background-color: var(--secondary-color-1);
     border-radius: 10px;
     padding: 20px 40px;
     position: relative;
@@ -225,6 +227,7 @@
             @include layout.Container-1(100%, auto);
             @include abs.display-flex(center , flex-start , column);
             gap: 5px;
+            color: var(--font-color-1);
             label{
                 font-size: 14px;
             }
@@ -233,6 +236,12 @@
                 width: 98%;
                 padding: 10px ;
                 border-radius: 5px;
+                background-color: var(--primary-color-1);
+                color: var(--font-color-1);
+                ::placeholder{
+                    color: var(--font-color-1);
+                    opacity: 1;
+                }
             }
 
             .inputText{
@@ -240,6 +249,12 @@
                 padding: 10px;
                 border: 1px solid gray;
                 border-radius: 5px;
+                background-color: var(--primary-color-1);
+                color: var(--font-color-1);
+                &::placeholder{
+                    color: var(--font-color-1);
+                    opacity: 0.7;
+                }
             }
 
             textarea{
@@ -248,6 +263,12 @@
                 border-radius: 5px;
                 padding: 10px;
                 height: 50px;
+                background-color: var(--primary-color-1);
+                color: var(--font-color-1);
+                ::placeholder{
+                    color: var(--font-color-1);
+                    opacity: 1;
+                }
             }
         }
 
