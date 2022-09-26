@@ -43,19 +43,32 @@ const EducationModalAdd = ({ modalEducation, setModalEducation }: { modalEducati
     } , [called , loading])
 
     const handleEducationAdd = () => {
-        educationAddMutation({variables : {
-            userId:educationData.userId,
-            school:educationData.school,
-            degree:educationData.degree,
-            fieldStudy:educationData.fieldStudy,
-            grade:educationData.grade,
-            activities:educationData.activities,
-            description:educationData.description,
-            monthStartDate:educationData.monthStartDate,
-            monthEndDate:educationData.monthEndDate,
-            yearStartDate:educationData.yearStartDate,
-            yearEndDate:educationData.yearEndDate,
-        }})
+
+        if(educationData.school === ""){
+            toastError("School cannot be null" , "top-right" , "colored");
+        }else if(educationData.degree === ""){
+            toastError("Degree cannot be null" , "top-right" , "colored");
+        }else if(educationData.fieldStudy === ""){
+            toastError("Field Study cannot be null" , "top-right" , "colored");
+        }else if(educationData.grade === ""){
+            toastError("Grade cannot be null" , "top-right" , "colored");
+        }else if(educationData.activities === ""){
+            toastError("Activities cannot be null" , "top-right" , "colored");
+        }else{
+            educationAddMutation({variables : {
+                userId:educationData.userId,
+                school:educationData.school,
+                degree:educationData.degree,
+                fieldStudy:educationData.fieldStudy,
+                grade:educationData.grade,
+                activities:educationData.activities,
+                description:educationData.description,
+                monthStartDate:educationData.monthStartDate,
+                monthEndDate:educationData.monthEndDate,
+                yearStartDate:educationData.yearStartDate,
+                yearEndDate:educationData.yearEndDate,
+            }})
+        }
     }
 
     const handleModalEducation = () => {

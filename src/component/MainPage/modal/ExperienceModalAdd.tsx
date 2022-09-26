@@ -43,22 +43,39 @@ const ExperienceModalAdd = ({ modalExperience, setModalExperience }: { modalExpe
     }, [called, loading])
 
     const handleExperienceAdd = () => {
-        experienceAddMutation({
-            variables: {
-                userId: experienceData.userId,
-                title: experienceData.title,
-                employmentType: experienceData.employmentType,
-                companyName: experienceData.companyName,
-                country: experienceData.country,
-                city: experienceData.city,
-                isActive: experienceData.isActive,
-                industry: experienceData.industry,
-                monthStartDate: experienceData.monthStartDate,
-                monthEndDate: experienceData.monthEndDate,
-                yearStartDate: experienceData.yearStartDate,
-                yearEndDate: experienceData.yearEndDate,
-            }
-        })
+
+        if(experienceData.title === ""){
+            toastError("Title cannot be null" , "top-right" , "colored");
+        }else if(experienceData.employmentType === ""){
+            toastError("Employment Type cannot be null" , "top-right" , "colored")
+        }else if(experienceData.companyName === ""){
+            toastError("Company Name cannot be null" , "top-right" , "colored")
+        }else if(experienceData.country === ""){
+            toastError("Country cannot be null" , "top-right" , "colored")
+        }else if(experienceData.city === ""){
+            toastError("City cannot be null" , "top-right" , "colored")
+        }else if(experienceData.industry === ""){
+            toastError("Industry cannot be null" , "top-right" , "colored")
+        }else{
+            experienceAddMutation({
+                variables: {
+                    userId: experienceData.userId,
+                    title: experienceData.title,
+                    employmentType: experienceData.employmentType,
+                    companyName: experienceData.companyName,
+                    country: experienceData.country,
+                    city: experienceData.city,
+                    isActive: experienceData.isActive,
+                    industry: experienceData.industry,
+                    monthStartDate: experienceData.monthStartDate,
+                    monthEndDate: experienceData.monthEndDate,
+                    yearStartDate: experienceData.yearStartDate,
+                    yearEndDate: experienceData.yearEndDate,
+                }
+            })
+        }
+
+        
     }
 
     const handlemodalExperience = () => {

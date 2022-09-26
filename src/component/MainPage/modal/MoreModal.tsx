@@ -147,7 +147,8 @@ const MoreModal = ({ userData, refectCurrentUser, setModalMore }: { userData: Us
     }
 
     const handleShowShareProfile = () => {
-        setModalShareProfile(true)
+        setModalMore(true)
+        setModalShareProfile(true) 
     }
 
     const handlePrintToPdf = () => {
@@ -168,7 +169,7 @@ const MoreModal = ({ userData, refectCurrentUser, setModalMore }: { userData: Us
                 pdf.save(`${userData.firstName.concat(" ").concat(userData.lastName).concat(".pdf")}`);
                 hideModal.style.display = 'block'
             });
-    }
+    }    
 
     return (
         <>

@@ -33,8 +33,14 @@ export const ThemeProvider: React.FC<props> = ({ children }) => {
     });
 
     const changeCurrTheme = () => {
-        if (currentTheme === enumThemeType.light) setCurrentTheme(enumThemeType.dark);
-        else setCurrentTheme(enumThemeType.light);
+        const getBody = document.getElementById('body') as HTMLElement;
+        if (currentTheme === enumThemeType.light){
+            setCurrentTheme(enumThemeType.dark);
+            getBody.style.backgroundColor = "#fff"
+        } else{
+            setCurrentTheme(enumThemeType.light);
+            getBody.style.backgroundColor = "#222"
+        } 
     }
 
     useEffect(() => {

@@ -102,9 +102,11 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
   const handleModalUser = () => {
     if (modalUser) setModalUser(false);
     else setModalUser(true)
+
   }
 
   const handleMoreModal = () => {
+    // console.log("ksadjflkdsafj");
     if (modalMore) setModalMore(false);
     else setModalMore(true)
   }
@@ -314,12 +316,12 @@ const UserInformation = ({ userData, refectCurrentUser }: { userData: UserType, 
                         )
                     )
                 }
-                <button className='button1-relative' onClick={handleMoreModal}>
-                  More
+                <div className='button-more'>
+                  <button className='button1-relative' onClick={handleMoreModal}> More </button>
                   {
                     modalMore === true && <MoreModal setModalMore={setModalMore} refectCurrentUser={refectCurrentUser} userData={userData} />
                   }
-                </button>
+                </div>
 
               </>
             )
